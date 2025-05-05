@@ -159,7 +159,8 @@
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelos\Gestor.cs" />
-    <Compile Include="Modelos\KanbanContext.cs" />
+    <Compile Include="Modelos\ITaskContext.cs" />
+    <Compile Include="Modelos\NivelExperiencia.cs" />
     <Compile Include="Modelos\Programador.cs" />
     <Compile Include="Modelos\Tarefa.cs" />
     <Compile Include="Modelos\TipoTarefa.cs" />

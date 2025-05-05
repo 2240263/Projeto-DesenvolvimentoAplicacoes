@@ -8,5 +8,14 @@ namespace iTasks.Modelos
 {
     public class Programador : Utilizador
     {
+        //declarei o enum como um atributo
+        NivelExperiencia nivelExperiencia;
+
+        public Programador()
+        {
+            nivelExperiencia = NivelExperiencia.Junior;
+        }
+
+
     }
 }
