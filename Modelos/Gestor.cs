@@ -8,5 +8,11 @@ namespace iTasks.Modelos
 {
     public class Gestor : Utilizador
     {
+
+
+
+
+
+
     }
 }
