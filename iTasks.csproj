@@ -116,48 +116,50 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmConsultarTarefasConcluidas.cs">
+    <Compile Include="Vistas\frmConsultarTarefasConcluidas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmConsultarTarefasConcluidas.Designer.cs">
+    <Compile Include="Vistas\frmConsultarTarefasConcluidas.Designer.cs">
       <DependentUpon>frmConsultarTarefasConcluidas.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmConsultaTarefasEmCurso.cs">
+    <Compile Include="Vistas\frmConsultaTarefasEmCurso.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmConsultaTarefasEmCurso.Designer.cs">
+    <Compile Include="Vistas\frmConsultaTarefasEmCurso.Designer.cs">
       <DependentUpon>frmConsultaTarefasEmCurso.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmDetalhesTarefa.cs">
+    <Compile Include="Vistas\frmDetalhesTarefa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDetalhesTarefa.Designer.cs">
+    <Compile Include="Vistas\frmDetalhesTarefa.Designer.cs">
       <DependentUpon>frmDetalhesTarefa.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmGereTiposTarefas.cs">
+    <Compile Include="Vistas\frmGereTiposTarefas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGereTiposTarefas.Designer.cs">
+    <Compile Include="Vistas\frmGereTiposTarefas.Designer.cs">
       <DependentUpon>frmGereTiposTarefas.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmKanban.cs">
+    <Compile Include="Vistas\frmKanban.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmKanban.Designer.cs">
+    <Compile Include="Vistas\frmKanban.Designer.cs">
       <DependentUpon>frmKanban.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmGereUtilizadores.cs">
+    <Compile Include="Vistas\frmGereUtilizadores.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGereUtilizadores.Designer.cs">
+    <Compile Include="Vistas\frmGereUtilizadores.Designer.cs">
       <DependentUpon>frmGereUtilizadores.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLogin.cs">
+    <Compile Include="Vistas\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.Designer.cs">
+    <Compile Include="Vistas\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\Departamentos.cs" />
+    <Compile Include="Modelos\EstadoAtual.cs" />
     <Compile Include="Modelos\Gestor.cs" />
     <Compile Include="Modelos\ITaskContext.cs" />
     <Compile Include="Modelos\NivelExperiencia.cs" />
@@ -167,25 +169,25 @@
     <Compile Include="Modelos\Utilizador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmConsultarTarefasConcluidas.resx">
+    <EmbeddedResource Include="Vistas\frmConsultarTarefasConcluidas.resx">
       <DependentUpon>frmConsultarTarefasConcluidas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmConsultaTarefasEmCurso.resx">
+    <EmbeddedResource Include="Vistas\frmConsultaTarefasEmCurso.resx">
       <DependentUpon>frmConsultaTarefasEmCurso.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDetalhesTarefa.resx">
+    <EmbeddedResource Include="Vistas\frmDetalhesTarefa.resx">
       <DependentUpon>frmDetalhesTarefa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGereTiposTarefas.resx">
+    <EmbeddedResource Include="Vistas\frmGereTiposTarefas.resx">
       <DependentUpon>frmGereTiposTarefas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGereUtilizadores.resx">
+    <EmbeddedResource Include="Vistas\frmGereUtilizadores.resx">
       <DependentUpon>frmGereUtilizadores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmKanban.resx">
+    <EmbeddedResource Include="Vistas\frmKanban.resx">
       <DependentUpon>frmKanban.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.resx">
+    <EmbeddedResource Include="Vistas\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -210,6 +212,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controlador\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

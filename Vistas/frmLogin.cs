@@ -28,5 +28,7 @@ namespace iTasks
             // deixa ter varios forms ao mesmo tempo 
             segundoForm.ShowDialog(); // so deixa abrir uma janela e bloqueia o resto
         }
+
+       
     }
 }
