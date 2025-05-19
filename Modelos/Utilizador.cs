@@ -27,5 +27,10 @@ namespace iTasks.Modelos
             Username = username;
             Password = password;
         }
+
+        public override string ToString()
+        {
+            return Nome;
+        }
     }
 }
