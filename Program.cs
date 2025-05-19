@@ -21,6 +21,7 @@ namespace iTasks
           
             using (ITaskContext context = new ITaskContext())
             {
+                //se a base de dados estiver vazia, inicializa automaticamente a base de dados com um gestor e um programador
                 if (context.Utilizadores.Count() == 0)
                 {
                     Utilizador utilizadorgestor = new Gestor(true,0,"administrador", "admin", "123");
@@ -37,7 +38,7 @@ namespace iTasks
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLogin());
+            Application.Run(new frmGereUtilizadores());
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace iTasks.Modelos
@@ -18,6 +19,9 @@ namespace iTasks.Modelos
            
         }
 
+        /*Vai inicializar os campos que são necessários para preencher, neste caso como estende de utilizador
+        não necessita de inicializar novamente os 3 campos do utilizador, apenas tem de chamar esses mesmos
+        campos com o :base */
         public Programador(NivelExperiencia nivelExperiencia, int idGestor, string nome, string username, string password):base(nome,username,password)
         {
             this.nivelExperiencia = nivelExperiencia;
