@@ -62,6 +62,7 @@
             this.lstLista.Name = "lstLista";
             this.lstLista.Size = new System.Drawing.Size(357, 451);
             this.lstLista.TabIndex = 0;
+            this.lstLista.SelectedIndexChanged += new System.EventHandler(this.lstLista_SelectedIndexChanged);
             // 
             // txtDesc
             // 
@@ -109,6 +110,7 @@
             this.btGravar.TabIndex = 31;
             this.btGravar.Text = "Gravar Dados";
             this.btGravar.UseVisualStyleBackColor = true;
+            this.btGravar.Click += new System.EventHandler(this.btGravar_Click);
             // 
             // ButEditar
             // 
@@ -129,6 +131,7 @@
             this.ButApagar.TabIndex = 33;
             this.ButApagar.Text = "Apagar Dados";
             this.ButApagar.UseVisualStyleBackColor = true;
+            this.ButApagar.Click += new System.EventHandler(this.ButApagar_Click);
             // 
             // frmGereTiposTarefas
             // 

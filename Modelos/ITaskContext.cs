@@ -18,6 +18,7 @@ namespace iTasks.Modelos
         public DbSet<Tarefa> Tarefas { get; set; }
 
         public DbSet<TipoTarefa> TipoTarefas { get; set; }
+        public List<TipoTarefa> ListTipoTarefas { get; internal set; }
 
         public ITaskContext()
         {

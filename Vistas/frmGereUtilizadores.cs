@@ -1,4 +1,6 @@
-﻿using iTasks.Modelos;
+﻿using iTasks.Controlador;
+using iTasks.Modelos;
+using iTasks.Vistas;
 using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,10 @@ namespace iTasks
         private Programador SelecionaProgramador;
         private List<Gestor> listaGestores = new List<Gestor>();
         private List<Programador> listaProgramadores = new List<Programador>();
+
+        //NEW CONTROLADORES UTILIZADORES
+        private UtilizadorControlador utilizadorControlador = new UtilizadorControlador();
+        
 
         public frmGereUtilizadores()
         {
@@ -202,8 +208,42 @@ namespace iTasks
                 MessageBox.Show("Selecione um programador");
                 return;
             }
-            SelecionaProgramador = listaProgramadores[index];
-            
+
+            Programador programador = listaProgramadores[index];
+            if (programador == SelecionaProgramador)
+            {
+                SelecionaProgramador = null;
+                lstListaProgramadores.SelectedIndex = -1;
+
+                txtNomeProg.Text = "";
+                txtUsernameProg.Text = "";
+                return;
+            }
+
+            SelecionaProgramador = programador;
+            txtNomeProg.Text = SelecionaProgramador.Nome;
+            txtUsernameProg.Text = SelecionaProgramador.Username;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AdicionarProgramador adicionar = new AdicionarProgramador();
+            adicionar.ShowDialog();
+
+            SelecionaProgramador = adicionar.GetProgramador(); // ia buscar o programador gerado
+
+            //utilizadorControlador.CriarProgramador(SelecionaProgramador);
+
+        }
+
+        private void buttonAtualizarProgramador_Click(object sender, EventArgs e) //atualizar
+        {
+            AdicionarProgramador adicionar = new AdicionarProgramador(SelecionaProgramador);
+            adicionar.ShowDialog();
+
+            SelecionaProgramador = adicionar.GetProgramador(); // ia buscar o programador gerado
+
+            utilizadorControlador.EditarUtilizador(SelecionaProgramador);
+    }
     }
 }

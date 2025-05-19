@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iTasks.Controlador;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace iTasks.Modelos
         public int Id { get; set; }
         public string Nome { get; set; }
 
+
         public TipoTarefa()
         {
         }
@@ -23,5 +25,11 @@ namespace iTasks.Modelos
         {
             this.Nome = nome;
         }
-    }
+
+        public override string ToString()
+        {
+            return Nome;
+        }
+    }   
+
 }
