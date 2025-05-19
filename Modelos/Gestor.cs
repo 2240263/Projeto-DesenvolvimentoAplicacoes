@@ -32,7 +32,7 @@ namespace iTasks.Modelos
 
         public override string ToString()
         {
-            return "Gestor : " + base.ToString();
+            return Nome;
         }
     }
 }

@@ -16,5 +16,17 @@ namespace iTasks
         {
             InitializeComponent();
         }
+
+        private void gerirUtilizadoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form segundoForm = new frmGereUtilizadores();
+            segundoForm.Show();
+        }
+
+        private void gerirTiposDeTarefasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form segundoForm = new frmGereTiposTarefas();
+            segundoForm.Show();
+        }
     }
 }

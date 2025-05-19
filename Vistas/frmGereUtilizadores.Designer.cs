@@ -135,6 +135,7 @@
             this.lstListaGestores.Name = "lstListaGestores";
             this.lstListaGestores.Size = new System.Drawing.Size(403, 671);
             this.lstListaGestores.TabIndex = 0;
+            this.lstListaGestores.SelectedIndexChanged += new System.EventHandler(this.lstListaGestores_SelectedIndexChanged);
             // 
             // groupBox2
             // 
@@ -188,6 +189,7 @@
             this.txtPasswordGestor.Name = "txtPasswordGestor";
             this.txtPasswordGestor.Size = new System.Drawing.Size(300, 26);
             this.txtPasswordGestor.TabIndex = 40;
+            this.txtPasswordGestor.UseSystemPasswordChar = true;
             // 
             // cbDepartamento
             // 
@@ -282,7 +284,7 @@
             // 
             // btGravarProg
             // 
-            this.btGravarProg.Location = new System.Drawing.Point(441, 435);
+            this.btGravarProg.Location = new System.Drawing.Point(439, 435);
             this.btGravarProg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btGravarProg.Name = "btGravarProg";
             this.btGravarProg.Size = new System.Drawing.Size(302, 35);
@@ -298,6 +300,7 @@
             this.txtPasswordProg.Name = "txtPasswordProg";
             this.txtPasswordProg.Size = new System.Drawing.Size(300, 26);
             this.txtPasswordProg.TabIndex = 40;
+            this.txtPasswordProg.UseSystemPasswordChar = true;
             // 
             // cbNivelProg
             // 
@@ -358,6 +361,7 @@
             this.lstListaProgramadores.Name = "lstListaProgramadores";
             this.lstListaProgramadores.Size = new System.Drawing.Size(403, 671);
             this.lstListaProgramadores.TabIndex = 0;
+            this.lstListaProgramadores.SelectedIndexChanged += new System.EventHandler(this.lstListaProgramadores_SelectedIndexChanged);
             // 
             // txtIdProg
             // 

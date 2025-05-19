@@ -33,6 +33,7 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btLogin = new System.Windows.Forms.Button();
+            this.buttonRegisto = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -60,6 +61,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(205, 26);
             this.txtPassword.TabIndex = 3;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label2
             // 
@@ -82,11 +84,23 @@
             this.btLogin.UseVisualStyleBackColor = true;
             this.btLogin.Click += new System.EventHandler(this.btLogin_Click);
             // 
+            // buttonRegisto
+            // 
+            this.buttonRegisto.Location = new System.Drawing.Point(146, 171);
+            this.buttonRegisto.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonRegisto.Name = "buttonRegisto";
+            this.buttonRegisto.Size = new System.Drawing.Size(112, 35);
+            this.buttonRegisto.TabIndex = 5;
+            this.buttonRegisto.Text = "Registo";
+            this.buttonRegisto.UseVisualStyleBackColor = true;
+            this.buttonRegisto.Click += new System.EventHandler(this.buttonRegisto_Click);
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 268);
+            this.Controls.Add(this.buttonRegisto);
             this.Controls.Add(this.btLogin);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label2);
@@ -95,7 +109,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmLogin";
             this.Text = "frmLogin";
-        
+            this.Load += new System.EventHandler(this.frmLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -108,5 +122,6 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btLogin;
+        private System.Windows.Forms.Button buttonRegisto;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iTasks.Modelos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,9 +17,30 @@ namespace iTasks
         {
             InitializeComponent();
         }
-
+          
         private void btLogin_Click(object sender, EventArgs e)
         {
+            using(ITaskContext context = new ITaskContext())
+            {
+                if (context.Utilizadores.Count() == 0)
+                {
+                    buttonRegisto.Visible = false;
+                }
+                string username = txtUsername.Text;
+                string password = txtPassword.Text;
+
+                // Procura utilizador com username e password correspondentes
+                Utilizador utilizador = context.Utilizadores
+                    .FirstOrDefault(u => u.Username == username);
+
+                if (utilizador == null)
+                {
+                    MessageBox.Show("Username ou password inválidos.");
+                    return;
+                }
+
+            }
+
             //abrir novos formulários
             Form segundoForm = new frmKanban();
             //só abre um form de cada vez 
@@ -29,6 +51,40 @@ namespace iTasks
             segundoForm.ShowDialog(); // so deixa abrir uma janela e bloqueia o resto
         }
 
-       
+
+        //botão registo do login
+        private void buttonRegisto_Click(object sender, EventArgs e)
+        {
+          
+            // Abre o formulário de registo 
+            frmGereUtilizadores frmRegisto = new frmGereUtilizadores();
+            frmRegisto.ShowDialog();
+
+            // Quando o registo for fechado, o utilizador volta ao login
+            // limpa os dados do login
+            txtUsername.Text = "";
+            txtPassword.Text = "";
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+
+            // Chama o método para verificar se existem utilizadores
+            bool temUtilizadores = VerificarSeHaUtilizadores();
+
+            // Se houver utilizadores, esconde o botão de registo
+            buttonRegisto.Visible = !temUtilizadores;
+
+        }
+
+        // Método auxiliar para verificar se há utilizadores na base de dados
+        private bool VerificarSeHaUtilizadores()
+        {
+            using (ITaskContext context = new ITaskContext())
+            {
+                return context.Utilizadores.Any(); // retorna true se houver pelo menos um
+            }
+        }
+
     }
 }
