@@ -16,6 +16,7 @@ namespace iTasks.Vistas
     public partial class AdicionarProgramador : Form
     {
         Programador Programador;
+       
         UtilizadorControlador utilizadorControlador = new UtilizadorControlador();
 
         public AdicionarProgramador() // contrutor para criar programador vazio
@@ -48,7 +49,7 @@ namespace iTasks.Vistas
 
         public Programador GetProgramador()
         {
-            return Programador; // TODO
+            return this.Programador; // TODO
         }
 
 
@@ -65,7 +66,7 @@ namespace iTasks.Vistas
 
         }
 
-        private void btGravarProg_Click(object sender, EventArgs e) // botão OK
+        private void btOKProg_Click(object sender, EventArgs e) // botão OK
         {
 
             NivelExperiencia nivelExperiencia;
@@ -82,12 +83,20 @@ namespace iTasks.Vistas
                 return;
             }
             
-            Programador = new Programador(nivelExperiencia, gestorselecionado,txtNomeProg.Text,txtUsernameProg.Text,txtPasswordProg.Text);
+            Programador novoProgramador = new Programador(nivelExperiencia, gestorselecionado,txtNomeProg.Text,txtUsernameProg.Text,txtPasswordProg.Text);
             try
             {
+                // AO CARREGAR NO BOTAO OK DO ADICIONARPROGRAMADOR - se a funcao chamada é criarUtilizador
+                // se der erro nao cria e lança mensagem de erro definida no controlador utilizador
+                // (username já existe)
+                utilizadorControlador.CriarUtilizador(novoProgramador); 
+               
+                this.Programador = novoProgramador;
 
-                utilizadorControlador.CriarUtilizador(Programador); // AO CARREGAR NO BOTAO OK DO ADICIONARPROGRAMADOR - se a funcao chamada é criarUtilizador se der erro nao cria e lança mensagem de erro definida no controlador utilizador (username já existe)
                 MessageBox.Show("Programador criado com sucesso!");
+                SetId(this.Programador.Id);
+
+                this.Close(); // fecha o formulário
             }
             catch (Exception ex)
             {
@@ -96,6 +105,6 @@ namespace iTasks.Vistas
 
         }
 
-
+       
     }
 }
