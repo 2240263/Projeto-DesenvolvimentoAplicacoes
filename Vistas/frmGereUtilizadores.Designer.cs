@@ -32,14 +32,14 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lstListaGestores = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonApagarGestor = new System.Windows.Forms.Button();
             this.buttonEditarGestor = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lstListaProgramadores = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btGravarProg = new System.Windows.Forms.Button();
-            this.buttonApagarGestor = new System.Windows.Forms.Button();
             this.buttonApagarProg = new System.Windows.Forms.Button();
+            this.btGravarProg = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -95,6 +95,17 @@
             this.groupBox2.TabIndex = 38;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Gestores";
+            // 
+            // buttonApagarGestor
+            // 
+            this.buttonApagarGestor.Location = new System.Drawing.Point(441, 525);
+            this.buttonApagarGestor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonApagarGestor.Name = "buttonApagarGestor";
+            this.buttonApagarGestor.Size = new System.Drawing.Size(302, 35);
+            this.buttonApagarGestor.TabIndex = 45;
+            this.buttonApagarGestor.Text = "Apagar Gestor";
+            this.buttonApagarGestor.UseVisualStyleBackColor = true;
+            this.buttonApagarGestor.Click += new System.EventHandler(this.buttonApagarGestor_Click);
             // 
             // buttonEditarGestor
             // 
@@ -157,28 +168,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Programadores";
             // 
-            // btGravarProg
-            // 
-            this.btGravarProg.Location = new System.Drawing.Point(58, 536);
-            this.btGravarProg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btGravarProg.Name = "btGravarProg";
-            this.btGravarProg.Size = new System.Drawing.Size(302, 35);
-            this.btGravarProg.TabIndex = 37;
-            this.btGravarProg.Text = "Criar";
-            this.btGravarProg.UseVisualStyleBackColor = true;
-            this.btGravarProg.Click += new System.EventHandler(this.btCriarProg_Click);
-            // 
-            // buttonApagarGestor
-            // 
-            this.buttonApagarGestor.Location = new System.Drawing.Point(441, 525);
-            this.buttonApagarGestor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.buttonApagarGestor.Name = "buttonApagarGestor";
-            this.buttonApagarGestor.Size = new System.Drawing.Size(302, 35);
-            this.buttonApagarGestor.TabIndex = 45;
-            this.buttonApagarGestor.Text = "Apagar Gestor";
-            this.buttonApagarGestor.UseVisualStyleBackColor = true;
-            this.buttonApagarGestor.Click += new System.EventHandler(this.buttonApagarGestor_Click);
-            // 
             // buttonApagarProg
             // 
             this.buttonApagarProg.Location = new System.Drawing.Point(58, 645);
@@ -190,6 +179,17 @@
             this.buttonApagarProg.UseVisualStyleBackColor = true;
             this.buttonApagarProg.Click += new System.EventHandler(this.buttonApagarProg_Click);
             // 
+            // btGravarProg
+            // 
+            this.btGravarProg.Location = new System.Drawing.Point(58, 536);
+            this.btGravarProg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btGravarProg.Name = "btGravarProg";
+            this.btGravarProg.Size = new System.Drawing.Size(302, 35);
+            this.btGravarProg.TabIndex = 37;
+            this.btGravarProg.Text = "Criar";
+            this.btGravarProg.UseVisualStyleBackColor = true;
+            this.btGravarProg.Click += new System.EventHandler(this.btCriarProg_Click);
+            // 
             // frmGereUtilizadores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -200,6 +200,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmGereUtilizadores";
             this.Text = "frmListaUtilizadores";
+
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);

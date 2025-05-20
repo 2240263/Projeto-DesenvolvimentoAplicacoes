@@ -129,7 +129,7 @@ namespace iTasks
             
             if(index== -1)
             {
-                MessageBox.Show("Selecione um programador");
+                //MessageBox.Show("Selecione um programador");
                 return;
             }
 
@@ -221,5 +221,7 @@ namespace iTasks
                 MessageBox.Show("Programador apagado com sucesso.");
             }
         }
+
+     
     }
 }
