@@ -16,19 +16,23 @@ namespace iTasks.Vistas
     public partial class AdicionarProgramador : Form
     {
         Programador Programador;
-       
+
         UtilizadorControlador utilizadorControlador = new UtilizadorControlador();
+        private bool QueroEditar = false; 
+
 
         public AdicionarProgramador() // contrutor para criar programador vazio
         {
             InitializeComponent();
-            
+
             EnumsDinamicos();
         }
         public AdicionarProgramador(Programador Programador) : this() // contrutor quando edita - recebe a informação já preenchida
         {
+            QueroEditar = true;
             EnumsDinamicos();
             this.Programador = Programador;
+
             // carregar os dados
             txtNomeProg.Text = this.Programador.Nome;
             txtUsernameProg.Text = this.Programador.Username;
@@ -61,7 +65,7 @@ namespace iTasks.Vistas
                 List<Gestor> gestores = context.Gestores.ToList();
                 cbGestorProg.DataSource = gestores;
                 cbGestorProg.DisplayMember = "Nome";   // ou outro campo que queira mostrar
-                
+
             }
 
         }
@@ -76,35 +80,61 @@ namespace iTasks.Vistas
                 return;
             }
 
-            Gestor gestorselecionado = cbGestorProg.SelectedItem as Gestor;
-            if (gestorselecionado == null)
+            Gestor gestorSelecionado = cbGestorProg.SelectedItem as Gestor;
+            if (gestorSelecionado == null)
             {
                 MessageBox.Show("Por favor selecione um gestor da lista.");
                 return;
             }
-            
-            Programador novoProgramador = new Programador(nivelExperiencia, gestorselecionado,txtNomeProg.Text,txtUsernameProg.Text,txtPasswordProg.Text);
-            try
-            {
-                // AO CARREGAR NO BOTAO OK DO ADICIONARPROGRAMADOR - se a funcao chamada é criarUtilizador
-                // se der erro nao cria e lança mensagem de erro definida no controlador utilizador
-                // (username já existe)
-                utilizadorControlador.CriarUtilizador(novoProgramador); 
-               
-                this.Programador = novoProgramador;
 
-                MessageBox.Show("Programador criado com sucesso!");
-                SetId(this.Programador.Id);
-
-                this.Close(); // fecha o formulário
-            }
-            catch (Exception ex)
+            //se quiser editar os dados do programador 
+            if (QueroEditar)
             {
-                MessageBox.Show(ex.Message);
+                // Atualiza os campos do programador já existente
+                this.Programador.Nome = txtNomeProg.Text;
+                this.Programador.Username = txtUsernameProg.Text;
+                this.Programador.Password = txtPasswordProg.Text;
+                this.Programador.nivelExperiencia = nivelExperiencia;
+                this.Programador.IdGestor = gestorSelecionado; 
+
+
+                try
+                {
+                    utilizadorControlador.EditarUtilizador(this.Programador);//adiciona o programador alterado
+                    MessageBox.Show("Programador atualizado com sucesso!");
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
+            else
+            {
+                Programador novoProgramador = new Programador(nivelExperiencia, gestorSelecionado, txtNomeProg.Text, txtUsernameProg.Text, txtPasswordProg.Text);
+                try
+                {
+                    // AO CARREGAR NO BOTAO OK DO ADICIONARPROGRAMADOR - se a funcao chamada é criarUtilizador
+                    // se der erro nao cria e lança mensagem de erro definida no controlador utilizador
+                    // (username já existe)
+                    utilizadorControlador.CriarUtilizador(novoProgramador);
+
+                    this.Programador = novoProgramador;
+
+                    MessageBox.Show("Programador criado com sucesso!");
+                    SetId(this.Programador.Id);
+
+                    this.Close(); // fecha o formulário
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+
 
         }
-
-       
     }
 }

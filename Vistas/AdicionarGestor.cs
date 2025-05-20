@@ -19,6 +19,7 @@ namespace iTasks.Vistas
         Gestor Gestor;
 
         UtilizadorControlador utilizadorControlador = new UtilizadorControlador();
+        private bool QueroEditar = false;
         public AdicionarGestor()
         {
             InitializeComponent();
@@ -26,6 +27,8 @@ namespace iTasks.Vistas
         }
         public AdicionarGestor(Gestor Gestor) : this() // construtor quando edita - recebe a informação já preenchida
         {
+            QueroEditar = true;
+
             EnumsDinamicosGestor();
             this.Gestor = Gestor;
             // carregar os dados
@@ -62,29 +65,51 @@ namespace iTasks.Vistas
                 MessageBox.Show("Selecione um departamento válido!");
                 return;
             }
-            bool gereUtilizadores = chkGereUtilizadores.Checked;
-
-            //criar objeto gestor
-            Gestor novoGestor = new Gestor(gereUtilizadores, departamento, txtNomeGestor.Text, txtUsernameGestor.Text, txtPasswordGestor.Text);
-            try
+            //se for para editar o gestor 
+            if (QueroEditar)
             {
-                // AO CARREGAR NO BOTAO OK DO ADICIONARGESTOR - se a funcao chamada é criarUtilizador
-                // se der erro nao cria e lança mensagem de erro definida no controlador utilizador
-                // (username já existe)
-                utilizadorControlador.CriarUtilizador(novoGestor);
-                this.Gestor = novoGestor;
-
-                MessageBox.Show("Gestor criado com sucesso!");
-                SetId(this.Gestor.Id);
-
-                this.Close(); // fecha o formulário
-
+                // Atualiza os campos do programador já existente
+                this.Gestor.Nome = txtNomeGestor.Text;
+                this.Gestor.Username = txtUsernameGestor.Text;
+                this.Gestor.Password = txtPasswordGestor.Text;
+                this.Gestor.Departamento = departamento;
+             
+                try
+                {
+                    utilizadorControlador.EditarUtilizador(this.Gestor);//adiciona o gestor alterado
+                    MessageBox.Show("Gestor atualizado com sucesso!");
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            else { 
+                bool gereUtilizadores = chkGereUtilizadores.Checked;
 
+                //criar objeto gestor
+                Gestor novoGestor = new Gestor(gereUtilizadores, departamento, txtNomeGestor.Text, txtUsernameGestor.Text, txtPasswordGestor.Text);
+                try
+                {
+                    // AO CARREGAR NO BOTAO OK DO ADICIONARGESTOR - se a funcao chamada é criarUtilizador
+                    // se der erro nao cria e lança mensagem de erro definida no controlador utilizador
+                    // (username já existe)
+                    utilizadorControlador.CriarUtilizador(novoGestor);
+                    this.Gestor = novoGestor;
+
+                    MessageBox.Show("Gestor criado com sucesso!");
+                    SetId(this.Gestor.Id);
+
+                    this.Close(); // fecha o formulário
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }

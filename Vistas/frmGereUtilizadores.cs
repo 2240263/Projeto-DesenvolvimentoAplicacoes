@@ -40,18 +40,6 @@ namespace iTasks
             InitializeComponent();
             atualizaListaGestores();
             atualizaListaProgramador();
-
-          
-
-            /*int index = lstListaGestores.SelectedIndex;
-            if (index != -1)
-            {
-                using (ITaskContext context = new ITaskContext())
-                {
-                    Gestor gestor = context.Gestores.ToList()[index];
-                    
-                }
-            }*/
         }
 
 
@@ -183,13 +171,17 @@ namespace iTasks
 
             utilizadorControlador.EditarUtilizador(SelecionaProgramador);
             atualizaListaProgramador();
-    }
+        }
+
+
+
         //botão para apagar gestor
         private void buttonApagarGestor_Click(object sender, EventArgs e)
         {
             if(SelecionaGestor== null)
             {
                 MessageBox.Show("Selecione um gestor!");
+                return;
             }
 
             var confirmar = MessageBox.Show($"Tem certeza que quer apagar o gestor '{SelecionaGestor.Nome}'?", "Confirmar Apagar", MessageBoxButtons.YesNo);
