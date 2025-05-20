@@ -42,9 +42,10 @@ namespace iTasks.Vistas
                 MessageBox.Show("Tipo de tarefa criada com suceso");
                 SetIdTT(TipoTarefas.Id);
                 FecharJanelaAposDelay();
+                txtDesc.Enabled = false; // torna a txtDesc impossivel de alterar
             }
 
-            async void FecharJanelaAposDelay()
+            async void FecharJanelaAposDelay() //fechar os forms apos um determinado tempo
             {
                 await Task.Delay(2000); // espera 2 segundos 
                 this.Close();           // fecha o formulário
