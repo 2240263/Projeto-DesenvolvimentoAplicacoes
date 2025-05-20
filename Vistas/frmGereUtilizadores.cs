@@ -16,7 +16,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 namespace iTasks
 {
     public partial class frmGereUtilizadores : Form
+
     {
+        private AdicionarProgramador FormAdicionarProgramador = new AdicionarProgramador();
         private Gestor SelecionaGestor;
         private Programador SelecionaProgramador;
         private List<Gestor> listaGestores = new List<Gestor>();
@@ -24,13 +26,16 @@ namespace iTasks
 
         //NEW CONTROLADORES UTILIZADORES
         private UtilizadorControlador utilizadorControlador = new UtilizadorControlador();
-        
+
+
 
         public frmGereUtilizadores()
         {
             InitializeComponent();
             atualizaListaGestores();
             atualizaListaProgramador();
+
+          
 
             /*int index = lstListaGestores.SelectedIndex;
             if (index != -1)
@@ -106,16 +111,9 @@ namespace iTasks
         //evento do formúlario, para que preencha as opçoes no combobox
         private void frmGereUtilizadores_Load(object sender, EventArgs e)
         { //getvalues retorna todos os elementos do tipo departamentos
-            
+
             cbDepartamento.DataSource = Enum.GetValues(typeof(Departamentos));
-            cbNivelProg.DataSource = Enum.GetValues(typeof(NivelExperiencia));
-            using (ITaskContext context = new ITaskContext())
-            {
-                List<Gestor> gestores = context.Gestores.ToList();
-                cbGestorProg.DataSource = gestores;
-                cbGestorProg.DisplayMember = "Nome";   // ou outro campo que queira mostrar
-                
-            }
+            
 
         }
         private void lstListaGestores_SelectedIndexChanged(object sender, EventArgs e)
@@ -133,54 +131,9 @@ namespace iTasks
         }
 
         //botão para gravar programador
-        private void btGravarProg_Click(object sender, EventArgs e)
+        private void btCriarProg_Click(object sender, EventArgs e)
         {
-            using (ITaskContext context = new ITaskContext())
-            {
-                string nome = txtNomeProg.Text;
-                string username = txtUsernameProg.Text;
-
-                Programador progexistente = context.Programadores.FirstOrDefault(prog => prog.Username == username);
-                if (progexistente != null)
-                {
-                    MessageBox.Show("Já existe um Programador com este username!");
-                    
-                    return;
-                }
-
-                string password = txtPasswordProg.Text;
-
-                NivelExperiencia nivelExperiencia;
-                if (!Enum.TryParse(cbNivelProg.SelectedItem?.ToString(), out nivelExperiencia))
-                {
-                    MessageBox.Show("Selecione um nível de experiência válido.");
-                    return;
-                }
-
-                Gestor gestorselecionado = cbGestorProg.SelectedItem as Gestor;
-                if (gestorselecionado == null)
-                {
-                    MessageBox.Show("Por favor selecione um gestor da lista.");
-                    return;
-                }
-
-                Programador novoprogramador = new Programador
-                {
-                    Nome = nome,
-                    Username = username,
-                    Password = password,
-                    nivelExperiencia = nivelExperiencia,
-                    IdGestor = gestorselecionado
-                };
-
-                context.Programadores.Add(novoprogramador);
-                context.SaveChanges();
-                // Mostrar o ID no campo txtIdProg
-                txtIdProg.Text = novoprogramador.Id.ToString();
-
-                MessageBox.Show("Programador gravado com sucesso!");
-              
-            }
+            FormAdicionarProgramador.Show(); // abrir formulario adicionar programador
         }
 
 
@@ -215,17 +168,14 @@ namespace iTasks
                 SelecionaProgramador = null;
                 lstListaProgramadores.SelectedIndex = -1;
 
-                txtNomeProg.Text = "";
-                txtUsernameProg.Text = "";
                 return;
             }
 
             SelecionaProgramador = programador;
-            txtNomeProg.Text = SelecionaProgramador.Nome;
-            txtUsernameProg.Text = SelecionaProgramador.Username;
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // MUDARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR BOTAO ERRADO
         {
             AdicionarProgramador adicionar = new AdicionarProgramador();
             adicionar.ShowDialog();

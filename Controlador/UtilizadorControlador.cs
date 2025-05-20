@@ -3,9 +3,11 @@ using Org.BouncyCastle.Crypto.Digests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace iTasks.Controlador
 {
@@ -38,6 +40,18 @@ namespace iTasks.Controlador
 
             }
            
+            Context.SaveChanges();
+        }
+        
+        public void CriarUtilizador(Programador programador)
+        {
+            Programador progexistente = Context.Programadores.FirstOrDefault(prog => prog.Username == programador.Username);
+            if (progexistente != null)
+            {
+                throw new InvalidOperationException("Já existe um Programador com este username!");
+            }
+
+            Context.Programadores.Add(programador);
             Context.SaveChanges();
         }
 

@@ -44,27 +44,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtUsernameGestor = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cbGestorProg = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btGravarProg = new System.Windows.Forms.Button();
-            this.txtPasswordProg = new System.Windows.Forms.TextBox();
-            this.cbNivelProg = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtUsernameProg = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lstListaProgramadores = new System.Windows.Forms.ListBox();
-            this.txtIdProg = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtNomeProg = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btGravarProg = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btGravarGestor
@@ -242,126 +230,14 @@
             this.label2.TabIndex = 37;
             this.label2.Text = "Username:";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.cbGestorProg);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.btGravarProg);
-            this.groupBox3.Controls.Add(this.txtPasswordProg);
-            this.groupBox3.Controls.Add(this.cbNivelProg);
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.txtUsernameProg);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.groupBox4);
-            this.groupBox3.Controls.Add(this.txtIdProg);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.txtNomeProg);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Location = new System.Drawing.Point(706, 14);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(681, 590);
-            this.groupBox3.TabIndex = 39;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Programadores";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(388, 283);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(50, 16);
-            this.label11.TabIndex = 44;
-            this.label11.Text = "Gestor:";
-            // 
-            // cbGestorProg
-            // 
-            this.cbGestorProg.FormattingEnabled = true;
-            this.cbGestorProg.Location = new System.Drawing.Point(392, 302);
-            this.cbGestorProg.Margin = new System.Windows.Forms.Padding(4);
-            this.cbGestorProg.Name = "cbGestorProg";
-            this.cbGestorProg.Size = new System.Drawing.Size(267, 24);
-            this.cbGestorProg.TabIndex = 43;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(388, 230);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(134, 16);
-            this.label6.TabIndex = 42;
-            this.label6.Text = "Nível de Experiência:";
-            // 
-            // btGravarProg
-            // 
-            this.btGravarProg.Location = new System.Drawing.Point(390, 348);
-            this.btGravarProg.Margin = new System.Windows.Forms.Padding(4);
-            this.btGravarProg.Name = "btGravarProg";
-            this.btGravarProg.Size = new System.Drawing.Size(268, 28);
-            this.btGravarProg.TabIndex = 37;
-            this.btGravarProg.Text = "Gravar Dados";
-            this.btGravarProg.UseVisualStyleBackColor = true;
-            this.btGravarProg.Click += new System.EventHandler(this.btGravarProg_Click);
-            // 
-            // txtPasswordProg
-            // 
-            this.txtPasswordProg.Location = new System.Drawing.Point(392, 196);
-            this.txtPasswordProg.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPasswordProg.Name = "txtPasswordProg";
-            this.txtPasswordProg.Size = new System.Drawing.Size(267, 22);
-            this.txtPasswordProg.TabIndex = 40;
-            this.txtPasswordProg.UseSystemPasswordChar = true;
-            // 
-            // cbNivelProg
-            // 
-            this.cbNivelProg.FormattingEnabled = true;
-            this.cbNivelProg.Location = new System.Drawing.Point(392, 250);
-            this.cbNivelProg.Margin = new System.Windows.Forms.Padding(4);
-            this.cbNivelProg.Name = "cbNivelProg";
-            this.cbNivelProg.Size = new System.Drawing.Size(267, 24);
-            this.cbNivelProg.TabIndex = 41;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(388, 176);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 16);
-            this.label7.TabIndex = 39;
-            this.label7.Text = "Password:";
-            // 
-            // txtUsernameProg
-            // 
-            this.txtUsernameProg.Location = new System.Drawing.Point(392, 146);
-            this.txtUsernameProg.Margin = new System.Windows.Forms.Padding(4);
-            this.txtUsernameProg.Name = "txtUsernameProg";
-            this.txtUsernameProg.Size = new System.Drawing.Size(267, 22);
-            this.txtUsernameProg.TabIndex = 38;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(388, 126);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(73, 16);
-            this.label8.TabIndex = 37;
-            this.label8.Text = "Username:";
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.lstListaProgramadores);
-            this.groupBox4.Location = new System.Drawing.Point(8, 23);
+            this.groupBox4.Location = new System.Drawing.Point(-1, 23);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Size = new System.Drawing.Size(365, 560);
+            this.groupBox4.Size = new System.Drawing.Size(374, 389);
             this.groupBox4.TabIndex = 32;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Lista";
@@ -374,63 +250,51 @@
             this.lstListaProgramadores.Location = new System.Drawing.Point(4, 19);
             this.lstListaProgramadores.Margin = new System.Windows.Forms.Padding(4);
             this.lstListaProgramadores.Name = "lstListaProgramadores";
-            this.lstListaProgramadores.Size = new System.Drawing.Size(357, 537);
+            this.lstListaProgramadores.Size = new System.Drawing.Size(366, 366);
             this.lstListaProgramadores.TabIndex = 0;
             this.lstListaProgramadores.SelectedIndexChanged += new System.EventHandler(this.lstListaProgramadores_SelectedIndexChanged);
             // 
-            // txtIdProg
-            // 
-            this.txtIdProg.Location = new System.Drawing.Point(392, 43);
-            this.txtIdProg.Margin = new System.Windows.Forms.Padding(4);
-            this.txtIdProg.Name = "txtIdProg";
-            this.txtIdProg.ReadOnly = true;
-            this.txtIdProg.Size = new System.Drawing.Size(81, 22);
-            this.txtIdProg.TabIndex = 34;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(388, 23);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(21, 16);
-            this.label9.TabIndex = 33;
-            this.label9.Text = "Id:";
-            // 
-            // txtNomeProg
-            // 
-            this.txtNomeProg.Location = new System.Drawing.Point(392, 98);
-            this.txtNomeProg.Margin = new System.Windows.Forms.Padding(4);
-            this.txtNomeProg.Name = "txtNomeProg";
-            this.txtNomeProg.Size = new System.Drawing.Size(267, 22);
-            this.txtNomeProg.TabIndex = 36;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(388, 78);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 16);
-            this.label10.TabIndex = 35;
-            this.label10.Text = "Nome:";
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(392, 384);
+            this.button2.Location = new System.Drawing.Point(52, 480);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(268, 28);
             this.button2.TabIndex = 45;
-            this.button2.Text = "Atualizar Dados";
+            this.button2.Text = "Editar ";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.buttonAtualizarProgramador_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button2);
+            this.groupBox3.Controls.Add(this.btGravarProg);
+            this.groupBox3.Controls.Add(this.groupBox4);
+            this.groupBox3.Location = new System.Drawing.Point(714, 14);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(414, 590);
+            this.groupBox3.TabIndex = 39;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Programadores";
+            // 
+            // btGravarProg
+            // 
+            this.btGravarProg.Location = new System.Drawing.Point(52, 429);
+            this.btGravarProg.Margin = new System.Windows.Forms.Padding(4);
+            this.btGravarProg.Name = "btGravarProg";
+            this.btGravarProg.Size = new System.Drawing.Size(268, 28);
+            this.btGravarProg.TabIndex = 37;
+            this.btGravarProg.Text = "Criar";
+            this.btGravarProg.UseVisualStyleBackColor = true;
+            this.btGravarProg.Click += new System.EventHandler(this.btCriarProg_Click);
             // 
             // frmGereUtilizadores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1401, 620);
+            this.ClientSize = new System.Drawing.Size(1189, 620);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -440,9 +304,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -464,23 +327,11 @@
         private System.Windows.Forms.CheckBox chkGereUtilizadores;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbDepartamento;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btGravarProg;
-        private System.Windows.Forms.TextBox txtPasswordProg;
-        private System.Windows.Forms.ComboBox cbNivelProg;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtUsernameProg;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ListBox lstListaProgramadores;
-        private System.Windows.Forms.TextBox txtIdProg;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtNomeProg;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cbGestorProg;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btGravarProg;
     }
 }
