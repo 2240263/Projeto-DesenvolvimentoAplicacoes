@@ -88,6 +88,7 @@ namespace iTasks.Vistas
 
                 utilizadorControlador.CriarUtilizador(Programador); // AO CARREGAR NO BOTAO OK DO ADICIONARPROGRAMADOR - se a funcao chamada é criarUtilizador se der erro nao cria e lança mensagem de erro definida no controlador utilizador (username já existe)
                 MessageBox.Show("Programador criado com sucesso!");
+                
             }
             catch (Exception ex)
             {

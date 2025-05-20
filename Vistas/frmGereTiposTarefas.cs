@@ -1,5 +1,6 @@
 ﻿using iTasks.Controlador;
 using iTasks.Modelos;
+using iTasks.Vistas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,7 @@ namespace iTasks
         private List<TipoTarefa> ListTipoTarefas { get; set; }
 
         TipoTarefaControlador tipoTarefaControlador = new TipoTarefaControlador();
+        AdicionarTipoTarefa FormadicionarTipoTarefa = new AdicionarTipoTarefa();
 
 
         public frmGereTiposTarefas()
@@ -27,21 +29,10 @@ namespace iTasks
             atualizarListaTiposTarefas();
         }
 
-        private void btGravar_Click(object sender, EventArgs e)
+        private void btCriarTT_Click(object sender, EventArgs e)
         {
-
-            using (ITaskContext context = new ITaskContext())
-            {
-                string descricao = txtDesc.Text;
-                TipoTarefa TipoTarefas = new TipoTarefa(descricao);
-
-                context.TipoTarefas.Add(TipoTarefas);
-                context.SaveChanges();
-                txtId.Text = TipoTarefas.Id.ToString();
-                atualizarListaTiposTarefas();
-
-                MessageBox.Show("Tipo de tarefa criada com suceso");
-            }
+            FormadicionarTipoTarefa.Show();
+            
         }
 
         
@@ -92,7 +83,7 @@ namespace iTasks
 
         private void textlimpa()
         {
-            txtDesc.Text = "";
+            //txtDesc.Text = "";
         }
     }
 }

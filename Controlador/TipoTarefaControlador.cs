@@ -26,7 +26,15 @@ namespace iTasks.Controlador
             Context.SaveChanges();
         }
 
-        public void EditarUtilizador(Utilizador tipoTarefa)
+        public void CriarTipoTarefa(TipoTarefa tipoTarefa)
+        {
+
+            Context.TipoTarefas.Add(tipoTarefa);
+            Context.SaveChanges();
+
+        }
+
+        /*public void EditarUtilizador(Utilizador tipoTarefa)
         {
             var utilizadorExiste = Context.Utilizadores.FirstOrDefault(u => u.Id == tipoTarefa.Id);
 
@@ -37,13 +45,12 @@ namespace iTasks.Controlador
                 utilizadorExiste.Password = tipoTarefa.Password;
             }
 
-            Context.SaveChanges();
+            Context.SaveChanges();*/
         }
 
     }
 
 
-}
 
 
 
