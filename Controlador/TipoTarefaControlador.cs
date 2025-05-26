@@ -21,7 +21,7 @@ namespace iTasks.Controlador
         {
             TipoTarefa tipo = Context.TipoTarefas.Find(tipoTarefa.Id); // Como o item vai ser apagado, necessitamos de fazer uma ligacao/referência à base de dados para saber o que vai apagar
             //Context.Entry(tipoTarefa).State = System.Data.Entity.EntityState.Deleted; - Outra forma de fz referência à lista na base de dados que vai ser apagada
-            if(tipo ==null) // para confirmar se o tipo de objeto existe, para nao gerar erro, caso nao exista.
+            if (tipo == null) // para confirmar se o tipo de objeto existe, para nao gerar erro, caso nao exista.
             {
                 throw new Exception("Tipo tarefa não encontrada");
             }
@@ -37,21 +37,23 @@ namespace iTasks.Controlador
 
         }
 
-        /*public void EditarUtilizador(Utilizador tipoTarefa)
+        public void EditarTipoTarefa(TipoTarefa tipoTarefa)
         {
-            var utilizadorExiste = Context.Utilizadores.FirstOrDefault(u => u.Id == tipoTarefa.Id);
+            var TipoTarefaExiste = Context.TipoTarefas.FirstOrDefault(tt => tt.Id == tipoTarefa.Id); //Retorna através da comparacao da lista (FirstOrDefault) o primeiro item que corresponde ao critério id, ou null se não encontrar
 
-            if (utilizadorExiste != null)
+
+            if (TipoTarefaExiste != null)
             {
-                utilizadorExiste.Nome = tipoTarefa.Nome;
-                utilizadorExiste.Username = tipoTarefa.Username;
-                utilizadorExiste.Password = tipoTarefa.Password;
+                TipoTarefaExiste.Nome = tipoTarefa.Nome;
+
+
             }
 
-            Context.SaveChanges();*/
+            Context.SaveChanges();
         }
 
     }
+}
 
 
 

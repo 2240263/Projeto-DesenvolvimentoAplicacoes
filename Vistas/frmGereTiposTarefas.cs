@@ -52,11 +52,8 @@ namespace iTasks
                 lstLista.DataSource = null;
                 lstLista.DataSource = ListTipoTarefas;
                
-            }    
-
+            }   
         }
-
-
 
 
     private void lstLista_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,12 +94,30 @@ namespace iTasks
 
         }
 
-
+        private void ButEditar_Click(object sender, EventArgs e)
+        {
+            if (SelecionaTipoTarefa == null)
+            {
+                MessageBox.Show("Tipo de tarefa não está selecionada");
+                return;
+            }
+            AdicionarTipoTarefa adicionartt = new AdicionarTipoTarefa();
+            adicionartt.ShowDialog();//showDailog bloqueia a janelas anteriores, até que essa seja fechada
             
 
-       
+            tipoTarefaControlador.EditarTipoTarefa(SelecionaTipoTarefa);
+            atualizarListaTiposTarefas();
+
+          
+                
+            
+
+        }
     }
 }
+
+
+
 
 
 // controladorUtilizador.ApagarUtilizador(SelecionaProgramador);

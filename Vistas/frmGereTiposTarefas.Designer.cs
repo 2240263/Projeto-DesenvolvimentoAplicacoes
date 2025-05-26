@@ -80,6 +80,7 @@
             this.ButEditar.TabIndex = 32;
             this.ButEditar.Text = "Editar";
             this.ButEditar.UseVisualStyleBackColor = true;
+            this.ButEditar.Click += new System.EventHandler(this.ButEditar_Click);
             // 
             // ButApagar
             // 

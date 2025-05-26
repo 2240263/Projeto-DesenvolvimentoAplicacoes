@@ -19,10 +19,12 @@ namespace iTasks.Vistas
     public partial class AdicionarTipoTarefa : Form
     {
         TipoTarefaControlador tipoTarefaControlador = new TipoTarefaControlador();
+
     
         public AdicionarTipoTarefa()
         {
             InitializeComponent();
+
 
            
         }
