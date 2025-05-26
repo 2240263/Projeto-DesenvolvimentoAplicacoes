@@ -33,21 +33,13 @@ namespace iTasks
         {
            // FormadicionarTipoTarefa.Show();
             var form = new AdicionarTipoTarefa();
+            FormadicionarTipoTarefa.ReseatFormulario(); // chama a funcao para colocar o formulario limpo e assim podermos criar novo tipo de tarefa sem fechar formulario
             var result = FormadicionarTipoTarefa.ShowDialog();
             if (result == DialogResult.OK) // se for ok a reposta, vai atualizar a lista de tipo de tarefas ( e o ok, vem no from adicionar tipo tarefas)
             {
                 atualizarListaTiposTarefas();
-            }
-
-           
-            
+            }    
         }
-
-
-        
-
-
-
 
 
 
@@ -69,37 +61,46 @@ namespace iTasks
 
     private void lstLista_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
             int index = lstLista.SelectedIndex;
 
             if( index == -1)
             {
+               
                 return;
             }
 
-
             SelecionaTipoTarefa = ListTipoTarefas[index];
+            
 
         }
 
         private void ButApagar_Click(object sender, EventArgs e)
         {
+           
 
             if(SelecionaTipoTarefa == null)
             {
                 MessageBox.Show("Tipo de tarefa não está selecionada");
                 return;
             }
+            try
+            {
+                tipoTarefaControlador.ApagarTipoTarefa(SelecionaTipoTarefa);
+                atualizarListaTiposTarefas();
+                MessageBox.Show("Tipo de tarefa apagado com sucesso.");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Erro ao apagar o tipo de tarefa: {ex.Message}");
+            }
 
-
-            tipoTarefaControlador.ApagarTipoTarefa(SelecionaTipoTarefa);
-            atualizarListaTiposTarefas();
-            textlimpa();
         }
 
-        private void textlimpa()
-        {
-            //txtDesc.Text = "";
-        }
+
+            
+
+       
     }
 }
 

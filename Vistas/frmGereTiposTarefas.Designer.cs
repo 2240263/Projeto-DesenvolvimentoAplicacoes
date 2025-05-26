@@ -58,7 +58,7 @@
             this.lstLista.Name = "lstLista";
             this.lstLista.Size = new System.Drawing.Size(357, 451);
             this.lstLista.TabIndex = 0;
-         
+            this.lstLista.Click += new System.EventHandler(this.lstLista_SelectedIndexChanged);
             // 
             // btGravar
             // 

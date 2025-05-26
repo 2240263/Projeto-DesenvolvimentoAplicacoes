@@ -64,8 +64,13 @@ namespace iTasks.Vistas
                 this.Close();           // fecha o formulário
             }
 
+        }
 
-
+        public void ReseatFormulario()
+        {
+            txtDesc.Text = "";
+            txtDesc.Enabled = true;
+            txtId.Text = "";
         }
 
         private void buttCancelarTT_Click(object sender, EventArgs e) // botao cancelar no criar tipo tarefa

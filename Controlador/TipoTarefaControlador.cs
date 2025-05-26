@@ -21,7 +21,10 @@ namespace iTasks.Controlador
         {
             TipoTarefa tipo = Context.TipoTarefas.Find(tipoTarefa.Id); // Como o item vai ser apagado, necessitamos de fazer uma ligacao/referência à base de dados para saber o que vai apagar
             //Context.Entry(tipoTarefa).State = System.Data.Entity.EntityState.Deleted; - Outra forma de fz referência à lista na base de dados que vai ser apagada
-
+            if(tipo ==null) // para confirmar se o tipo de objeto existe, para nao gerar erro, caso nao exista.
+            {
+                throw new Exception("Tipo tarefa não encontrada");
+            }
             Context.TipoTarefas.Remove(tipo);
             Context.SaveChanges();
         }
