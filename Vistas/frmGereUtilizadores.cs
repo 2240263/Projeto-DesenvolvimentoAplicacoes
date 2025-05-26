@@ -111,7 +111,7 @@ namespace iTasks
                 Gestor gestorEditado = formEditar.GetGestor();
 
                 utilizadorControlador.EditarUtilizador(gestorEditado);
-                MessageBox.Show("Gestor atualizado com sucesso!");
+             
                 atualizaListaGestores();
             }
 
