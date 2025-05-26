@@ -64,7 +64,7 @@ namespace iTasks.Vistas
             {
                 List<Gestor> gestores = context.Gestores.ToList();
                 cbGestorProg.DataSource = gestores;
-                cbGestorProg.DisplayMember = "Nome";   // ou outro campo que queira mostrar
+      
 
             }
 

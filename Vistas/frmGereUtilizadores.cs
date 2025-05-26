@@ -78,8 +78,7 @@ namespace iTasks
             int index = lstListaGestores.SelectedIndex;
             if (index == -1)
             {
-               
-                MessageBox.Show("Selecione um Gestor !");
+                MessageBox.Show("selecione um gestor");
                 return;
             }
             //guarda na variavel global selecionagestor a posiçao que está na lista 
@@ -117,7 +116,6 @@ namespace iTasks
             
             if(index== -1)
             {
-                //MessageBox.Show("Selecione um programador");
                 return;
             }
 
@@ -134,7 +132,7 @@ namespace iTasks
 
         }
         //este botao é para atualizar/editar o gestor
-        private void button1_Click(object sender, EventArgs e) // MUDARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR BOTAO ERRADO
+        private void BotaoEditarG(object sender, EventArgs e) 
         {
             //se nao houver nenhum gestor selecionado apresenta uma mensagem
             if (SelecionaGestor == null)
@@ -203,7 +201,7 @@ namespace iTasks
                 MessageBox.Show("Selecione um programador!");
             }
 
-            var confirmar = MessageBox.Show($"Tem certeza que quer apagar o programador '{SelecionaProgramador.Nome}'?", "Confirmar Apagar", MessageBoxButtons.YesNo);
+            var confirmar = MessageBox.Show($"Tem certeza que quer apagar o programador '{SelecionaProgramador}'?", "Confirmar Apagar", MessageBoxButtons.YesNo);
 
             if (confirmar == DialogResult.Yes)
             {

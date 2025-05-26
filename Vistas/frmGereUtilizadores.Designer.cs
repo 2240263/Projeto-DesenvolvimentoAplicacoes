@@ -118,7 +118,7 @@
             this.buttonEditarGestor.TabIndex = 44;
             this.buttonEditarGestor.Text = "Editar";
             this.buttonEditarGestor.UseVisualStyleBackColor = true;
-            this.buttonEditarGestor.Click += new System.EventHandler(this.button1_Click);
+            this.buttonEditarGestor.Click += new System.EventHandler(this.BotaoEditarG);
             // 
             // groupBox4
             // 
