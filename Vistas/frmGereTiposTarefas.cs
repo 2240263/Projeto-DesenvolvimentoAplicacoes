@@ -34,12 +34,12 @@ namespace iTasks
            // FormadicionarTipoTarefa.Show();
             var form = new AdicionarTipoTarefa();
             var result = FormadicionarTipoTarefa.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result == DialogResult.OK) // se for ok a reposta, vai atualizar a lista de tipo de tarefas ( e o ok, vem no from adicionar tipo tarefas)
             {
                 atualizarListaTiposTarefas();
             }
 
-           // atualizarListaTiposTarefas();
+           
             
         }
 
@@ -60,8 +60,6 @@ namespace iTasks
                 lstLista.DataSource = null;
                 lstLista.DataSource = ListTipoTarefas;
                
-
-                
             }    
 
         }

@@ -97,6 +97,7 @@
             this.buttCancelarTT.TabIndex = 1;
             this.buttCancelarTT.Text = "Cancelar";
             this.buttCancelarTT.UseVisualStyleBackColor = true;
+            this.buttCancelarTT.Click += new System.EventHandler(this.buttCancelarTT_Click);
             // 
             // butOkTT
             // 
