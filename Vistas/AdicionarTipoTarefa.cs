@@ -35,9 +35,6 @@ namespace iTasks.Vistas
                 TipoTarefa TipoTarefas = new TipoTarefa(descricao);
 
                 tipoTarefaControlador.CriarTipoTarefa(TipoTarefas);
-            
-              
-                //atualizarListaTiposTarefas();           faltaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
                 MessageBox.Show("Tipo de tarefa criada com suceso");
                 SetIdTT(TipoTarefas.Id);

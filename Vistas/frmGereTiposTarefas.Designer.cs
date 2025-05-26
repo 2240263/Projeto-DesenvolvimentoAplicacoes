@@ -58,37 +58,37 @@
             this.lstLista.Name = "lstLista";
             this.lstLista.Size = new System.Drawing.Size(357, 451);
             this.lstLista.TabIndex = 0;
-            this.lstLista.SelectedIndexChanged += new System.EventHandler(this.lstLista_SelectedIndexChanged);
+         
             // 
             // btGravar
             // 
-            this.btGravar.Location = new System.Drawing.Point(557, 174);
+            this.btGravar.Location = new System.Drawing.Point(422, 150);
             this.btGravar.Margin = new System.Windows.Forms.Padding(4);
             this.btGravar.Name = "btGravar";
             this.btGravar.Size = new System.Drawing.Size(185, 28);
             this.btGravar.TabIndex = 31;
-            this.btGravar.Text = "Gravar Dados";
+            this.btGravar.Text = "Criar";
             this.btGravar.UseVisualStyleBackColor = true;
             this.btGravar.Click += new System.EventHandler(this.btCriarTT_Click);
             // 
             // ButEditar
             // 
-            this.ButEditar.Location = new System.Drawing.Point(664, 117);
+            this.ButEditar.Location = new System.Drawing.Point(422, 216);
             this.ButEditar.Margin = new System.Windows.Forms.Padding(4);
             this.ButEditar.Name = "ButEditar";
             this.ButEditar.Size = new System.Drawing.Size(185, 28);
             this.ButEditar.TabIndex = 32;
-            this.ButEditar.Text = "Editar Dados";
+            this.ButEditar.Text = "Editar";
             this.ButEditar.UseVisualStyleBackColor = true;
             // 
             // ButApagar
             // 
-            this.ButApagar.Location = new System.Drawing.Point(448, 117);
+            this.ButApagar.Location = new System.Drawing.Point(422, 275);
             this.ButApagar.Margin = new System.Windows.Forms.Padding(4);
             this.ButApagar.Name = "ButApagar";
             this.ButApagar.Size = new System.Drawing.Size(185, 28);
             this.ButApagar.TabIndex = 33;
-            this.ButApagar.Text = "Apagar Dados";
+            this.ButApagar.Text = "Apagar";
             this.ButApagar.UseVisualStyleBackColor = true;
             this.ButApagar.Click += new System.EventHandler(this.ButApagar_Click);
             // 
@@ -96,7 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(885, 497);
+            this.ClientSize = new System.Drawing.Size(640, 497);
             this.Controls.Add(this.ButApagar);
             this.Controls.Add(this.ButEditar);
             this.Controls.Add(this.btGravar);

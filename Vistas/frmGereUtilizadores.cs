@@ -90,7 +90,7 @@ namespace iTasks
         //botão para gravar programador
         private void btCriarProg_Click(object sender, EventArgs e)
         {
-            FormAdicionarProgramador.ShowDialog(); // abrir formulario adicionar programador
+            FormAdicionarProgramador.ShowDialog(); // abrir formulario adicionar programador e só depois de fechado é executado o resto (showDialog - janela pai fica bloqueada até fechar)
             atualizaListaProgramador();
         }
 
@@ -105,7 +105,7 @@ namespace iTasks
                 // Atualiza a lista local
                 lstListaProgramadores.DataSource = null;
                 lstListaProgramadores.DataSource = listaProgramadores;
-                lstListaProgramadores.DisplayMember = "Nome";  // mostra só o nome do programador
+                lstListaProgramadores.DisplayMember = "Username";  // mostra só o nome do programador
             }
 
 
@@ -214,6 +214,9 @@ namespace iTasks
             }
         }
 
-     
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

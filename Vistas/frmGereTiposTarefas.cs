@@ -31,28 +31,45 @@ namespace iTasks
 
         private void btCriarTT_Click(object sender, EventArgs e)
         {
-            FormadicionarTipoTarefa.Show();
+           // FormadicionarTipoTarefa.Show();
+            var form = new AdicionarTipoTarefa();
+            var result = FormadicionarTipoTarefa.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                atualizarListaTiposTarefas();
+            }
+
+           // atualizarListaTiposTarefas();
             
         }
 
-        
-           
 
-        private void atualizarListaTiposTarefas()
+        
+
+
+
+
+
+
+    private void atualizarListaTiposTarefas()
         {
             using (ITaskContext context = new ITaskContext())
             {
                 ListTipoTarefas = context.TipoTarefas.ToList();
-
+               
                 lstLista.DataSource = null;
                 lstLista.DataSource = ListTipoTarefas;
+               
 
-
+                
             }    
 
         }
 
-        private void lstLista_SelectedIndexChanged(object sender, EventArgs e)
+
+
+
+    private void lstLista_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = lstLista.SelectedIndex;
 
