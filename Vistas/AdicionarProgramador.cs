@@ -1,5 +1,6 @@
 ﻿using iTasks.Controlador;
 using iTasks.Modelos;
+using Org.BouncyCastle.Asn1.Cmp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -119,13 +120,15 @@ namespace iTasks.Vistas
                     // se der erro nao cria e lança mensagem de erro definida no controlador utilizador
                     // (username já existe)
                     utilizadorControlador.CriarUtilizador(novoProgramador);
-
-                    this.Programador = novoProgramador;
+                   
+                   
 
                     MessageBox.Show("Programador criado com sucesso!");
+                    this.Programador = novoProgramador;
                     SetId(this.Programador.Id);
 
-                    this.Close(); // fecha o formulário
+                    enbaleformProgramador();
+                    FecharJanelaAposDelay();
                 }
                 catch (Exception ex)
                 {
@@ -135,6 +138,47 @@ namespace iTasks.Vistas
             }
 
 
+        }
+        async void FecharJanelaAposDelay() //fechar os form apos um determinado tempo
+        {
+            await Task.Delay(1500); // espera pouco mais de 1 segundo antes de fechar
+            this.DialogResult = DialogResult.OK;// retorna que o utilizador confirmou ok após o show.dialog e retorna esse resultado - quando devolver ok vai atualizar a lista
+            this.Close();           // fecha o formulário
+
+        }
+
+
+
+        public void enbaleformProgramador()// torna a txt impossivel de alterar
+        {
+            txtNomeProg.Enabled = false;
+            txtUsernameProg.Enabled = false;
+            txtPasswordProg.Enabled = false;
+            cbNivelProg.Enabled = false;
+            cbGestorProg.Enabled = false;
+        }
+
+        public void ResetFormularioProgramador()
+        {
+
+            txtNomeProg.Text = "";
+            txtUsernameProg.Text = "";
+            txtPasswordProg.Text = "";
+            cbNivelProg.Text = "";
+            cbGestorProg.Text = "";
+            txtIdProg.Text = "";
+
+            txtNomeProg.Enabled = true;
+            txtUsernameProg.Enabled = true;
+            txtPasswordProg.Enabled = true;
+            cbNivelProg.Enabled = true;
+            cbGestorProg.Enabled = true;
+
+        }
+
+        private void buttonCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

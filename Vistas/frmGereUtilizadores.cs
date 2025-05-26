@@ -62,12 +62,20 @@ namespace iTasks
         //quando clico no botao criar gestor vai abrir o form do gestor 
         private void btGravarGestor_Click(object sender, EventArgs e)
         {
+            
+            var form = new AdicionarGestor();// cria nova instancia de adicionar gestor (porque se limpa)
+            FormAdicionarGestor.ResetFormularioGestor();// vai buscar ao formAdicionarGestor a funcao reseat 
 
-            FormAdicionarGestor.ShowDialog();// espera até o utilizador fechar o form
+            
+            var result = FormAdicionarGestor.ShowDialog();
 
-            // só atualiza a lista depois que o formulário for fechado
-            atualizaListaGestores();
-
+            if (result == DialogResult.OK)
+            {
+                // só atualiza a lista depois que o formulário for fechado
+                atualizaListaGestores();
+            }
+            
+            
 
 
         }
@@ -78,7 +86,6 @@ namespace iTasks
             int index = lstListaGestores.SelectedIndex;
             if (index == -1)
             {
-                MessageBox.Show("selecione um gestor");
                 return;
             }
             //guarda na variavel global selecionagestor a posiçao que está na lista 
@@ -86,11 +93,71 @@ namespace iTasks
 
         }
 
+        //este botao é para atualizar/editar o gestor
+        private void BotaoEditarG(object sender, EventArgs e)
+        {
+            //se nao houver nenhum gestor selecionado apresenta uma mensagem
+            if (SelecionaGestor == null)
+            {
+                MessageBox.Show("Selecione um gestor para editar.");
+                return;
+            }
+
+            // Passar o gestor selecionado para o formulário
+            AdicionarGestor formEditar = new AdicionarGestor(SelecionaGestor);
+            if (formEditar.ShowDialog() == DialogResult.OK)
+            {
+                //vai buscar o gestor que foi gerado 
+                Gestor gestorEditado = formEditar.GetGestor();
+
+                utilizadorControlador.EditarUtilizador(gestorEditado);
+                MessageBox.Show("Gestor atualizado com sucesso!");
+                atualizaListaGestores();
+            }
+
+
+        }
+
+        //botão para apagar gestor
+        private void buttonApagarGestor_Click(object sender, EventArgs e)
+        {
+            if (SelecionaGestor == null)
+            {
+                MessageBox.Show("Selecione um gestor!");
+                return;
+            }
+
+            var confirmar = MessageBox.Show($"Tem certeza que quer apagar o gestor '{SelecionaGestor.Nome}'?", "Confirmar Apagar", MessageBoxButtons.YesNo);
+
+            if (confirmar == DialogResult.Yes)
+            {
+                utilizadorControlador.ApagarUtilizador(SelecionaGestor);
+                atualizaListaGestores();
+                SelecionaGestor = null;
+                MessageBox.Show("Gestor apagado com sucesso.");
+            }
+        }
+
+
+
+        //-------------------------------------PROGRAMADOR ---------------------------------------------
+
         //botão para gravar programador
         private void btCriarProg_Click(object sender, EventArgs e)
         {
-            FormAdicionarProgramador.ShowDialog(); // abrir formulario adicionar programador e só depois de fechado é executado o resto (showDialog - janela pai fica bloqueada até fechar)
-            atualizaListaProgramador();
+          
+            var form = new AdicionarProgramador();// cria nova instancia de adicionar gestor (porque se limpa)
+            FormAdicionarProgramador.ResetFormularioProgramador();// vai buscar ao formAdicionarGestor a funcao reseat 
+
+
+            var result = FormAdicionarProgramador.ShowDialog();//(showDialog - janela pai fica bloqueada até fechar)
+
+            if (result == DialogResult.OK)
+            {
+                // só atualiza a lista depois que o formulário for fechado
+                atualizaListaProgramador();
+            }
+
         }
 
 
@@ -116,6 +183,7 @@ namespace iTasks
             
             if(index== -1)
             {
+               
                 return;
             }
 
@@ -131,30 +199,7 @@ namespace iTasks
             SelecionaProgramador = programador;
 
         }
-        //este botao é para atualizar/editar o gestor
-        private void BotaoEditarG(object sender, EventArgs e) 
-        {
-            //se nao houver nenhum gestor selecionado apresenta uma mensagem
-            if (SelecionaGestor == null)
-            {
-                MessageBox.Show("Selecione um gestor para editar.");
-                return;
-            }
-
-            // Passar o gestor selecionado para o formulário
-            AdicionarGestor formEditar = new AdicionarGestor(SelecionaGestor);
-            if(formEditar.ShowDialog() == DialogResult.OK) { 
-                //vai buscar o gestor que foi gerado 
-                Gestor gestorEditado = formEditar.GetGestor();
-
-                utilizadorControlador.EditarUtilizador(gestorEditado);
-                MessageBox.Show("Gestor atualizado com sucesso!");
-                atualizaListaGestores();
-            }
-            
-            
-        }
-
+        
         private void buttonAtualizarProgramador_Click(object sender, EventArgs e) //atualizar
         {
             if (SelecionaProgramador == null)
@@ -171,27 +216,6 @@ namespace iTasks
             atualizaListaProgramador();
         }
 
-
-
-        //botão para apagar gestor
-        private void buttonApagarGestor_Click(object sender, EventArgs e)
-        {
-            if(SelecionaGestor== null)
-            {
-                MessageBox.Show("Selecione um gestor!");
-                return;
-            }
-
-            var confirmar = MessageBox.Show($"Tem certeza que quer apagar o gestor '{SelecionaGestor.Nome}'?", "Confirmar Apagar", MessageBoxButtons.YesNo);
-
-            if (confirmar == DialogResult.Yes)
-            {
-                utilizadorControlador.ApagarUtilizador(SelecionaGestor);
-                atualizaListaGestores();
-                SelecionaGestor = null;
-                MessageBox.Show("Gestor apagado com sucesso.");
-            }
-        }
 
         //botão apagar programador 
         private void buttonApagarProg_Click(object sender, EventArgs e)

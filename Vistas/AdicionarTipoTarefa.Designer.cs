@@ -30,11 +30,11 @@
         {
             this.txtDesc = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttCancelarTT = new System.Windows.Forms.Button();
             this.butOkTT = new System.Windows.Forms.Button();
+            this.txtId = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,15 +57,6 @@
             this.label4.TabIndex = 18;
             this.label4.Text = "Descrição:";
             // 
-            // txtId
-            // 
-            this.txtId.Location = new System.Drawing.Point(135, 71);
-            this.txtId.Margin = new System.Windows.Forms.Padding(4);
-            this.txtId.Name = "txtId";
-            this.txtId.ReadOnly = true;
-            this.txtId.Size = new System.Drawing.Size(81, 22);
-            this.txtId.TabIndex = 17;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -78,6 +69,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtId);
             this.groupBox1.Controls.Add(this.buttCancelarTT);
             this.groupBox1.Controls.Add(this.butOkTT);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -110,6 +102,15 @@
             this.butOkTT.UseVisualStyleBackColor = true;
             this.butOkTT.Click += new System.EventHandler(this.butOkTT_Click);
             // 
+            // txtId
+            // 
+            this.txtId.AutoSize = true;
+            this.txtId.Location = new System.Drawing.Point(116, 59);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(24, 20);
+            this.txtId.TabIndex = 2;
+            this.txtId.Text = "   ";
+            // 
             // AdicionarTipoTarefa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -117,12 +118,12 @@
             this.ClientSize = new System.Drawing.Size(565, 261);
             this.Controls.Add(this.txtDesc);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtId);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Name = "AdicionarTipoTarefa";
             this.Text = "AdicionarTipoTarefa";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,10 +133,10 @@
 
         private System.Windows.Forms.TextBox txtDesc;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button buttCancelarTT;
         private System.Windows.Forms.Button butOkTT;
+        private System.Windows.Forms.Label txtId;
     }
 }

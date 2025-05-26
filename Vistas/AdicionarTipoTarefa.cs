@@ -18,9 +18,10 @@ namespace iTasks.Vistas
 {
     public partial class AdicionarTipoTarefa : Form
     {
+        TipoTarefa TipoTarefa;
         TipoTarefaControlador tipoTarefaControlador = new TipoTarefaControlador();
+        private bool QueroEditar = false;
 
-    
         public AdicionarTipoTarefa()
         {
             InitializeComponent();
@@ -28,7 +29,19 @@ namespace iTasks.Vistas
 
            
         }
+        public AdicionarTipoTarefa(TipoTarefa TipoTarefa):this()// contrutor quando edita - recebe a informação já preenchida
+        {
+            QueroEditar = true;
 
+            txtDesc.Text = this.TipoTarefa.Nome;
+            
+
+
+
+
+        }
+
+     
         public void SetIdTT(int id) // 
         {
             txtId.Text = id.ToString();
@@ -41,23 +54,53 @@ namespace iTasks.Vistas
         
 
         private void butOkTT_Click(object sender, EventArgs e)
-        {
-
-            using (ITaskContext context = new ITaskContext())
+        {//se quiser editar a descrição da tarefa 
+            if (QueroEditar)
             {
+                // Atualiza os campos da tarefa já existente
+                
+                this.TipoTarefa.Nome = txtDesc.Text;
+
+
+                try
+                {
+                    tipoTarefaControlador.EditarTipoTarefa(this.TipoTarefa);//adiciona o tarefa alterada
+                    MessageBox.Show("Tipo de Tarefa atualizado com sucesso!");
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else { 
                 string descricao = txtDesc.Text;
                 TipoTarefa TipoTarefas = new TipoTarefa(descricao);
 
-                tipoTarefaControlador.CriarTipoTarefa(TipoTarefas); // chama o controlador criar tipo tarefa e passa o parametro com a descricao
+                try
+                {
+                    // AO CARREGAR NO BOTAO OK DO ADICIONATIPOTAREFA - se a funcao chamada é criarTipotarefa
+                    // se der erro nao cria e lança mensagem de erro definida no controlador TipoTarefa
+                    
+                    tipoTarefaControlador.CriarTipoTarefa(TipoTarefas); // chama o controlador criar tipo tarefa e passa o parametro com a descricao
 
-                MessageBox.Show("Tipo de tarefa criada com suceso");
-                SetIdTT(TipoTarefas.Id);// Associada ID da tarefa - funcao especifica para ID
-                FecharJanelaAposDelay();// chama a funcao criada para fechar janela automatica
-                txtDesc.Enabled = false; // torna a txtDesc impossivel de alterar
-                
 
 
-            }
+                    MessageBox.Show("Tipo de Tarefa criado com sucesso!");
+                    SetIdTT(TipoTarefas.Id);// Associada ID da tarefa - funcao especifica para ID
+                    FecharJanelaAposDelay();// chama a funcao criada para fechar janela automatica
+                    txtDesc.Enabled = false; // torna a txtDesc impossivel de alterar
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+               
+             }   
+
+
+            
 
             async void FecharJanelaAposDelay() //fechar os form apos um determinado tempo
             {
@@ -68,7 +111,7 @@ namespace iTasks.Vistas
 
         }
 
-        public void ReseatFormulario()
+        public void ResetFormulario()
         {
             txtDesc.Text = "";
             txtDesc.Enabled = true;

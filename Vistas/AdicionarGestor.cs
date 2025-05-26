@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
@@ -97,19 +98,63 @@ namespace iTasks.Vistas
                     // se der erro nao cria e lança mensagem de erro definida no controlador utilizador
                     // (username já existe)
                     utilizadorControlador.CriarUtilizador(novoGestor);
-                    this.Gestor = novoGestor;
 
+                    this.Gestor = novoGestor;
                     MessageBox.Show("Gestor criado com sucesso!");
                     SetId(this.Gestor.Id);
 
-                    this.Close(); // fecha o formulário
+                    FecharJanelaAposDelay();
+                    enbaleformGestor();
+                    
+
 
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-            }
+
+              
+
+
+                
+            }  
+        }   
+       async void FecharJanelaAposDelay() //fechar os form apos um determinado tempo
+       {
+            await Task.Delay(1500); // espera pouco mais de 1 segundo antes de fechar
+            this.DialogResult = DialogResult.OK;// retorna que o utilizador confirmou ok após o show.dialog e retorna esse resultado - quando devolver ok  vai atualizar a lista
+            this.Close();           // fecha o formulário
+                
+        }
+
+        public void enbaleformGestor()// torna a txt impossivel de alterar
+        {
+         txtNomeGestor.Enabled = false; 
+         txtUsernameGestor.Enabled = false;
+         txtPasswordGestor.Enabled = false;
+         cbDepartamento.Enabled = false; 
+        }
+
+        public void ResetFormularioGestor()
+        {
+
+            txtNomeGestor.Text = "";
+            txtNomeGestor.Enabled = true;
+            txtUsernameGestor.Text = "";
+            txtUsernameGestor.Enabled = true;
+            txtPasswordGestor.Text = "";
+            txtPasswordGestor.Enabled =true;
+            cbDepartamento.Text = "";
+            cbDepartamento.Enabled = true;
+            txtIdGestor.Text="";
+
+        }
+
+        private void buttonCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
+

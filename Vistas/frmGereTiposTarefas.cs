@@ -33,7 +33,7 @@ namespace iTasks
         {
            // FormadicionarTipoTarefa.Show();
             var form = new AdicionarTipoTarefa();
-            FormadicionarTipoTarefa.ReseatFormulario(); // chama a funcao para colocar o formulario limpo e assim podermos criar novo tipo de tarefa sem fechar formulario
+            FormadicionarTipoTarefa.ResetFormulario(); // chama a funcao para colocar o formulario limpo e assim podermos criar novo tipo de tarefa sem fechar formulario
             var result = FormadicionarTipoTarefa.ShowDialog();
             if (result == DialogResult.OK) // se for ok a reposta, vai atualizar a lista de tipo de tarefas ( e o ok, vem no from adicionar tipo tarefas)
             {
@@ -63,7 +63,7 @@ namespace iTasks
 
             if( index == -1)
             {
-               
+                MessageBox.Show("aAAAAAAAAAAAAA");
                 return;
             }
 
@@ -101,6 +101,7 @@ namespace iTasks
                 MessageBox.Show("Tipo de tarefa não está selecionada");
                 return;
             }
+
             AdicionarTipoTarefa adicionartt = new AdicionarTipoTarefa();
             adicionartt.ShowDialog();//showDailog bloqueia a janelas anteriores, até que essa seja fechada
             
