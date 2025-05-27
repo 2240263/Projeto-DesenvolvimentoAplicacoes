@@ -101,13 +101,20 @@ namespace iTasks
                 MessageBox.Show("Tipo de tarefa não está selecionada");
                 return;
             }
-
-            AdicionarTipoTarefa adicionartt = new AdicionarTipoTarefa();
-            adicionartt.ShowDialog();//showDailog bloqueia a janelas anteriores, até que essa seja fechada
+       
+            AdicionarTipoTarefa adicionartt = new AdicionarTipoTarefa(SelecionaTipoTarefa);
             
+            if (adicionartt.ShowDialog() == DialogResult.OK)
+            {
+                //vai buscar o gestor que foi gerado 
+                TipoTarefa tipoTarefaEditada= adicionartt.GetTipoTarefa();
 
-            tipoTarefaControlador.EditarTipoTarefa(SelecionaTipoTarefa);
-            atualizarListaTiposTarefas();
+                tipoTarefaControlador.EditarTipoTarefa(tipoTarefaEditada);
+                MessageBox.Show("Tipo de Tarefa atualizado com sucesso!");
+                atualizarListaTiposTarefas();
+            }
+
+          
 
           
                 

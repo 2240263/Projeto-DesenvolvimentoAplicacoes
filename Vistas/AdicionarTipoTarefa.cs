@@ -32,8 +32,9 @@ namespace iTasks.Vistas
         public AdicionarTipoTarefa(TipoTarefa TipoTarefa):this()// contrutor quando edita - recebe a informação já preenchida
         {
             QueroEditar = true;
-
+            this.TipoTarefa = TipoTarefa;
             txtDesc.Text = this.TipoTarefa.Nome;
+            txtId.Text = this.TipoTarefa.Id.ToString();
             
 
 
@@ -46,12 +47,15 @@ namespace iTasks.Vistas
         {
             txtId.Text = id.ToString();
         }
-         
-
-       
 
 
-        
+        public TipoTarefa GetTipoTarefa()
+        {
+            return this.TipoTarefa; // TODO
+        }
+
+
+
 
         private void butOkTT_Click(object sender, EventArgs e)
         {//se quiser editar a descrição da tarefa 
@@ -75,20 +79,19 @@ namespace iTasks.Vistas
                 }
             }
             else { 
-                string descricao = txtDesc.Text;
-                TipoTarefa TipoTarefas = new TipoTarefa(descricao);
+                TipoTarefa novoTipoTarefas = new TipoTarefa(txtDesc.Text);
 
                 try
                 {
                     // AO CARREGAR NO BOTAO OK DO ADICIONATIPOTAREFA - se a funcao chamada é criarTipotarefa
                     // se der erro nao cria e lança mensagem de erro definida no controlador TipoTarefa
                     
-                    tipoTarefaControlador.CriarTipoTarefa(TipoTarefas); // chama o controlador criar tipo tarefa e passa o parametro com a descricao
+                    tipoTarefaControlador.CriarTipoTarefa(novoTipoTarefas); // chama o controlador criar tipo tarefa e passa o parametro com a descricao
 
-
+                    this.TipoTarefa = novoTipoTarefas;
 
                     MessageBox.Show("Tipo de Tarefa criado com sucesso!");
-                    SetIdTT(TipoTarefas.Id);// Associada ID da tarefa - funcao especifica para ID
+                    SetIdTT(this.TipoTarefa.Id);// Associada ID da tarefa - funcao especifica para ID
                     FecharJanelaAposDelay();// chama a funcao criada para fechar janela automatica
                     txtDesc.Enabled = false; // torna a txtDesc impossivel de alterar
                 }
