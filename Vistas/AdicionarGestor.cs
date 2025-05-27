@@ -37,6 +37,7 @@ namespace iTasks.Vistas
             txtUsernameGestor.Text = this.Gestor.Username;
             txtPasswordGestor.Text = this.Gestor.Password;
             cbDepartamento.SelectedItem = this.Gestor.Departamento;
+            txtIdGestor.Text = this.Gestor.Id.ToString();
 
         }
         public void SetId(int id) 
@@ -74,6 +75,7 @@ namespace iTasks.Vistas
                 this.Gestor.Username = txtUsernameGestor.Text;
                 this.Gestor.Password = txtPasswordGestor.Text;
                 this.Gestor.Departamento = departamento;
+                
              
                 try
                 {

@@ -56,6 +56,7 @@ namespace iTasks
         private void buttonRegisto_Click(object sender, EventArgs e)
         {
           
+
             // Abre o formulário de registo 
             frmGereUtilizadores frmRegisto = new frmGereUtilizadores();
             frmRegisto.ShowDialog();

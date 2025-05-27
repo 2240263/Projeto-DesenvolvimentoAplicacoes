@@ -40,6 +40,8 @@ namespace iTasks.Vistas
             txtPasswordProg.Text = this.Programador.Password;
             cbNivelProg.SelectedItem = this.Programador.nivelExperiencia;
             cbGestorProg.SelectedItem = this.Programador.IdGestor;
+          
+            txtIdProg.Text = this.Programador.Id.ToString();
 
 
 
@@ -65,8 +67,6 @@ namespace iTasks.Vistas
             {
                 List<Gestor> gestores = context.Gestores.ToList();
                 cbGestorProg.DataSource = gestores;
-      
-
             }
 
         }
