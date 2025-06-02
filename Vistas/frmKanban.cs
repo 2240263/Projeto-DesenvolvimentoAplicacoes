@@ -88,10 +88,8 @@ namespace iTasks
 
         private void btNova_Click(object sender, EventArgs e)
         {
-            var proximoId = controladorT.IdTarefa();
-            controladorT.CriarTarefa(proximoId);
-            // Crie a janela passando o ID
-            Form detalhesTarefaForm = new frmDetalhesTarefa(proximoId);
+            Tarefa novaTarefa = controladorT.CriarTarefa();
+            Form detalhesTarefaForm = new frmDetalhesTarefa(novaTarefa.Id);
             detalhesTarefaForm.ShowDialog();
             this.AtualizarListas();
         }
@@ -104,15 +102,21 @@ namespace iTasks
             lstTodo.DisplayMember = "Descricao";
             lstTodo.ValueMember = "Id";
 
+            lstTodo.ClearSelected();
+
             lstDoing.DataSource = null;
             lstDoing.DataSource = controladorT.ListaDoing();
             lstDoing.DisplayMember = "Descricao";
             lstDoing.ValueMember = "Id";
 
+            lstDoing.ClearSelected();
+
             lstDone.DataSource = null;
             lstDone.DataSource = controladorT.ListaDone();
             lstDone.DisplayMember = "Descricao";
             lstDone.ValueMember = "Id";
+
+            lstDone.ClearSelected();
         }
 
         private void AtualizarListas()
@@ -122,15 +126,21 @@ namespace iTasks
             lstTodo.DisplayMember = "Descricao";
             lstTodo.ValueMember = "Id";
 
+            lstTodo.ClearSelected();
+
             lstDoing.DataSource = null;
             lstDoing.DataSource = controladorT.ListaDoing();
             lstDoing.DisplayMember = "Descricao";
             lstDoing.ValueMember = "Id";
 
+            lstDoing.ClearSelected();
+
             lstDone.DataSource = null;
             lstDone.DataSource = controladorT.ListaDone();
             lstDone.DisplayMember = "Descricao";
             lstDone.ValueMember = "Id";
+
+            lstDone.ClearSelected();
         }
 
         private void btSetDoing_Click(object sender, EventArgs e)
@@ -172,13 +182,13 @@ namespace iTasks
             int tarefaId = -1;
 
             // Verifica se há alguma tarefa selecionada na coluna "To Do"
-            if /*(lstTodo.SelectedItem != null)
+            if (lstTodo.SelectedItem != null)
             {
                 Tarefa tarefaSelecionada = (Tarefa)lstTodo.SelectedItem;
                 tarefaId = tarefaSelecionada.Id;
             }
             // Caso não tenha, verifica na coluna "Doing"
-            else if */(lstDoing.SelectedItem != null)
+            else if (lstDoing.SelectedItem != null)
             {
                 Tarefa tarefaSelecionada = (Tarefa)lstDoing.SelectedItem;
                 tarefaId = tarefaSelecionada.Id;
@@ -206,7 +216,7 @@ namespace iTasks
             int tarefaId = -1;
 
             // Verifica se há alguma tarefa selecionada na coluna "To Do"
-            if /*(lstTodo.SelectedItem != null)
+            if (lstTodo.SelectedItem != null)
             {
                 Tarefa tarefaSelecionada = (Tarefa)lstTodo.SelectedItem;
                 tarefaId = tarefaSelecionada.Id;
@@ -218,7 +228,7 @@ namespace iTasks
                 tarefaId = tarefaSelecionada.Id;
             }
             // Caso não tenha, verifica na coluna "Done"
-            else if */(lstDone.SelectedItem != null)
+            else if (lstDone.SelectedItem != null)
             {
                 Tarefa tarefaSelecionada = (Tarefa)lstDone.SelectedItem;
                 tarefaId = tarefaSelecionada.Id;
@@ -240,13 +250,13 @@ namespace iTasks
             int tarefaId = -1;
 
             // Verifica se há alguma tarefa selecionada na coluna "To Do"
-            if /*(lstTodo.SelectedItem != null)
+            if (lstTodo.SelectedItem != null)
             {
                 Tarefa tarefaSelecionada = (Tarefa)lstTodo.SelectedItem;
                 tarefaId = tarefaSelecionada.Id;
             }
             // Caso não tenha, verifica na coluna "Doing"
-            else if */(lstDoing.SelectedItem != null)
+            else if (lstDoing.SelectedItem != null)
             {
                 Tarefa tarefaSelecionada = (Tarefa)lstDoing.SelectedItem;
                 tarefaId = tarefaSelecionada.Id;

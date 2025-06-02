@@ -20,29 +20,8 @@ namespace iTasks.Controlador
         }
 
         // metodo para criar o id tarefa na app que vai coincidir com a base de dados
-        public int IdTarefa()
-        {
-            int proximoId;
-
-            using (ITaskContext context = new ITaskContext())
-            {
-                // Verifica se há tarefas existentes
-                if (context.Tarefas.Any())
-                {
-                    // Pega o maior ID existente
-                    proximoId = context.Tarefas.Max(t => t.Id) + 1;
-                    return proximoId;
-                }
-                else
-                {
-                    // Caso não haja tarefas, inicia com ID 1
-                    proximoId = 1;
-                    return proximoId;
-                }
-            }
-        }
         
-        public void CriarTarefa(int Id) // salva as novas
+        public Tarefa CriarTarefa() // salva as novas
         {
             {
                 Tarefa tarefaNova = new Tarefa();
@@ -50,6 +29,7 @@ namespace iTasks.Controlador
                 Context.Tarefas.Add(tarefaNova);
                 Context.SaveChanges();
 
+                return tarefaNova;
                 MessageBox.Show("Nova tarefa criada!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
