@@ -50,7 +50,10 @@
             this.btNova = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btPrevisao = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+
+            this.buttonEditarTarefa = new System.Windows.Forms.Button();
+            this.buttonApagarTarefa = new System.Windows.Forms.Button();
+            
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -210,8 +213,10 @@
             // 
             // btSetDoing
             // 
-            this.btSetDoing.Location = new System.Drawing.Point(220, 618);
-            this.btSetDoing.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+
+         
+            this.btSetDoing.Location = new System.Drawing.Point(684, 777);
+            this.btSetDoing.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btSetDoing.Name = "btSetDoing";
             this.btSetDoing.Size = new System.Drawing.Size(195, 28);
             this.btSetDoing.TabIndex = 5;
@@ -221,8 +226,9 @@
             // 
             // btSetDone
             // 
-            this.btSetDone.Location = new System.Drawing.Point(633, 618);
-            this.btSetDone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      
+            this.btSetDone.Location = new System.Drawing.Point(1158, 777);
+            this.btSetDone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btSetDone.Name = "btSetDone";
             this.btSetDone.Size = new System.Drawing.Size(192, 28);
             this.btSetDone.TabIndex = 6;
@@ -232,8 +238,8 @@
             // 
             // btSetTodo
             // 
-            this.btSetTodo.Location = new System.Drawing.Point(430, 618);
-            this.btSetTodo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btSetTodo.Location = new System.Drawing.Point(923, 777);
+            this.btSetTodo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btSetTodo.Name = "btSetTodo";
             this.btSetTodo.Size = new System.Drawing.Size(192, 28);
             this.btSetTodo.TabIndex = 7;
@@ -243,8 +249,9 @@
             // 
             // btNova
             // 
-            this.btNova.Location = new System.Drawing.Point(20, 618);
-            this.btNova.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btNova.Location = new System.Drawing.Point(18, 773);
+            this.btNova.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
             this.btNova.Name = "btNova";
             this.btNova.Size = new System.Drawing.Size(68, 28);
             this.btNova.TabIndex = 8;
@@ -272,23 +279,31 @@
             this.btPrevisao.Text = "Ver Previsão de Conclusão";
             this.btPrevisao.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonEditarTarefa
             // 
-            this.button1.Location = new System.Drawing.Point(96, 618);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 28);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Nova Tarefa";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonEditarTarefa.Location = new System.Drawing.Point(191, 773);
+            this.buttonEditarTarefa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonEditarTarefa.Name = "buttonEditarTarefa";
+            this.buttonEditarTarefa.Size = new System.Drawing.Size(156, 35);
+            this.buttonEditarTarefa.TabIndex = 11;
+            this.buttonEditarTarefa.Text = "Editar Tarefa";
+            this.buttonEditarTarefa.UseVisualStyleBackColor = true;
+            // 
+            // buttonApagarTarefa
+            // 
+            this.buttonApagarTarefa.Location = new System.Drawing.Point(373, 773);
+            this.buttonApagarTarefa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonApagarTarefa.Name = "buttonApagarTarefa";
+            this.buttonApagarTarefa.Size = new System.Drawing.Size(156, 35);
+            this.buttonApagarTarefa.TabIndex = 12;
+            this.buttonApagarTarefa.Text = "ApagarTarefa";
+            this.buttonApagarTarefa.UseVisualStyleBackColor = true;
             // 
             // frmKanban
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1257, 661);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1414, 826);
+            this.Controls.Add(this.buttonApagarTarefa);
+            this.Controls.Add(this.buttonEditarTarefa);
             this.Controls.Add(this.btPrevisao);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btNova);
@@ -338,6 +353,7 @@
         private System.Windows.Forms.Button btNova;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btPrevisao;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonEditarTarefa;
+        private System.Windows.Forms.Button buttonApagarTarefa;
     }
 }

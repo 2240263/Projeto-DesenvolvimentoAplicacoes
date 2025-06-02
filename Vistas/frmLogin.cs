@@ -1,4 +1,5 @@
-﻿using iTasks.Modelos;
+﻿using Google.Protobuf.WellKnownTypes;
+using iTasks.Modelos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,23 +36,34 @@ namespace iTasks
                 Utilizador utilizador = context.Utilizadores
                     .FirstOrDefault(u => u.Username == username);
 
-                if (utilizador == null)
+                //validações para os campos vazios do login
+                if (string.IsNullOrWhiteSpace (password) || string.IsNullOrWhiteSpace(username))
                 {
-                    MessageBox.Show("Username ou password inválidos.");
+                    MessageBox.Show("Campos vazios!");
                     return;
                 }
-                //abrir novos formulários
-                Form segundoForm = new frmKanban(utilizador);
+                else { 
+                    if (utilizador == null)
+                    {
+                    MessageBox.Show("Username ou password inválidos.");
+                    return;
+                    }   
+                    //abrir novos formulários
+                    Form segundoForm = new frmKanban(utilizador);
 
             
-                //só abre um form de cada vez 
-                //segundoForm.Show();     
+                    //só abre um form de cada vez 
+                    //segundoForm.Show();     
             
-            
+           
 
-                Hide(); //para esconder a janela do login mas fica guardada em memória
-                // deixa ter varios forms ao mesmo tempo 
-                segundoForm.ShowDialog(); // so deixa abrir uma janela e bloqueia o resto
+                    Hide(); //para esconder a janela do login mas fica guardada em memória
+                    // deixa ter varios forms ao mesmo tempo 
+                    segundoForm.ShowDialog(); // so deixa abrir uma janela e bloqueia o resto
+
+                }
+                
+                
             }
 
        
@@ -59,7 +71,7 @@ namespace iTasks
 
 
         //botão registo do login
-        private void buttonRegisto_Click(object sender, EventArgs e)
+        private void buttonRegisto_Click(object sender, EventArgs e) //verrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
         {
           
 

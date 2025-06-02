@@ -68,6 +68,12 @@ namespace iTasks.Vistas
 
                 try
                 {
+                    if (string.IsNullOrWhiteSpace(txtDesc.Text))
+                    {
+                        MessageBox.Show("Campo vazio!");
+                        return;
+                    }
+
                     tipoTarefaControlador.EditarTipoTarefa(this.TipoTarefa);//adiciona o tarefa alterada
                     MessageBox.Show("Tipo de Tarefa atualizado com sucesso!");
                     DialogResult = DialogResult.OK;
@@ -83,9 +89,14 @@ namespace iTasks.Vistas
 
                 try
                 {
+                    if (string.IsNullOrWhiteSpace(txtDesc.Text))
+                    {
+                        MessageBox.Show("Campo vazio!");
+                        return;
+                    }
                     // AO CARREGAR NO BOTAO OK DO ADICIONATIPOTAREFA - se a funcao chamada é criarTipotarefa
                     // se der erro nao cria e lança mensagem de erro definida no controlador TipoTarefa
-                    
+
                     tipoTarefaControlador.CriarTipoTarefa(novoTipoTarefas); // chama o controlador criar tipo tarefa e passa o parametro com a descricao
 
                     this.TipoTarefa = novoTipoTarefas;

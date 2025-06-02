@@ -74,13 +74,8 @@ namespace iTasks.Vistas
         private void btOKProg_Click(object sender, EventArgs e) // botão OK
         {
 
-            NivelExperiencia nivelExperiencia;
-            if (!Enum.TryParse(cbNivelProg.SelectedItem.ToString(), out nivelExperiencia))
-            {
-                MessageBox.Show("Selecione um nível de experiência válido.");
-                return;
-            }
-
+            NivelExperiencia nivelExperiencia = (NivelExperiencia)cbNivelProg.SelectedItem;
+           
             Gestor gestorSelecionado = cbGestorProg.SelectedItem as Gestor;
             if (gestorSelecionado == null)
             {
@@ -101,6 +96,13 @@ namespace iTasks.Vistas
 
                 try
                 {
+                    //Os campos combox colocámos a propriedade dropdownstyle em dropdownlist 
+                    if (string.IsNullOrWhiteSpace(txtNomeProg.Text) || string.IsNullOrWhiteSpace(txtUsernameProg.Text) || string.IsNullOrWhiteSpace(txtPasswordProg.Text))
+                    {
+                        MessageBox.Show("Campos vazios!");
+                        return;
+                    }
+
                     utilizadorControlador.EditarUtilizador(this.Programador);//adiciona o programador alterado
                     MessageBox.Show("Programador atualizado com sucesso!");
                     DialogResult = DialogResult.OK;
@@ -116,6 +118,12 @@ namespace iTasks.Vistas
                 Programador novoProgramador = new Programador(nivelExperiencia, gestorSelecionado, txtNomeProg.Text, txtUsernameProg.Text, txtPasswordProg.Text);
                 try
                 {
+                    //Os campos combox colocámos a propriedade dropdownstyle em dropdownlist 
+                    if (string.IsNullOrWhiteSpace(txtNomeProg.Text) || string.IsNullOrWhiteSpace(txtUsernameProg.Text) || string.IsNullOrWhiteSpace(txtPasswordProg.Text))
+                    {
+                        MessageBox.Show("Campos vazios!");
+                        return;
+                    }
                     // AO CARREGAR NO BOTAO OK DO ADICIONARPROGRAMADOR - se a funcao chamada é criarUtilizador
                     // se der erro nao cria e lança mensagem de erro definida no controlador utilizador
                     // (username já existe)
