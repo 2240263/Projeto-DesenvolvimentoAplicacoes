@@ -40,13 +40,13 @@ namespace iTasks
             if (Utilizador is Programador)
             {
                 utilizadoresToolStripMenuItem.Visible = false;
-
+                btNova.Visible = false;
 
             }
             if (Utilizador is Gestor)
             {
 
-                btNova.Visible = false;
+                
             }
         }
 

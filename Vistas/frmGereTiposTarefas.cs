@@ -124,8 +124,3 @@ namespace iTasks
     }
 }
 
-
-
-
-
-// controladorUtilizador.ApagarUtilizador(SelecionaProgramador);
