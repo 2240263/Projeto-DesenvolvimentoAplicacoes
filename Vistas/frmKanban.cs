@@ -41,14 +41,23 @@ namespace iTasks
             //se for um programador
             if (Utilizador is Programador)
             {
-                utilizadoresToolStripMenuItem.Visible = false;
-                btNova.Visible = false;
+                tarefasEmCursoToolStripMenuItem.Visible = false; //opção tarefas em curso
+                utilizadoresToolStripMenuItem.Visible = false; //menu acesso as tarefas
+                btNova.Visible = false; //botao novatarefa
+                buttonApagarTarefa.Visible = false;
+                buttonEditarTarefa.Visible = false;
+                exportarParaCSVToolStripMenuItem.Visible = false; // botao converter em csv
+                btPrevisao.Visible = false; // botao previsao
+
 
             }
             if (Utilizador is Gestor)
             {
+                btSetDoing.Visible = false;
+                btSetDone.Visible = false;
+                btSetTodo.Visible = false;
 
-                
+
             }
         }
 

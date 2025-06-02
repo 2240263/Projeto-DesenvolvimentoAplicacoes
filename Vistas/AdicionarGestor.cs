@@ -60,13 +60,8 @@ namespace iTasks.Vistas
 
         private void btOkGestor_Click(object sender, EventArgs e)
         {
-            Departamentos departamento;
+            Departamentos departamento = (Departamentos)cbDepartamento.SelectedItem;
 
-            if (!Enum.TryParse(cbDepartamento.SelectedItem.ToString(), out departamento))
-            {
-                MessageBox.Show("Selecione um departamento válido!");
-                return;
-            }
             //se for para editar o gestor 
             if (QueroEditar)
             {
@@ -76,9 +71,17 @@ namespace iTasks.Vistas
                 this.Gestor.Password = txtPasswordGestor.Text;
                 this.Gestor.Departamento = departamento;
                 
+
              
                 try
                 {
+                   
+                    if (string.IsNullOrWhiteSpace(txtNomeGestor.Text) || string.IsNullOrWhiteSpace(txtUsernameGestor.Text) || string.IsNullOrWhiteSpace(txtPasswordGestor.Text))
+                    {
+                        MessageBox.Show("Campos vazios!");
+                        return;
+
+                    }
                     utilizadorControlador.EditarUtilizador(this.Gestor);//adiciona o gestor alterado
                     MessageBox.Show("Gestor atualizado com sucesso!");
                     DialogResult = DialogResult.OK;
@@ -96,6 +99,14 @@ namespace iTasks.Vistas
                 Gestor novoGestor = new Gestor(gereUtilizadores, departamento, txtNomeGestor.Text, txtUsernameGestor.Text, txtPasswordGestor.Text);
                 try
                 {
+                 
+
+                    if (string.IsNullOrWhiteSpace(txtNomeGestor.Text) || string.IsNullOrWhiteSpace(txtUsernameGestor.Text) || string.IsNullOrWhiteSpace(txtPasswordGestor.Text))
+                    {
+                        MessageBox.Show("Campos vazios!");
+                        return;
+
+                    }
                     // AO CARREGAR NO BOTAO OK DO ADICIONARGESTOR - se a funcao chamada é criarUtilizador
                     // se der erro nao cria e lança mensagem de erro definida no controlador utilizador
                     // (username já existe)
@@ -157,6 +168,10 @@ namespace iTasks.Vistas
         {
             this.Close();
         }
+
+      
+
+
     }
 }
 
