@@ -52,7 +52,12 @@
             this.btPrevisao = new System.Windows.Forms.Button();
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             this.button1 = new System.Windows.Forms.Button();
+=======
+            this.buttonEditarTarefa = new System.Windows.Forms.Button();
+            this.buttonApagarTarefa = new System.Windows.Forms.Button();
+>>>>>>> Stashed changes
 =======
             this.buttonEditarTarefa = new System.Windows.Forms.Button();
             this.buttonApagarTarefa = new System.Windows.Forms.Button();
@@ -222,9 +227,12 @@
             // 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             this.btSetDoing.Location = new System.Drawing.Point(220, 618);
             this.btSetDoing.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
             this.btSetDoing.Location = new System.Drawing.Point(684, 777);
@@ -241,9 +249,12 @@
             // 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             this.btSetDone.Location = new System.Drawing.Point(633, 618);
             this.btSetDone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
             this.btSetDone.Location = new System.Drawing.Point(1158, 777);
@@ -260,9 +271,12 @@
             // 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             this.btSetTodo.Location = new System.Drawing.Point(430, 618);
             this.btSetTodo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
             this.btSetTodo.Location = new System.Drawing.Point(923, 777);
@@ -279,9 +293,12 @@
             // 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             this.btNova.Location = new System.Drawing.Point(20, 618);
             this.btNova.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
             this.btNova.Location = new System.Drawing.Point(18, 773);
@@ -316,6 +333,7 @@
             // 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(96, 618);
@@ -327,6 +345,8 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
             // buttonEditarTarefa
@@ -349,6 +369,9 @@
             this.buttonApagarTarefa.Text = "ApagarTarefa";
             this.buttonApagarTarefa.UseVisualStyleBackColor = true;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -365,6 +388,9 @@
             this.Controls.Add(this.buttonApagarTarefa);
             this.Controls.Add(this.buttonEditarTarefa);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -419,7 +445,12 @@
         private System.Windows.Forms.Button btPrevisao;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         private System.Windows.Forms.Button button1;
+=======
+        private System.Windows.Forms.Button buttonEditarTarefa;
+        private System.Windows.Forms.Button buttonApagarTarefa;
+>>>>>>> Stashed changes
 =======
         private System.Windows.Forms.Button buttonEditarTarefa;
         private System.Windows.Forms.Button buttonApagarTarefa;
