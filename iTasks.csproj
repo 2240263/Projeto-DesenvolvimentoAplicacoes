@@ -116,6 +116,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controlador\TarefaControlador.cs" />
     <Compile Include="Controlador\TipoTarefaControlador.cs" />
     <Compile Include="Controlador\UtilizadorControlador.cs" />
     <Compile Include="Vistas\AdicionarGestor.cs">

@@ -23,7 +23,7 @@ namespace iTasks.Modelos
         public DateTime DataRealFim { get; set; }
         public DateTime DataCriacao { get; set; }
 
-        EstadoAtual estadoatual;
+        public EstadoAtual estadoatual { get; set; }
 
         public Tarefa()
         {
