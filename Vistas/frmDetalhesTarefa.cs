@@ -15,19 +15,15 @@ namespace iTasks
 {
     public partial class frmDetalhesTarefa : Form
     {
-        public string DescricaoTarefa { get; set; }
-
 
         TarefaControlador controladorT = new TarefaControlador();
-        UtilizadorControlador controladorU = new UtilizadorControlador();
-        private int idTarefa; // variável para guardar o id 
         private Tarefa tarefaAtual;
 
-        public frmDetalhesTarefa(int idTarefa)
+        public frmDetalhesTarefa(Tarefa tarefa)
         {
             InitializeComponent();
-            this.idTarefa = idTarefa; // guarda o ID na variável       
-            tarefaAtual = controladorT.CarregarTarefa(idTarefa);
+            this.tarefaAtual = tarefa;      
+            tarefaAtual = controladorT.CarregarTarefa(tarefaAtual.Id);
             preencherDados(tarefaAtual);
 
         }
@@ -36,17 +32,19 @@ namespace iTasks
         {
             if (tarefaAtual == null)
             {
-                txtId.Text = idTarefa.ToString();
-                txtDesc.Text = DescricaoTarefa;
-                txtDataCriacao.Text = DateTime.Now.ToString();
+                txtId.Text = "--";
+                txtDataCriacao.Text = "--/--/--";
                 txtDataRealini.Text = "--/--/--";
                 txtdataRealFim.Text = "--/--/--";
 
             }
             else
             {
-                txtId.Text = idTarefa.ToString();
+                txtId.Text = tarefaAtual.Id.ToString();
                 txtDesc.Text = tarefaAtual.Descricao;
+                txtOrdem.Text = tarefaAtual.OrdemExecucao.ToString();
+                txtStoryPoints.Text = tarefaAtual.StoryPoints.ToString();
+
                 if (tarefaAtual.DataCriacao != null)
                     txtDataCriacao.Text = tarefaAtual.DataCriacao.ToString("dd/MM/yy");
                 else
@@ -64,76 +62,93 @@ namespace iTasks
 
                 txtEstado.Text = tarefaAtual.estadoatual.ToString();
 
+                dtInicio.Value = tarefaAtual.DataPrevistaInicio;
+                dtFim.Value = tarefaAtual.DataPrevistaFim;
+
             }
 
         }
 
+        // Botão gravar, com verificações para que os campos a preencher não vão vazios
         private void btGravar_Click(object sender, EventArgs e)
         {
-
             if (tarefaAtual == null)
             {
-                // Caso não tenha sido carregada, pode criar uma nova
                 tarefaAtual = new Tarefa();
-                this.tarefaAtual.DataCriacao = DateTime.Now;
             }
 
-
+            // Verifica descrição
+            if (string.IsNullOrWhiteSpace(txtDesc.Text))
+            {
+                MessageBox.Show("Descrição é obrigatória.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDesc.Focus();
+                return;
+            }
             tarefaAtual.Descricao = txtDesc.Text;
 
-            // Converte e atribui o Tipo de Tarefa
+            // Tipo de Tarefa
             if (cbTipoTarefa.SelectedValue != null && int.TryParse(cbTipoTarefa.SelectedValue.ToString(), out int idTipoTarefa))
             {
-                tarefaAtual.IdTipoTarefa = (int)cbTipoTarefa.SelectedValue; ;
+                tarefaAtual.IdTipoTarefa = idTipoTarefa;
             }
             else
             {
-                // Opcional: tratar erro ou definir valor padrão
-                tarefaAtual.IdTipoTarefa = 0;
+                MessageBox.Show("Selecione um Tipo de Tarefa válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbTipoTarefa.Focus();
+                return;
             }
 
-            // Converte e atribui o Programador
+            // Programador
             if (cbProgramador.SelectedValue != null && int.TryParse(cbProgramador.SelectedValue.ToString(), out int idProgramador))
             {
-                tarefaAtual.IdProgramador = (int)cbProgramador.SelectedValue; ;
+                tarefaAtual.IdProgramador = idProgramador;
             }
             else
             {
-                // Opcional: tratar erro ou definir valor padrão
-                tarefaAtual.IdProgramador = 0;
+                MessageBox.Show("Selecione um Programador válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbProgramador.Focus();
+                return;
             }
 
-            // Converte e atribui a Ordem de Execução
-            if (int.TryParse(txtOrdem.Text,out int ordem))
+            // Ordem Execução
+            if (!int.TryParse(txtOrdem.Text, out int ordemExecucao) || ordemExecucao <= 0)
             {
-                tarefaAtual.OrdemExecucao = ordem;
+                MessageBox.Show("Ordem de execução deve ser um número inteiro positivo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtOrdem.Focus();
+                return;
             }
-            else
+            tarefaAtual.OrdemExecucao = ordemExecucao;
+
+            //Regra 17
+            // Verificar se já existe uma tarefa com a mesma ordem para este programador
+            bool ordemRepetida = controladorT.VerificarOrdemTarefas(ordemExecucao, tarefaAtual.IdProgramador, tarefaAtual.Id); 
+
+            if (ordemRepetida)
             {
-                tarefaAtual.OrdemExecucao = 0; // valor padrão
+                MessageBox.Show("Já existe uma tarefa com essa ordem para este programador.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtOrdem.Focus();
+                return;
             }
 
-            // Converte e atribui os StoryPoints
-            if (int.TryParse(txtStoryPoints.Text, out int storyPoints))
+            // Story Points
+            if (!int.TryParse(txtStoryPoints.Text, out int storyPoints) || storyPoints < 0)
             {
-                tarefaAtual.StoryPoints = storyPoints;
+                MessageBox.Show("Story Points deve ser um número inteiro não negativo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtStoryPoints.Focus();
+                return;
             }
-            else
-            {
-                tarefaAtual.StoryPoints = 0; // valor padrão
-            }
+            tarefaAtual.StoryPoints = storyPoints;
 
-            // Atribui as datas
+            // Datas
             tarefaAtual.DataPrevistaInicio = dtInicio.Value;
             tarefaAtual.DataPrevistaFim = dtFim.Value;
             tarefaAtual.estadoatual = EstadoAtual.ToDo;
 
-            // Envie para salvar
+            // Guarda
             controladorT.GuardaTarefa(tarefaAtual);
 
             this.DialogResult = DialogResult.OK;
             this.Close();
-
         }
 
         private void frmDetalhesTarefa_Activated(object sender, EventArgs e)
@@ -145,6 +160,11 @@ namespace iTasks
             cbTipoTarefa.DataSource = controladorT.ListaTiposTarefa();
             cbTipoTarefa.DisplayMember = "Nome"; // o que será mostrado na lista
             cbTipoTarefa.ValueMember = "Id";     // o valor interno enviado ao objeto
+        }
+
+        private void dtInicio_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
     }

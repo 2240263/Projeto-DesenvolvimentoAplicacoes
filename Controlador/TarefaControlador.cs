@@ -18,69 +18,97 @@ namespace iTasks.Controlador
         {
             Context = new ITaskContext();
         }
-
-        // metodo para criar o id tarefa na app que vai coincidir com a base de dados
         
-        public Tarefa CriarTarefa() // salva as novas
-        {
-            {
-                Tarefa tarefaNova = new Tarefa();
-                // Insere uma nova tarefa
-                Context.Tarefas.Add(tarefaNova);
-                Context.SaveChanges();
-
-                return tarefaNova;
-                MessageBox.Show("Nova tarefa criada!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-        }
-
+        // VAI BUSCAR TAREFA À BASE DE DADOS SENGUNDO O ID, RETORNA NULL SE NÃO ENCONTRAR
         public Tarefa CarregarTarefa(int Id)
         {
             try
             {
-                // carregar tarefa pelo id
                 Tarefa tarefaEncontrada = Context.Tarefas
                                                 .Where(t => t.Id == Id)
-                                                .FirstOrDefault();
+                                                .First(); 
 
                     return tarefaEncontrada;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao carregar a tarefa {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
 
         }
 
-        public void GuardaTarefa(Tarefa TarefaAtualizada)
+        public void AtualizarTarefa(Tarefa tarefa)
         {
-            var tarefaExistente = Context.Tarefas.Find(TarefaAtualizada.Id);
-            if (tarefaExistente != null)
-            {
-                // Atualizar os campos
-                tarefaExistente.Descricao = TarefaAtualizada.Descricao;
-                tarefaExistente.IdTipoTarefa = TarefaAtualizada.IdTipoTarefa;
-                tarefaExistente.IdProgramador = TarefaAtualizada.IdProgramador;
-                tarefaExistente.OrdemExecucao = TarefaAtualizada.OrdemExecucao;
-                tarefaExistente.StoryPoints = TarefaAtualizada.StoryPoints;
-                tarefaExistente.DataPrevistaInicio = TarefaAtualizada.DataPrevistaInicio;
-                tarefaExistente.DataPrevistaFim = TarefaAtualizada.DataPrevistaFim;
+            // Carrega a tarefa original da base de dados pelo Id
+            var tarefaOriginal = Context.Tarefas.FirstOrDefault(t => t.Id == tarefa.Id);
 
+            if (tarefaOriginal != null)
+            {
+                // Atualiza os campos que podem ter sido alterados
+                tarefaOriginal.Descricao = tarefa.Descricao;
+                tarefaOriginal.IdTipoTarefa = tarefa.IdTipoTarefa;
+                tarefaOriginal.IdProgramador = tarefa.IdProgramador;
+                tarefaOriginal.OrdemExecucao = tarefa.OrdemExecucao;
+                tarefaOriginal.StoryPoints = tarefa.StoryPoints;
+                tarefaOriginal.DataPrevistaInicio = tarefa.DataPrevistaInicio;
+                tarefaOriginal.DataPrevistaFim = tarefa.DataPrevistaFim;
+
+
+                // Salva as alterações no banco
                 Context.SaveChanges();
-                MessageBox.Show("Tarefa atualizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                // Criar uma nova tarefa
-                Context.Tarefas.Add(TarefaAtualizada);
-                Context.SaveChanges();
-                MessageBox.Show("Nova tarefa salva com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                throw new Exception("Tarefa não encontrada para atualização.");
             }
         }
 
+        // GUARDAR TAREFAS NOVAS E EXISTENTES (BUTÃO GRAVAR DO FRMDETALHES)
+        public void GuardaTarefa(Tarefa tarefa)
+        {
+            try
+            {
+                var tarefaExistente = Context.Tarefas.Find(tarefa.Id);
 
+                if (tarefaExistente != null) // SE A TAREFA EXISTIR
+                {
+                    // Atualizar campos
+                    tarefaExistente.Descricao = tarefa.Descricao;
+                    tarefaExistente.IdTipoTarefa = tarefa.IdTipoTarefa;
+                    tarefaExistente.IdProgramador = tarefa.IdProgramador;
+                    tarefaExistente.OrdemExecucao = tarefa.OrdemExecucao;
+                    tarefaExistente.StoryPoints = tarefa.StoryPoints;
+                    tarefaExistente.DataPrevistaInicio = tarefa.DataPrevistaInicio;
+                    tarefaExistente.DataPrevistaFim = tarefa.DataPrevistaFim;
+
+                    Context.SaveChanges();
+                    MessageBox.Show("Tarefa atualizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else // SE A TAREFA NÃO EXISTIR, CRIA NOVA
+                {
+                    Context.Tarefas.Add(tarefa);
+                    Context.SaveChanges();
+                    MessageBox.Show("Nova tarefa criada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao guardar a tarefa: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // APAGAR TAREFA KANBAN - a funcionar
+        public void ApagarTarefa(int id)
+        {
+            var tarefaApagar = Context.Tarefas.FirstOrDefault(p => p.Id == id);
+            if (tarefaApagar != null)
+            {
+                Context.Tarefas.Remove(tarefaApagar);
+                Context.SaveChanges();
+            }
+        }
+
+        // ATUALIZAR TAREFA KANBAN - a funcionar
         public void AtualizarEstadoTarefa(int Id)
         {
             try
@@ -94,23 +122,53 @@ namespace iTasks.Controlador
                 {
 
                     if (tarefaEncontrada.estadoatual == EstadoAtual.ToDo)
-                    { // Incrementar o estado
+                    { 
                         tarefaEncontrada.estadoatual = EstadoAtual.Doing;
 
-                        // atulaizar a data 
+                        // atulaizar a data  de inicio
                         tarefaEncontrada.DataRealInicio = DateTime.Now;
                     }
 
                     else if (tarefaEncontrada.estadoatual == EstadoAtual.Doing)
                     {
-                        // Incrementar o estado
+                        
                         tarefaEncontrada.estadoatual = EstadoAtual.Done;
 
-                        // atulaizar a data 
+                        // atulaizar a data de fim
                         tarefaEncontrada.DataRealFim = DateTime.Now;
                     }
 
-                    // Salvar alterações no banco
+
+                    Context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao carregar ou atualizar a tarefa: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // REVERTER ESTADO TAREFA KANBAN - a funcionar
+        public void ReverterEstadoTarefa(int Id)
+        {
+            try
+            {
+                // carregar tarefa pelo id
+                Tarefa tarefaEncontrada = Context.Tarefas
+                                                 .Where(t => t.Id == Id)
+                                                 .FirstOrDefault();
+
+                if (tarefaEncontrada != null)
+                {
+
+                    if (tarefaEncontrada.estadoatual == EstadoAtual.Doing)
+                    {
+                        tarefaEncontrada.estadoatual = EstadoAtual.ToDo;
+
+                        // atulaizar a data para o min, de maneira a dar 'reset' à mesma
+                        tarefaEncontrada.DataRealInicio = DateTime.MinValue;
+                    }
+
                     Context.SaveChanges();
                 }
                 else
@@ -124,11 +182,58 @@ namespace iTasks.Controlador
             }
         }
 
-        // listas para apresentação na view
+
+        // MÉTODOS PARA IMPLEMEMTAÇÃO DE REGRAS
+        //----------------------------------------------------------------------------------------
+        
+        public int TarefasEmDoing(int idProg)
+        {
+            return Context.Tarefas
+                .Where(t => t.IdProgramador == idProg && t.estadoatual == EstadoAtual.Doing)
+                .Count();
+        }
+
+        public bool VerificarTarefaPrioritariaToDo(Tarefa tarefaSelecionada, int idProg)
+        {
+            // lista de tarefas por programador e estado
+            var tarefasToDo = Context.Tarefas
+                .Where(t => t.IdProgramador == idProg && t.estadoatual == EstadoAtual.ToDo)
+                .OrderBy(t => t.OrdemExecucao)
+                .ToList();
+
+            var tarefaPrioritaria = tarefasToDo.First(); // firs retorna a primeira da lista que foi ordenada por ordem de execução
+             
+            return tarefaSelecionada.Id == tarefaPrioritaria.Id; // true ou false
+        }
+
+        public bool VerificarTarefaPrioritariaDoing(Tarefa tarefaSelecionada, int idProg)
+        {
+            // lista de tarefas por programador e estado
+            var tarefasDoing = Context.Tarefas
+                .Where(t => t.IdProgramador == idProg && t.estadoatual == EstadoAtual.Doing)
+                .OrderBy(t => t.OrdemExecucao)
+                .ToList();
+
+            var tarefaPrioritaria = tarefasDoing.First(); // first retorna a primeira da lista que foi ordenada por ordem de execução
+
+            return tarefaSelecionada.Id == tarefaPrioritaria.Id; // true ou false
+        }
+
+        public bool VerificarOrdemTarefas(int ordem, int idProgramador, int idTarefaAtual = 0)
+        {
+            return Context.Tarefas.Any(t =>
+                t.IdProgramador == idProgramador &&
+                t.OrdemExecucao == ordem &&
+                t.Id != idTarefaAtual);
+        }
+
+
+        // LISTAS PARA APRESENTAÇÃO NA VIEW
+        //---------------------------------------------------------------------------------------
         public List<TipoTarefa> ListaTiposTarefa()
         {
             return Context.TipoTarefas
-               .OrderBy(p => p.Nome) // opcional, ordena por nome
+               .OrderBy(p => p.Nome) // ordena por nome
                .ToList();
         }
 
@@ -136,7 +241,7 @@ namespace iTasks.Controlador
         {
             return Context.Tarefas
                 .Where(t => t.estadoatual == EstadoAtual.ToDo)
-               .OrderBy(p => p.Id) // opcional, ordena por nome
+               .OrderBy(p => p.Id) // aqui ordena por ID
                .ToList();
         }
 
@@ -144,7 +249,7 @@ namespace iTasks.Controlador
         {
             return Context.Tarefas
                 .Where(t => t.estadoatual == EstadoAtual.Doing)
-               .OrderBy(p => p.Id) // opcional, ordena por nome
+               .OrderBy(p => p.Id) 
                .ToList();
         }
 
@@ -152,19 +257,16 @@ namespace iTasks.Controlador
         {
             return Context.Tarefas
                 .Where(t => t.estadoatual == EstadoAtual.Done)
-               .OrderBy(p => p.Id) // opcional, ordena por nome
+               .OrderBy(p => p.Id)
                .ToList();
         }
 
-        public List<Utilizador> ListaProgramadores()
+        public List<Programador> ListaProgramadores()
         {
             return Context.Programadores
-               .OrderBy(p => p.Nome) // opcional, ordena por nome
-               .Cast<Utilizador>() // Faz o cast para Utilizador
+               .OrderBy(p => p.Nome)
                .ToList();
         }
-
-
 
     }
 

@@ -89,6 +89,7 @@
             // 
             // cbProgramador
             // 
+            this.cbProgramador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProgramador.FormattingEnabled = true;
             this.cbProgramador.Items.AddRange(new object[] {
             "1",
@@ -148,6 +149,8 @@
             // 
             // cbTipoTarefa
             // 
+            this.cbTipoTarefa.AllowDrop = true;
+            this.cbTipoTarefa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoTarefa.FormattingEnabled = true;
             this.cbTipoTarefa.Items.AddRange(new object[] {
             "1",
@@ -166,6 +169,7 @@
             this.dtInicio.Name = "dtInicio";
             this.dtInicio.Size = new System.Drawing.Size(265, 22);
             this.dtInicio.TabIndex = 14;
+            this.dtInicio.ValueChanged += new System.EventHandler(this.dtInicio_ValueChanged);
             // 
             // label6
             // 

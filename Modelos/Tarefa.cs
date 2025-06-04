@@ -21,7 +21,7 @@ namespace iTasks.Modelos
         public int StoryPoints { get; set; }
         public DateTime DataRealInicio { get; set; }
         public DateTime DataRealFim { get; set; }
-        public DateTime DataCriacao { get; set; }
+        public DateTime DataCriacao { get; set; } = DateTime.Now;
 
         public EstadoAtual estadoatual { get; set; }
 
