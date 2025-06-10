@@ -209,7 +209,7 @@
         #endregion
 
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cbGestorProg;
+        public System.Windows.Forms.ComboBox cbGestorProg;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btGravarProg;
         private System.Windows.Forms.TextBox txtPasswordProg;

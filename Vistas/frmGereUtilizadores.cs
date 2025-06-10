@@ -64,15 +64,16 @@ namespace iTasks
         {
             
             var form = new AdicionarGestor();// cria nova instancia de adicionar gestor (porque se limpa)
-            FormAdicionarGestor.ResetFormularioGestor();// vai buscar ao formAdicionarGestor a funcao reseat 
+            form.ResetFormularioGestor();// vai buscar ao formAdicionarGestor a funcao reseat 
 
             
-            var result = FormAdicionarGestor.ShowDialog();
+            var result = form.ShowDialog();
 
             if (result == DialogResult.OK)
             {
                 // só atualiza a lista depois que o formulário for fechado
                 atualizaListaGestores();
+               
             }
             
             
@@ -147,10 +148,12 @@ namespace iTasks
         {
           
             var form = new AdicionarProgramador();// cria nova instancia de adicionar gestor (porque se limpa)
-            FormAdicionarProgramador.ResetFormularioProgramador();// vai buscar ao formAdicionarGestor a funcao reseat 
+          
+            form.ResetFormularioProgramador();// vai buscar ao formAdicionarGestor a funcao reseat 
+            RecarregarGestores();
 
 
-            var result = FormAdicionarProgramador.ShowDialog();//(showDialog - janela pai fica bloqueada até fechar)
+            var result = form.ShowDialog();//(showDialog - janela pai fica bloqueada até fechar)
 
             if (result == DialogResult.OK)
             {
@@ -175,6 +178,20 @@ namespace iTasks
             }
 
 
+        }
+
+        private void RecarregarGestores()
+        {
+            using (var context = new ITaskContext())
+            {
+                AdicionarProgramador prog = new AdicionarProgramador();
+                var gestores = context.Gestores.ToList();
+                
+                prog.cbGestorProg.DataSource = null; // limpa os dados antigos
+                prog.cbGestorProg.DataSource = gestores;
+                prog.cbGestorProg.DisplayMember = "Username"; // ou a propriedade que quer mostrar
+                
+            }
         }
 
         private void lstListaProgramadores_SelectedIndexChanged(object sender, EventArgs e)
