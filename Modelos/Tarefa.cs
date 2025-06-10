@@ -27,6 +27,9 @@ namespace iTasks.Modelos
 
         public Tarefa()
         {
+            DataCriacao = DateTime.Now;
+            DataRealInicio = DateTime.Now;
+            DataRealFim = DateTime.Now;
         }
 
         public Tarefa(int idGestor, int idProgramador, int ordemExecucao, string descricao, DateTime dataPrevistaInicio, DateTime dataPrevistaFim, int idTipoTarefa, int storyPoints)
@@ -41,7 +44,8 @@ namespace iTasks.Modelos
             this.StoryPoints = storyPoints;
             DataCriacao = DateTime.Now;
             estadoatual = EstadoAtual.ToDo; //Vai assumir o To do por defeito
-
+            DataRealInicio = DateTime.Now;
+            DataRealFim = DateTime.Now;
         }
     }
 }

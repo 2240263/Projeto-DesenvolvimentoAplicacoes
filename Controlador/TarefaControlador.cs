@@ -94,6 +94,13 @@ namespace iTasks.Controlador
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao guardar a tarefa: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                    Console.WriteLine($"Inner Exception Stack Trace: {ex.InnerException.StackTrace}");
+                }
+                // Podes também re-lançar a exceção se for necessário
+                throw;
             }
         }
 
@@ -138,6 +145,7 @@ namespace iTasks.Controlador
                         tarefaEncontrada.DataRealFim = DateTime.Now;
                     }
 
+                    
 
                     Context.SaveChanges();
                 }

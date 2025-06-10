@@ -150,7 +150,7 @@ namespace iTasks
             var form = new AdicionarProgramador();// cria nova instancia de adicionar gestor (porque se limpa)
           
             form.ResetFormularioProgramador();// vai buscar ao formAdicionarGestor a funcao reseat 
-            RecarregarGestores();
+            RecarregarGestores(); // atualizar a lista de gestores sempre 
 
 
             var result = form.ShowDialog();//(showDialog - janela pai fica bloqueada até fechar)

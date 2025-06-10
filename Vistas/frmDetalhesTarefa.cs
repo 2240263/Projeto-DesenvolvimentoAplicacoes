@@ -25,8 +25,11 @@ namespace iTasks
             this.tarefaAtual = tarefa;      
             tarefaAtual = controladorT.CarregarTarefa(tarefaAtual.Id);
             preencherDados(tarefaAtual);
+          
 
         }
+
+
 
         private void preencherDados(Tarefa tarefaAtual) // metodo para preencher dados automaticos
         {
@@ -64,6 +67,8 @@ namespace iTasks
 
                 dtInicio.Value = tarefaAtual.DataPrevistaInicio;
                 dtFim.Value = tarefaAtual.DataPrevistaFim;
+
+                escondercampos(tarefaAtual,txtDataRealini, txtdataRealFim);  //metodo para esconder as datas que foram incializadas com a data atual - nomeadamente datarealinicio e datarealfim
 
             }
 
@@ -162,9 +167,32 @@ namespace iTasks
             cbTipoTarefa.ValueMember = "Id";     // o valor interno enviado ao objeto
         }
 
+
         private void dtInicio_ValueChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void escondercampos(Tarefa tarefa, TextBox dataRi, TextBox dataRf)
+        {
+            if (tarefa.estadoatual == EstadoAtual.ToDo)
+            {
+                dataRi.Visible = false;
+                dataRf.Visible = false;
+            }
+            else if (tarefa.estadoatual == EstadoAtual.Doing)
+            {
+                dataRi.Visible = true;
+                dataRf.Visible = false;
+            }
+            else
+            {
+                dataRi.Visible = true;
+                dataRf.Visible = true;
+
+            }
+
+        }
+
     }
-    }
+}

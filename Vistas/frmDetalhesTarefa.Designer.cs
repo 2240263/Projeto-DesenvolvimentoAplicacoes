@@ -392,9 +392,9 @@
         private System.Windows.Forms.DateTimePicker dtFim;
         private System.Windows.Forms.TextBox txtEstado;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtDataRealini;
+        public System.Windows.Forms.TextBox txtDataRealini;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtdataRealFim;
+        public System.Windows.Forms.TextBox txtdataRealFim;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtDataCriacao;
         private System.Windows.Forms.Label label11;

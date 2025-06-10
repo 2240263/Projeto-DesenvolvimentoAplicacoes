@@ -113,6 +113,7 @@ namespace iTasks
             {
                 // para atualizar as listas 
                 AtualizarListas();
+
             }
 
         }
@@ -229,6 +230,7 @@ namespace iTasks
                         if (tarefaSelecionada.Id != -1) 
                         {
                             controladorT.AtualizarEstadoTarefa(tarefaSelecionada.Id);
+
                         }
                         else
                         {
@@ -378,6 +380,7 @@ namespace iTasks
 
             lstDone.ClearSelected();
         }
+
     }
 }
 
