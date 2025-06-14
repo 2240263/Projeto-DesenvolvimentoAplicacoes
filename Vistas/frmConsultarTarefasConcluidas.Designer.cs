@@ -54,7 +54,7 @@
             this.gvTarefasConcluidas.Size = new System.Drawing.Size(1551, 497);
             this.gvTarefasConcluidas.TabIndex = 31;
             this.gvTarefasConcluidas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvTarefasConcluidas_CellDoubleClick);
-            this.gvTarefasConcluidas.Click += new System.EventHandler(this.gvTarefasConcluidas_Click);
+            
             // 
             // frmConsultarTarefasConcluidas
             // 
@@ -66,7 +66,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmConsultarTarefasConcluidas";
             this.Text = "frmConsultarTarefasConcluidas";
-            this.Load += new System.EventHandler(this.frmConsultarTarefasConcluidas_Load_1);
+            this.Load += new System.EventHandler(this.frmConsultarTarefasConcluidas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvTarefasConcluidas)).EndInit();
             this.ResumeLayout(false);
 

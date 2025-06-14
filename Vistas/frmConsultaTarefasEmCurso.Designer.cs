@@ -43,7 +43,7 @@
             this.gvTarefasEmCurso.Size = new System.Drawing.Size(1504, 486);
             this.gvTarefasEmCurso.TabIndex = 0;
             this.gvTarefasEmCurso.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvTarefasEmCurso_CellDoubleClick);
-           
+            this.gvTarefasEmCurso.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gvTarefasEmCurso_CellFormatting_1);
             // 
             // btFechar
             // 

@@ -23,17 +23,19 @@ namespace iTasks
             _idGestorAutenticado = idGestorAutenticado;
 
         }
-      
+
+
         private void frmConsultaTarefasEmCurso_Load(object sender, EventArgs e)
         {
             carregarTarefasemCurso();
-
         }
+
+
 
         private void carregarTarefasemCurso()
         {
 
-           // Obter as listas separadas das tarefas
+            // Obter as listas separadas das tarefas
             var listaToDo = controlador.ListaToDo();
             var listaDoing = controlador.ListaDoing();
 
@@ -95,34 +97,42 @@ namespace iTasks
             gvTarefasEmCurso.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        private void gvTarefasEmCurso_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) // formatar a datagridview, porque nao pode apresentar as datas reais e de fim .  
+        private void gvTarefasEmCurso_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)// formatar a datagridview, porque nao pode apresentar as datas reais e de fim .  
         {
-            var coluna = gvTarefasEmCurso.Columns[e.ColumnIndex].Name;
-            var rowData = gvTarefasEmCurso.Rows[e.RowIndex].DataBoundItem;
+            gvTarefasEmCurso.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+            gvTarefasEmCurso.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
 
-            if (rowData == null)
+
+            var coluna = gvTarefasEmCurso.Columns[e.ColumnIndex].Name;
+            // Obter o DataBoundItem de forma segura
+            object rowDataObj = gvTarefasEmCurso.Rows[e.RowIndex].DataBoundItem;
+
+            if (rowDataObj == null)
                 return;
 
-            var estadoAtualProp = rowData.GetType().GetProperty("estadoatual");
-            if (estadoAtualProp != null)
+
+            EstadoAtual estadoatual = EstadoAtual.ToDo; // Valor predefinido
+
+            var estadoAtualProp = rowDataObj.GetType().GetProperty("estadoatual");
+            if (estadoAtualProp != null && estadoAtualProp.PropertyType == typeof(EstadoAtual))
             {
-                var estadoatual = (EstadoAtual)estadoAtualProp.GetValue(rowData);
-
-                if (coluna == "DataRealInicio" && estadoatual == EstadoAtual.ToDo)//se estiver no estado todo a data real de inicio vai aparecer em branco
-                {
-                    e.Value = "";
-                    e.FormattingApplied = true;
-                }
-
-                if (coluna == "DataRealFim" && (estadoatual == EstadoAtual.ToDo || estadoatual == EstadoAtual.Doing))
-                {
-                    e.Value = "";
-                    e.FormattingApplied = true;
-                }
+                estadoatual = (EstadoAtual)estadoAtualProp.GetValue(rowDataObj);
             }
 
-        }
+            //DataRealInicio em branco se o estado for ToDo
+            if (coluna == "DataRealInicio" && estadoatual == EstadoAtual.ToDo)
+            {
+                e.Value = "";
+                e.FormattingApplied = true;
+            }
 
+            //DataRealFim em branco se o estado for ToDo ou Doing
+            if (coluna == "DataRealFim" && (estadoatual == EstadoAtual.ToDo || estadoatual == EstadoAtual.Doing))
+            {
+                e.Value = "";
+                e.FormattingApplied = true;
+            }
+        }
 
 
         private void gvTarefasEmCurso_CellDoubleClick(object sender, DataGridViewCellEventArgs e)//para abrir os detalhes de tarefa só em modo leitura
@@ -156,5 +166,6 @@ namespace iTasks
             this.Close();
         }
 
+        
     }
 }
