@@ -77,8 +77,13 @@ namespace iTasks
 
         private void tarefasTerminadasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form segundoForm = new frmConsultarTarefasConcluidas();
-            segundoForm.Show();
+
+            if (Utilizador is Gestor gestorAutenticado)
+            {
+                Form segundoForm = new frmConsultarTarefasConcluidas(gestorAutenticado.Id);
+                segundoForm.Show();
+            }
+
         }
 
         private void tarefasEmCursoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -90,8 +95,6 @@ namespace iTasks
             }
            
 
-           // Form segundoForm = new frmConsultaTarefasEmCurso();
-            //segundoForm.Show();
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)

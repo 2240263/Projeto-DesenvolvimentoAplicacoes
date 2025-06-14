@@ -70,15 +70,15 @@ namespace iTasks
 
                     // --- Novas Colunas Calculadas ---
                     TempoEmFalta = t.estadoatual == EstadoAtual.Done // Se a tarefa está concluída
-                                      ? "Concluída" // Não há tempo em falta
+                                      ? "Concluída" 
                                       : (DiasRestantes > 0 // Se a data prevista de fim ainda não passou
                                          ? $"Faltam {DiasRestantes} {(DiasRestantes == 1 ? "dia" : "dias")}"
-                                         : "0 dias"), // Se a data já passou (ou é hoje), mas não está Done, o tempo em falta é 0
+                                         : "0 dias"), 
 
-                    // Tempo em Atraso: Adaptado para singular/plural "dia(s)"
-                    TempoEmAtraso = t.estadoatual == EstadoAtual.Done || t.DataPrevistaFim.Date >= DateTime.Now.Date // Comparar apenas datas
-                                      ? "No Prazo" // Ou "Concluída no Prazo"
-                                      : $"Atrasada em {DiasEmAtraso} {(DiasEmAtraso == 1 ? "dia" : "dias")}" // Usar (int) para obter dias completos
+                   
+                    TempoEmAtraso = t.estadoatual == EstadoAtual.Done || t.DataPrevistaFim.Date >= DateTime.Now.Date 
+                                      ? "No Prazo" 
+                                      : $"Atrasada em {DiasEmAtraso} {(DiasEmAtraso == 1 ? "dia" : "dias")}" 
                 };
 
             })
