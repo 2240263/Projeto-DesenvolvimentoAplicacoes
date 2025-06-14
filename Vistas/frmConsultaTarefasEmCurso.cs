@@ -45,33 +45,42 @@ namespace iTasks
                                            .Where(t => t.IdGestor == _idGestorAutenticado)
                                            .ToList();
 
-            var dadosParaExibir = listaFiltradaPorGestor.Select(t => new
+            var dadosParaExibir = listaFiltradaPorGestor.Select(t =>
             {
-                t.Id,
-                t.IdProgramador,
-                t.Descricao,
-                t.OrdemExecucao,
-                t.StoryPoints,
-                t.estadoatual,
-                t.DataCriacao,
-                t.DataPrevistaInicio,
-                t.DataPrevistaFim,
-                t.DataRealInicio,
-                t.DataRealFim,
-                t.IdTipoTarefa,
-                
-                t.IdGestor,
+       
+                // Calcular os dias restantes. Estas variáveis são locais a este bloco 'Select'.
+                int DiasRestantes = (int)(t.DataPrevistaFim.Date - DateTime.Now.Date).TotalDays;
+                int DiasEmAtraso = (int)(DateTime.Now.Date-t.DataPrevistaFim.Date).TotalDays;
+                return new
+                {
 
-                // --- Novas Colunas Calculadas ---
-                TempoEmFalta = t.estadoatual == EstadoAtual.Done // Se a tarefa está concluída
-                               ? "Concluída" // Não há tempo em falta
-                               : (t.DataPrevistaFim.Date > DateTime.Now.Date // Se a data prevista de fim ainda não passou
-                                  ? $"Faltam {(int)(t.DataPrevistaFim.Date - DateTime.Now.Date).TotalDays} dias" // Usar (int) para obter dias completos
-                                  : "0 dias"), // Se a data já passou, mas não está Done, o tempo em falta é 0
+                    t.Id,
+                    t.IdProgramador,
+                    t.Descricao,
+                    t.OrdemExecucao,
+                    t.StoryPoints,
+                    t.estadoatual,
+                    t.DataCriacao,
+                    t.DataPrevistaInicio,
+                    t.DataPrevistaFim,
+                    t.DataRealInicio,
+                    t.DataRealFim,
+                    t.IdTipoTarefa,
+                    t.IdGestor,
 
-                TempoEmAtraso = t.estadoatual == EstadoAtual.Done || t.DataPrevistaFim >= DateTime.Now // Se a tarefa está concluída ou ainda não está no prazo
-                               ? "No Prazo" 
-                               : $"Atrasada em {(int)(DateTime.Now.Date - t.DataPrevistaFim.Date).TotalDays} dias"
+                    // --- Novas Colunas Calculadas ---
+                    TempoEmFalta = t.estadoatual == EstadoAtual.Done // Se a tarefa está concluída
+                                      ? "Concluída" // Não há tempo em falta
+                                      : (DiasRestantes > 0 // Se a data prevista de fim ainda não passou
+                                         ? $"Faltam {DiasRestantes} {(DiasRestantes == 1 ? "dia" : "dias")}"
+                                         : "0 dias"), // Se a data já passou (ou é hoje), mas não está Done, o tempo em falta é 0
+
+                    // Tempo em Atraso: Adaptado para singular/plural "dia(s)"
+                    TempoEmAtraso = t.estadoatual == EstadoAtual.Done || t.DataPrevistaFim.Date >= DateTime.Now.Date // Comparar apenas datas
+                                      ? "No Prazo" // Ou "Concluída no Prazo"
+                                      : $"Atrasada em {DiasEmAtraso} {(DiasEmAtraso == 1 ? "dia" : "dias")}" // Usar (int) para obter dias completos
+                };
+
             })
                 .OrderBy(t => t.estadoatual).ToList();// ordenada os dados pelo estado atual
             gvTarefasEmCurso.DataSource = dadosParaExibir;
