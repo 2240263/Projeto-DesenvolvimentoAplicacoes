@@ -25,6 +25,8 @@ namespace iTasks.Modelos
 
         public EstadoAtual estadoatual { get; set; }
 
+        
+
         public Tarefa()
         {
             DataCriacao = DateTime.Now;

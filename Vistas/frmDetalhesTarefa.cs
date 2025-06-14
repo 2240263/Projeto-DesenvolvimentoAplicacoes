@@ -35,13 +35,14 @@ namespace iTasks
             if (forcarModoReadyOnly) // utilizar o modo forcar modo realyonly quando se chama , caso contratrio verifica o utilizador para saber se coloca nesse estado ou não
             {
                 modoReadOnly = true;
+                AplicarModoReadOnly();
             }
             else
             {
                 modoReadOnly = (utilizador is Programador); 
-                
+                AplicarModoReadOnly();
             }
-            AplicarModoReadOnly();
+            
            
 
         }
@@ -92,10 +93,17 @@ namespace iTasks
         // Botão gravar, com verificações para que os campos a preencher não vão vazios
         private void btGravar_Click(object sender, EventArgs e)
         {
-            if (tarefaAtual == null)
-            {
-                tarefaAtual = new Tarefa();
+             if (tarefaAtual == null)
+             {
+                 
+                if (utilizadoratual is Gestor gestorCriador) 
+                {
+                    tarefaAtual = new Tarefa();
+                    tarefaAtual.IdGestor = gestorCriador.Id;// associar tarefa ao id do gestor
+                }
             }
+
+
 
             // Verifica descrição
             if (string.IsNullOrWhiteSpace(txtDesc.Text))
