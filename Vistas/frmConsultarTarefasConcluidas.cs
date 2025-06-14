@@ -15,15 +15,16 @@ namespace iTasks
     public partial class frmConsultarTarefasConcluidas : Form
     {
         private TarefaControlador controlador = new TarefaControlador();
-        private int _idGestorAutenticado;
-        public frmConsultarTarefasConcluidas(int idGestorAutenticado)
+        //private int _idGestorAutenticado;
+        private Utilizador utilizadorAutenticado;
+
+        public frmConsultarTarefasConcluidas(Utilizador utilizadorAutenticado)
         {
             InitializeComponent();
-            _idGestorAutenticado = idGestorAutenticado;
+            this.utilizadorAutenticado = utilizadorAutenticado;
         }
 
 
-        //EVENTOOOOOOOOOOOOOOOOOOOOOOOOOOO
         private void frmConsultarTarefasConcluidas_Load(object sender, EventArgs e)
         {
             CarregarTarefasConcluidas();
@@ -32,15 +33,37 @@ namespace iTasks
        
         private void CarregarTarefasConcluidas()
         {
-            // Obter a lista de tarefas concluídas (estado Done)
+            // Obter a lista de todas as tarefas concluídas (estado Done)
             var listaDone = controlador.ListaDone();
+            List<Tarefa> listaFiltradaPorUtilizador;
 
-            // Filtrar as tarefas pelo ID do gestor autenticado
-            var listaFiltradaPorGestor = listaDone
-                                            .Where(t => t.IdGestor == _idGestorAutenticado)
-                                            .ToList();
+            // Filtrar as tarefas com base no tipo de utilizador autenticado
+            if (utilizadorAutenticado is Gestor gestor)
+            {
+                // Se for um Gestor, mostra as tarefas concluídas que ele tem
+                listaFiltradaPorUtilizador = listaDone
+                                                .Where(t => t.IdGestor == gestor.Id)
+                                                .ToList();
+            }
+            else if (utilizadorAutenticado is Programador programador)
+            {
+                // Se for um Programador, mostra apenas as tarefas concluídas que lhe foram atribuídas
+                listaFiltradaPorUtilizador = listaDone
+                                                .Where(t => t.IdProgramador == programador.Id)
+                                                .ToList();
+            }
+            else
+            {
+               
+                listaFiltradaPorUtilizador = new List<Tarefa>();
+            }
 
-            var dadosParaExibir = listaFiltradaPorGestor.Select(t =>
+
+
+
+
+
+            var dadosParaExibir = listaFiltradaPorUtilizador.Select(t =>
             {
                 
                 int DiasUtilizados = (t.DataRealFim != DateTime.MinValue && t.DataRealInicio != DateTime.MinValue && t.DataRealFim >= t.DataRealInicio)
@@ -96,22 +119,36 @@ namespace iTasks
             gvTarefasConcluidas.DataSource = dadosParaExibir;
 
            
-            gvTarefasConcluidas.Columns["Id"].Visible = false;
-            gvTarefasConcluidas.Columns["IdTipoTarefa"].Visible = false;
-            gvTarefasConcluidas.Columns["DataCriacao"].Visible = false;
-            gvTarefasConcluidas.Columns["IdGestor"].Visible = false;
-            gvTarefasConcluidas.Columns["OrdemExecucao"].Visible = false;
+            
+
+            if (utilizadorAutenticado is Gestor)
+            {
+                
+                gvTarefasConcluidas.Columns["TempoDemorado"].Visible = true;
+                gvTarefasConcluidas.Columns["TempoPrevisto"].Visible = true;
+                gvTarefasConcluidas.Columns["Id"].Visible = false;
+                gvTarefasConcluidas.Columns["IdTipoTarefa"].Visible = false;
+                gvTarefasConcluidas.Columns["DataCriacao"].Visible = false;
+                gvTarefasConcluidas.Columns["IdGestor"].Visible = false;
+                gvTarefasConcluidas.Columns["OrdemExecucao"].Visible = false;
+            }
+            else if (utilizadorAutenticado is Programador)
+            {
+                gvTarefasConcluidas.Columns["TempoDemorado"].Visible = true;
+                gvTarefasConcluidas.Columns["TempoPrevisto"].Visible = false;
+                gvTarefasConcluidas.Columns["Id"].Visible = false;
+                gvTarefasConcluidas.Columns["IdTipoTarefa"].Visible = false;
+                gvTarefasConcluidas.Columns["DataCriacao"].Visible = false;
+                gvTarefasConcluidas.Columns["IdGestor"].Visible = true;
+                gvTarefasConcluidas.Columns["IdProgramador"].Visible = false;
+            }
 
             // Ajusta o tamanho das colunas
             gvTarefasConcluidas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
 
-
-
-
-        //EVENTOOOOOOOOOOOOOOOOOOOOOOOOOOO
-        private void gvTarefasConcluidas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void gvTarefasConcluidas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)// para abrir os detalhes da tarefa
         {
 
             if (e.RowIndex >= 0)

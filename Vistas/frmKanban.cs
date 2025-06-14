@@ -43,14 +43,14 @@ namespace iTasks
             //se for um programador
             if (Utilizador is Programador)
             {
-                tarefasEmCursoToolStripMenuItem.Visible = false; //opção tarefas em curso
+                
                 utilizadoresToolStripMenuItem.Visible = false; //menu acesso as tarefas
                 btNova.Visible = false; //botao novatarefa
                 buttonApagarTarefa.Visible = false;
                 buttonEditarTarefa.Visible = false;
                 exportarParaCSVToolStripMenuItem.Visible = false; // botao converter em csv
                 btPrevisao.Visible = false; // botao previsao
-
+                tarefasEmCursoToolStripMenuItem.Visible = false;
 
             }
             if (Utilizador is Gestor)
@@ -77,12 +77,9 @@ namespace iTasks
 
         private void tarefasTerminadasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            frmConsultarTarefasConcluidas segundoForm = new frmConsultarTarefasConcluidas(this.Utilizador);
+            segundoForm.Show();
 
-            if (Utilizador is Gestor gestorAutenticado)
-            {
-                Form segundoForm = new frmConsultarTarefasConcluidas(gestorAutenticado.Id);
-                segundoForm.Show();
-            }
 
         }
 

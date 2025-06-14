@@ -33,6 +33,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lstDoing = new System.Windows.Forms.ListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lstDone = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ficheiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,7 +52,6 @@
             this.btPrevisao = new System.Windows.Forms.Button();
             this.buttonEditarTarefa = new System.Windows.Forms.Button();
             this.buttonApagarTarefa = new System.Windows.Forms.Button();
-            this.lstDone = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -117,6 +117,18 @@
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Done";
+            // 
+            // lstDone
+            // 
+            this.lstDone.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstDone.FormattingEnabled = true;
+            this.lstDone.ItemHeight = 16;
+            this.lstDone.Location = new System.Drawing.Point(4, 19);
+            this.lstDone.Margin = new System.Windows.Forms.Padding(4);
+            this.lstDone.Name = "lstDone";
+            this.lstDone.Size = new System.Drawing.Size(395, 519);
+            this.lstDone.TabIndex = 0;
+            this.lstDone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstDone_MouseDoubleClick);
             // 
             // menuStrip1
             // 
@@ -189,14 +201,14 @@
             // tarefasTerminadasToolStripMenuItem
             // 
             this.tarefasTerminadasToolStripMenuItem.Name = "tarefasTerminadasToolStripMenuItem";
-            this.tarefasTerminadasToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.tarefasTerminadasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.tarefasTerminadasToolStripMenuItem.Text = "Tarefas Concluídas";
             this.tarefasTerminadasToolStripMenuItem.Click += new System.EventHandler(this.tarefasTerminadasToolStripMenuItem_Click);
             // 
             // tarefasEmCursoToolStripMenuItem
             // 
             this.tarefasEmCursoToolStripMenuItem.Name = "tarefasEmCursoToolStripMenuItem";
-            this.tarefasEmCursoToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.tarefasEmCursoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.tarefasEmCursoToolStripMenuItem.Text = "Tarefas em Curso";
             this.tarefasEmCursoToolStripMenuItem.Click += new System.EventHandler(this.tarefasEmCursoToolStripMenuItem_Click);
             // 
@@ -285,18 +297,6 @@
             this.buttonApagarTarefa.Text = "ApagarTarefa";
             this.buttonApagarTarefa.UseVisualStyleBackColor = true;
             this.buttonApagarTarefa.Click += new System.EventHandler(this.buttonApagarTarefa_Click);
-            // 
-            // lstDone
-            // 
-            this.lstDone.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstDone.FormattingEnabled = true;
-            this.lstDone.ItemHeight = 16;
-            this.lstDone.Location = new System.Drawing.Point(4, 19);
-            this.lstDone.Margin = new System.Windows.Forms.Padding(4);
-            this.lstDone.Name = "lstDone";
-            this.lstDone.Size = new System.Drawing.Size(395, 519);
-            this.lstDone.TabIndex = 0;
-            this.lstDone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstDone_MouseDoubleClick);
             // 
             // frmKanban
             // 
