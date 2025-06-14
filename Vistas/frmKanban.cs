@@ -43,7 +43,7 @@ namespace iTasks
             //se for um programador
             if (Utilizador is Programador)
             {
-                
+
                 utilizadoresToolStripMenuItem.Visible = false; //menu acesso as tarefas
                 btNova.Visible = false; //botao novatarefa
                 buttonApagarTarefa.Visible = false;
@@ -90,7 +90,7 @@ namespace iTasks
                 Form segundoForm = new frmConsultaTarefasEmCurso(gestorAutenticado.Id);
                 segundoForm.Show();
             }
-           
+
 
         }
 
@@ -438,6 +438,29 @@ namespace iTasks
                     AtualizarListas();
                 }
             }
+
+        }
+
+        private void btPrevisao_Click(object sender, EventArgs e)
+        {
+            if (Utilizador is Gestor gestor)
+            {
+                TimeSpan previsao = controladorT.CalcularTempoPrevistoTarefasToDo(gestor.Id);
+
+                MessageBox.Show($"Tempo estimado total para concluir todas as tarefas 'ToDo': {previsao.TotalMinutes:F1} horas.",
+                                "Previsão de Tempo",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                
+            }
+            else
+            {
+                MessageBox.Show("Ups.",
+                                "Aviso",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+            }
+
 
         }
     }

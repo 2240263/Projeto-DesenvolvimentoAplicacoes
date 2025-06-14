@@ -62,11 +62,11 @@
             // 
             this.lstTodo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstTodo.FormattingEnabled = true;
-            this.lstTodo.ItemHeight = 16;
-            this.lstTodo.Location = new System.Drawing.Point(4, 19);
+            this.lstTodo.ItemHeight = 20;
+            this.lstTodo.Location = new System.Drawing.Point(4, 23);
             this.lstTodo.Margin = new System.Windows.Forms.Padding(4);
             this.lstTodo.Name = "lstTodo";
-            this.lstTodo.Size = new System.Drawing.Size(395, 516);
+            this.lstTodo.Size = new System.Drawing.Size(395, 512);
             this.lstTodo.TabIndex = 0;
             this.lstTodo.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstTodo_MouseDoubleClick);
             // 
@@ -98,11 +98,11 @@
             // 
             this.lstDoing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstDoing.FormattingEnabled = true;
-            this.lstDoing.ItemHeight = 16;
-            this.lstDoing.Location = new System.Drawing.Point(4, 19);
+            this.lstDoing.ItemHeight = 20;
+            this.lstDoing.Location = new System.Drawing.Point(4, 23);
             this.lstDoing.Margin = new System.Windows.Forms.Padding(4);
             this.lstDoing.Name = "lstDoing";
-            this.lstDoing.Size = new System.Drawing.Size(395, 519);
+            this.lstDoing.Size = new System.Drawing.Size(395, 515);
             this.lstDoing.TabIndex = 0;
             this.lstDoing.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstDoing_MouseDoubleClick);
             // 
@@ -122,16 +122,17 @@
             // 
             this.lstDone.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstDone.FormattingEnabled = true;
-            this.lstDone.ItemHeight = 16;
-            this.lstDone.Location = new System.Drawing.Point(4, 19);
+            this.lstDone.ItemHeight = 20;
+            this.lstDone.Location = new System.Drawing.Point(4, 23);
             this.lstDone.Margin = new System.Windows.Forms.Padding(4);
             this.lstDone.Name = "lstDone";
-            this.lstDone.Size = new System.Drawing.Size(395, 519);
+            this.lstDone.Size = new System.Drawing.Size(395, 515);
             this.lstDone.TabIndex = 0;
             this.lstDone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstDone_MouseDoubleClick);
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ficheiroToolStripMenuItem,
@@ -140,7 +141,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1294, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1294, 33);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -150,20 +151,20 @@
             this.sairToolStripMenuItem,
             this.exportarParaCSVToolStripMenuItem});
             this.ficheiroToolStripMenuItem.Name = "ficheiroToolStripMenuItem";
-            this.ficheiroToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.ficheiroToolStripMenuItem.Size = new System.Drawing.Size(89, 29);
             this.ficheiroToolStripMenuItem.Text = "Ficheiro";
             // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(338, 26);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(407, 34);
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
             // exportarParaCSVToolStripMenuItem
             // 
             this.exportarParaCSVToolStripMenuItem.Name = "exportarParaCSVToolStripMenuItem";
-            this.exportarParaCSVToolStripMenuItem.Size = new System.Drawing.Size(338, 26);
+            this.exportarParaCSVToolStripMenuItem.Size = new System.Drawing.Size(407, 34);
             this.exportarParaCSVToolStripMenuItem.Text = "Exportar Tarefas Concluídas para CSV";
             // 
             // utilizadoresToolStripMenuItem
@@ -172,20 +173,20 @@
             this.gerirUtilizadoresToolStripMenuItem,
             this.gerirTiposDeTarefasToolStripMenuItem});
             this.utilizadoresToolStripMenuItem.Name = "utilizadoresToolStripMenuItem";
-            this.utilizadoresToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
+            this.utilizadoresToolStripMenuItem.Size = new System.Drawing.Size(189, 29);
             this.utilizadoresToolStripMenuItem.Text = "Gestão da Aplicação";
             // 
             // gerirUtilizadoresToolStripMenuItem
             // 
             this.gerirUtilizadoresToolStripMenuItem.Name = "gerirUtilizadoresToolStripMenuItem";
-            this.gerirUtilizadoresToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.gerirUtilizadoresToolStripMenuItem.Size = new System.Drawing.Size(283, 34);
             this.gerirUtilizadoresToolStripMenuItem.Text = "Gerir Utilizadores";
             this.gerirUtilizadoresToolStripMenuItem.Click += new System.EventHandler(this.gerirUtilizadoresToolStripMenuItem_Click);
             // 
             // gerirTiposDeTarefasToolStripMenuItem
             // 
             this.gerirTiposDeTarefasToolStripMenuItem.Name = "gerirTiposDeTarefasToolStripMenuItem";
-            this.gerirTiposDeTarefasToolStripMenuItem.Size = new System.Drawing.Size(235, 26);
+            this.gerirTiposDeTarefasToolStripMenuItem.Size = new System.Drawing.Size(283, 34);
             this.gerirTiposDeTarefasToolStripMenuItem.Text = "Gerir Tipos de Tarefas";
             this.gerirTiposDeTarefasToolStripMenuItem.Click += new System.EventHandler(this.gerirTiposDeTarefasToolStripMenuItem_Click);
             // 
@@ -195,20 +196,20 @@
             this.tarefasTerminadasToolStripMenuItem,
             this.tarefasEmCursoToolStripMenuItem});
             this.listagensToolStripMenuItem.Name = "listagensToolStripMenuItem";
-            this.listagensToolStripMenuItem.Size = new System.Drawing.Size(84, 24);
+            this.listagensToolStripMenuItem.Size = new System.Drawing.Size(101, 29);
             this.listagensToolStripMenuItem.Text = "Listagens";
             // 
             // tarefasTerminadasToolStripMenuItem
             // 
             this.tarefasTerminadasToolStripMenuItem.Name = "tarefasTerminadasToolStripMenuItem";
-            this.tarefasTerminadasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.tarefasTerminadasToolStripMenuItem.Size = new System.Drawing.Size(259, 34);
             this.tarefasTerminadasToolStripMenuItem.Text = "Tarefas Concluídas";
             this.tarefasTerminadasToolStripMenuItem.Click += new System.EventHandler(this.tarefasTerminadasToolStripMenuItem_Click);
             // 
             // tarefasEmCursoToolStripMenuItem
             // 
             this.tarefasEmCursoToolStripMenuItem.Name = "tarefasEmCursoToolStripMenuItem";
-            this.tarefasEmCursoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.tarefasEmCursoToolStripMenuItem.Size = new System.Drawing.Size(259, 34);
             this.tarefasEmCursoToolStripMenuItem.Text = "Tarefas em Curso";
             this.tarefasEmCursoToolStripMenuItem.Click += new System.EventHandler(this.tarefasEmCursoToolStripMenuItem_Click);
             // 
@@ -262,7 +263,7 @@
             this.label1.Location = new System.Drawing.Point(1037, 42);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(187, 16);
+            this.label1.Size = new System.Drawing.Size(221, 20);
             this.label1.TabIndex = 9;
             this.label1.Text = "Bem vindo: <Nome Utilizador>";
             // 
@@ -275,6 +276,7 @@
             this.btPrevisao.TabIndex = 10;
             this.btPrevisao.Text = "Ver Previsão de Conclusão";
             this.btPrevisao.UseVisualStyleBackColor = true;
+            this.btPrevisao.Click += new System.EventHandler(this.btPrevisao_Click);
             // 
             // buttonEditarTarefa
             // 

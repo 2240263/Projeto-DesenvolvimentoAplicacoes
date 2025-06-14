@@ -8,6 +8,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace iTasks.Controlador
 {
@@ -18,7 +19,7 @@ namespace iTasks.Controlador
         {
             Context = new ITaskContext();
         }
-        
+
         // VAI BUSCAR TAREFA À BASE DE DADOS SENGUNDO O ID, RETORNA NULL SE NÃO ENCONTRAR
         public Tarefa CarregarTarefa(int Id)
         {
@@ -26,9 +27,9 @@ namespace iTasks.Controlador
             {
                 Tarefa tarefaEncontrada = Context.Tarefas
                                                 .Where(t => t.Id == Id)
-                                                .First(); 
+                                                .First();
 
-                    return tarefaEncontrada;
+                return tarefaEncontrada;
             }
             catch (Exception ex)
             {
@@ -129,7 +130,7 @@ namespace iTasks.Controlador
                 {
 
                     if (tarefaEncontrada.estadoatual == EstadoAtual.ToDo)
-                    { 
+                    {
                         tarefaEncontrada.estadoatual = EstadoAtual.Doing;
 
                         // atulaizar a data  de inicio
@@ -138,14 +139,14 @@ namespace iTasks.Controlador
 
                     else if (tarefaEncontrada.estadoatual == EstadoAtual.Doing)
                     {
-                        
+
                         tarefaEncontrada.estadoatual = EstadoAtual.Done;
 
                         // atulaizar a data de fim
                         tarefaEncontrada.DataRealFim = DateTime.Now;
                     }
 
-                    
+
 
                     Context.SaveChanges();
                 }
@@ -193,7 +194,7 @@ namespace iTasks.Controlador
 
         // MÉTODOS PARA IMPLEMEMTAÇÃO DE REGRAS
         //----------------------------------------------------------------------------------------
-        
+
         public int TarefasEmDoing(int idProg)
         {
             return Context.Tarefas
@@ -210,7 +211,7 @@ namespace iTasks.Controlador
                 .ToList();
 
             var tarefaPrioritaria = tarefasToDo.First(); // firs retorna a primeira da lista que foi ordenada por ordem de execução
-             
+
             return tarefaSelecionada.Id == tarefaPrioritaria.Id; // true ou false
         }
 
@@ -257,7 +258,7 @@ namespace iTasks.Controlador
         {
             return Context.Tarefas
                 .Where(t => t.estadoatual == EstadoAtual.Doing)
-               .OrderBy(p => p.Id) 
+               .OrderBy(p => p.Id)
                .ToList();
         }
 
@@ -276,8 +277,64 @@ namespace iTasks.Controlador
                .ToList();
         }
 
-    }
 
+
+        //METODO PARA VER A PREVISÃO DO TEMPO DAS TAREFAS
+        //TIMESPAN DEVOLVE O TEMPO ESTIMADO TOTAL COM O ID DO GESTOR EM QUESTAO
+        public TimeSpan CalcularTempoPrevistoTarefasToDo(int idGestor)
+        {
+            // 1. Seleciona todas as tarefas concluídas por esse gestor
+            //valida as datas
+            var tarefasConcluidas = Context.Tarefas
+                .Where(t => t.estadoatual == EstadoAtual.Done && t.IdGestor == idGestor)
+                .Where(t => t.DataRealFim > t.DataRealInicio)
+                .ToList();
+
+            // 2. Agrupar por StoryPoints (tarefas com 3 ficam juntas e etc) e calcular média usando TotalMinutes
+            var mediasPorStoryPoints = tarefasConcluidas
+                .GroupBy(t => t.StoryPoints)
+                //A chave é o número de StoryPoints.
+                //O valor é o tempo médio(em TimeSpan) que as tarefas com esse número de StoryPoints levaram para serem concluídas.
+                .ToDictionary(
+                    g => g.Key,
+                    g => TimeSpan.FromMinutes(g.Average(t => (t.DataRealFim - t.DataRealInicio).TotalMinutes))
+                );
+
+            // 3. seleciona todas as tarefas ToDo do gestor
+            var tarefasToDo = Context.Tarefas
+                .Where(t => t.estadoatual == EstadoAtual.ToDo && t.IdGestor == idGestor)
+                .ToList();
+
+            TimeSpan tempoTotalEstimado = TimeSpan.Zero;
+
+            foreach (var tarefa in tarefasToDo)
+            {//se existir uma média de tempo já calculada para esse número exato de StoryPoints, adiciona essa media de tempo ao totalestimado
+                if (mediasPorStoryPoints.TryGetValue(tarefa.StoryPoints, out var media))
+                {
+                    tempoTotalEstimado += media;
+                }
+                else
+                {
+                    // Procurar média mais próxima
+                    var storyPointsDisponiveis = mediasPorStoryPoints.Keys.ToList();
+                    if (storyPointsDisponiveis.Count > 0)
+                    {
+                        int spMaisProximo = storyPointsDisponiveis
+                            .OrderBy(sp => Math.Abs(sp - tarefa.StoryPoints))
+                            .First();
+
+                        tempoTotalEstimado += mediasPorStoryPoints[spMaisProximo];
+                    }
+                }
+            }
+
+            return tempoTotalEstimado;
+        }
+
+
+
+
+    }
 }
 
 
