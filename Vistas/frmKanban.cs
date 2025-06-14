@@ -29,6 +29,7 @@ namespace iTasks
             AtualizarListas();
             AtualizarNomeUtilizador();
             VerificarUtilizador();
+
         }
 
         private void AtualizarNomeUtilizador()
@@ -105,7 +106,7 @@ namespace iTasks
             Tarefa novaTarefa = new Tarefa();
 
             // Abre o formulário de detalhes, passando a nova tarefa
-            Form detalhesTarefaForm = new frmDetalhesTarefa(novaTarefa);
+            Form detalhesTarefaForm = new frmDetalhesTarefa(novaTarefa, Utilizador);
 
             var resultado = detalhesTarefaForm.ShowDialog();
 
@@ -149,7 +150,7 @@ namespace iTasks
             {
 
                 //Abre o formulário com o ID da tarefa selecionada
-                Form detalhesTarefaForm = new frmDetalhesTarefa(tarefaSelecionada);
+                Form detalhesTarefaForm = new frmDetalhesTarefa(tarefaSelecionada, Utilizador);
                 var resultado = detalhesTarefaForm.ShowDialog();
 
                 if (resultado == DialogResult.OK)
@@ -219,7 +220,7 @@ namespace iTasks
 
                 // Regra 15
                 int tarefasEmDoing = controladorT.TarefasEmDoing(Utilizador.Id);
-                
+
                 if (tarefasEmDoing < 2)
                 {
                     // Regra 16
@@ -227,7 +228,7 @@ namespace iTasks
 
                     if (ordemTarefasCerta)
                     {
-                        if (tarefaSelecionada.Id != -1) 
+                        if (tarefaSelecionada.Id != -1)
                         {
                             controladorT.AtualizarEstadoTarefa(tarefaSelecionada.Id);
 
@@ -252,7 +253,7 @@ namespace iTasks
 
             }
             // Caso não tenha envia mensagem
-            else 
+            else
             {
                 MessageBox.Show("Por favor, selecione uma tarefa da lista To Do.");
             }
@@ -287,7 +288,7 @@ namespace iTasks
                     return; // sai do método
                 }
             }
-  
+
             // Caso não tenha envia mensagem
             else
             {
@@ -308,7 +309,7 @@ namespace iTasks
                 tarefaId = tarefaSelecionada.Id;
             }
             // Caso não tenha envia mensagem
-            else 
+            else
             {
                 MessageBox.Show("Por favor, selecione uma tarefa da lista Doing.");
             }
@@ -381,6 +382,57 @@ namespace iTasks
             lstDone.ClearSelected();
         }
 
+        private void lstTodo_MouseDoubleClick(object sender, MouseEventArgs e) // para abrir detalhes de tarefa clicando duas vezes - ToDo
+        {
+
+
+            ListBox lista = sender as ListBox;
+
+            if (lista.SelectedItem != null && lista.SelectedItem is Tarefa tarefaSelecionada)
+            {
+                Form detalhesTarefaForm = new frmDetalhesTarefa(tarefaSelecionada, Utilizador);
+                var resultado = detalhesTarefaForm.ShowDialog();
+
+                if (resultado == DialogResult.OK)
+                {
+                    AtualizarListas();
+                }
+            }
+        }
+
+        private void lstDoing_MouseDoubleClick(object sender, MouseEventArgs e)// para abrir detalhes de tarefa clicando duas vezes - Doing
+        {
+            ListBox lista = sender as ListBox;
+
+            if (lista.SelectedItem != null && lista.SelectedItem is Tarefa tarefaSelecionada)
+            {
+                Form detalhesTarefaForm = new frmDetalhesTarefa(tarefaSelecionada, Utilizador);
+                var resultado = detalhesTarefaForm.ShowDialog();
+
+                if (resultado == DialogResult.OK)
+                {
+                    AtualizarListas();
+                }
+            }
+        }
+
+        private void lstDone_MouseDoubleClick(object sender, MouseEventArgs e) // neste caso chama o forcar realy only, pois já não é possivel alterar nada
+        {
+            ListBox lista = sender as ListBox;
+
+            if (lista.SelectedItem != null && lista.SelectedItem is Tarefa tarefaSelecionada)
+            {
+                // Só força modo só leitura quando abrir a partir desta listbox
+                Form detalhesTarefaForm = new frmDetalhesTarefa(tarefaSelecionada, Utilizador, forcarModoReadyOnly: true);
+                var resultado = detalhesTarefaForm.ShowDialog();
+
+                if (resultado == DialogResult.OK)
+                {
+                    AtualizarListas();
+                }
+            }
+
+        }
     }
 }
 

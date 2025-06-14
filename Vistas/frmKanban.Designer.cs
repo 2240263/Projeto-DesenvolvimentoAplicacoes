@@ -33,7 +33,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lstDoing = new System.Windows.Forms.ListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lstDone = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ficheiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +51,7 @@
             this.btPrevisao = new System.Windows.Forms.Button();
             this.buttonEditarTarefa = new System.Windows.Forms.Button();
             this.buttonApagarTarefa = new System.Windows.Forms.Button();
+            this.lstDone = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -68,6 +68,7 @@
             this.lstTodo.Name = "lstTodo";
             this.lstTodo.Size = new System.Drawing.Size(395, 516);
             this.lstTodo.TabIndex = 0;
+            this.lstTodo.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstTodo_MouseDoubleClick);
             // 
             // groupBox1
             // 
@@ -103,6 +104,7 @@
             this.lstDoing.Name = "lstDoing";
             this.lstDoing.Size = new System.Drawing.Size(395, 519);
             this.lstDoing.TabIndex = 0;
+            this.lstDoing.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstDoing_MouseDoubleClick);
             // 
             // groupBox3
             // 
@@ -116,17 +118,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Done";
             // 
-            // lstDone
-            // 
-            this.lstDone.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstDone.FormattingEnabled = true;
-            this.lstDone.ItemHeight = 16;
-            this.lstDone.Location = new System.Drawing.Point(4, 19);
-            this.lstDone.Margin = new System.Windows.Forms.Padding(4);
-            this.lstDone.Name = "lstDone";
-            this.lstDone.Size = new System.Drawing.Size(395, 519);
-            this.lstDone.TabIndex = 0;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
@@ -137,7 +128,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1453, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1294, 28);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -211,7 +202,7 @@
             // 
             // btSetDoing
             // 
-            this.btSetDoing.Location = new System.Drawing.Point(680, 641);
+            this.btSetDoing.Location = new System.Drawing.Point(565, 679);
             this.btSetDoing.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btSetDoing.Name = "btSetDoing";
             this.btSetDoing.Size = new System.Drawing.Size(195, 28);
@@ -222,7 +213,7 @@
             // 
             // btSetDone
             // 
-            this.btSetDone.Location = new System.Drawing.Point(1083, 641);
+            this.btSetDone.Location = new System.Drawing.Point(968, 679);
             this.btSetDone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btSetDone.Name = "btSetDone";
             this.btSetDone.Size = new System.Drawing.Size(192, 28);
@@ -233,7 +224,7 @@
             // 
             // btSetTodo
             // 
-            this.btSetTodo.Location = new System.Drawing.Point(883, 641);
+            this.btSetTodo.Location = new System.Drawing.Point(768, 679);
             this.btSetTodo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btSetTodo.Name = "btSetTodo";
             this.btSetTodo.Size = new System.Drawing.Size(192, 28);
@@ -244,10 +235,10 @@
             // 
             // btNova
             // 
-            this.btNova.Location = new System.Drawing.Point(20, 638);
+            this.btNova.Location = new System.Drawing.Point(142, 632);
             this.btNova.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btNova.Name = "btNova";
-            this.btNova.Size = new System.Drawing.Size(68, 28);
+            this.btNova.Size = new System.Drawing.Size(156, 32);
             this.btNova.TabIndex = 8;
             this.btNova.Text = "Nova Tarefa";
             this.btNova.UseVisualStyleBackColor = true;
@@ -275,10 +266,10 @@
             // 
             // buttonEditarTarefa
             // 
-            this.buttonEditarTarefa.Location = new System.Drawing.Point(179, 638);
+            this.buttonEditarTarefa.Location = new System.Drawing.Point(142, 674);
             this.buttonEditarTarefa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonEditarTarefa.Name = "buttonEditarTarefa";
-            this.buttonEditarTarefa.Size = new System.Drawing.Size(156, 35);
+            this.buttonEditarTarefa.Size = new System.Drawing.Size(156, 32);
             this.buttonEditarTarefa.TabIndex = 11;
             this.buttonEditarTarefa.Text = "Editar Tarefa";
             this.buttonEditarTarefa.UseVisualStyleBackColor = true;
@@ -286,18 +277,30 @@
             // 
             // buttonApagarTarefa
             // 
-            this.buttonApagarTarefa.Location = new System.Drawing.Point(343, 638);
+            this.buttonApagarTarefa.Location = new System.Drawing.Point(142, 716);
             this.buttonApagarTarefa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonApagarTarefa.Name = "buttonApagarTarefa";
-            this.buttonApagarTarefa.Size = new System.Drawing.Size(156, 35);
+            this.buttonApagarTarefa.Size = new System.Drawing.Size(156, 31);
             this.buttonApagarTarefa.TabIndex = 12;
             this.buttonApagarTarefa.Text = "ApagarTarefa";
             this.buttonApagarTarefa.UseVisualStyleBackColor = true;
             this.buttonApagarTarefa.Click += new System.EventHandler(this.buttonApagarTarefa_Click);
             // 
+            // lstDone
+            // 
+            this.lstDone.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstDone.FormattingEnabled = true;
+            this.lstDone.ItemHeight = 16;
+            this.lstDone.Location = new System.Drawing.Point(4, 19);
+            this.lstDone.Margin = new System.Windows.Forms.Padding(4);
+            this.lstDone.Name = "lstDone";
+            this.lstDone.Size = new System.Drawing.Size(395, 519);
+            this.lstDone.TabIndex = 0;
+            this.lstDone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstDone_MouseDoubleClick);
+            // 
             // frmKanban
             // 
-            this.ClientSize = new System.Drawing.Size(1453, 703);
+            this.ClientSize = new System.Drawing.Size(1294, 766);
             this.Controls.Add(this.buttonApagarTarefa);
             this.Controls.Add(this.buttonEditarTarefa);
             this.Controls.Add(this.btPrevisao);
@@ -332,7 +335,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListBox lstDoing;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ListBox lstDone;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ficheiroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
@@ -351,5 +353,6 @@
         private System.Windows.Forms.Button btPrevisao;
         private System.Windows.Forms.Button buttonEditarTarefa;
         private System.Windows.Forms.Button buttonApagarTarefa;
+        private System.Windows.Forms.ListBox lstDone;
     }
 }

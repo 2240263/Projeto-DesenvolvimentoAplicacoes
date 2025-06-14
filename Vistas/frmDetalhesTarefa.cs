@@ -15,21 +15,36 @@ namespace iTasks
 {
     public partial class frmDetalhesTarefa : Form
     {
+        private Utilizador utilizadoratual;
 
         TarefaControlador controladorT = new TarefaControlador();
         private Tarefa tarefaAtual;
+        private bool modoReadOnly;
 
-        public frmDetalhesTarefa(Tarefa tarefa)
+        public frmDetalhesTarefa(Tarefa tarefa, Utilizador utilizador, bool forcarModoReadyOnly =false)
         {
             InitializeComponent();
+            this.utilizadoratual = utilizador;
             this.tarefaAtual = tarefa;      
             tarefaAtual = controladorT.CarregarTarefa(tarefaAtual.Id);
             preencherDados(tarefaAtual);
-          
+
+
+ 
+
+            if (forcarModoReadyOnly) // utilizar o modo forcar modo realyonly quando se chama , caso contratrio verifica o utilizador para saber se coloca nesse estado ou não
+            {
+                modoReadOnly = true;
+            }
+            else
+            {
+                modoReadOnly = (utilizador is Programador); 
+                
+            }
+            AplicarModoReadOnly();
+           
 
         }
-
-
 
         private void preencherDados(Tarefa tarefaAtual) // metodo para preencher dados automaticos
         {
@@ -194,5 +209,25 @@ namespace iTasks
 
         }
 
+        private void AplicarModoReadOnly()
+        {
+            if (!modoReadOnly)
+                return;
+
+            txtDesc.ReadOnly = true;
+            txtOrdem.ReadOnly = true;
+            txtStoryPoints.ReadOnly = true;
+            dtInicio.Enabled = false;
+            dtFim.Enabled = false;
+            cbProgramador.Enabled = false;
+            cbTipoTarefa.Enabled = false;
+
+            btGravar.Enabled = false;
+        }
+
+        private void btFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
