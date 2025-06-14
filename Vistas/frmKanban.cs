@@ -447,11 +447,10 @@ namespace iTasks
             {
                 TimeSpan previsao = controladorT.CalcularTempoPrevistoTarefasToDo(gestor.Id);
 
-                MessageBox.Show($"Tempo estimado total para concluir todas as tarefas 'ToDo': {previsao.TotalMinutes:F1} horas.",
-                                "Previsão de Tempo",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-                
+                string mensagem = $"Estimativa de tempo para concluir todas as tarefas 'ToDo': " +
+                         $"{(int)previsao.TotalHours} horas e {previsao.Minutes} minutos.";
+                MessageBox.Show(mensagem,"Previsão de Tempo",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
             }
             else
             {

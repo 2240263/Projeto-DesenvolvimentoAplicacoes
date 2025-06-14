@@ -283,14 +283,14 @@ namespace iTasks.Controlador
         //TIMESPAN DEVOLVE O TEMPO ESTIMADO TOTAL COM O ID DO GESTOR EM QUESTAO
         public TimeSpan CalcularTempoPrevistoTarefasToDo(int idGestor)
         {
-            // 1. Seleciona todas as tarefas concluídas por esse gestor
+            // Seleciona todas as tarefas concluídas por esse gestor
             //valida as datas
             var tarefasConcluidas = Context.Tarefas
                 .Where(t => t.estadoatual == EstadoAtual.Done && t.IdGestor == idGestor)
                 .Where(t => t.DataRealFim > t.DataRealInicio)
                 .ToList();
 
-            // 2. Agrupar por StoryPoints (tarefas com 3 ficam juntas e etc) e calcular média usando TotalMinutes
+            // Agrupar por StoryPoints (tarefas com 3 ficam juntas e etc) e calcular média usando TotalMinutes
             var mediasPorStoryPoints = tarefasConcluidas
                 .GroupBy(t => t.StoryPoints)
                 //A chave é o número de StoryPoints.
@@ -300,7 +300,7 @@ namespace iTasks.Controlador
                     g => TimeSpan.FromMinutes(g.Average(t => (t.DataRealFim - t.DataRealInicio).TotalMinutes))
                 );
 
-            // 3. seleciona todas as tarefas ToDo do gestor
+            // seleciona todas as tarefas ToDo do gestor
             var tarefasToDo = Context.Tarefas
                 .Where(t => t.estadoatual == EstadoAtual.ToDo && t.IdGestor == idGestor)
                 .ToList();
