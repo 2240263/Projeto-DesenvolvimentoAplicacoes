@@ -14,6 +14,8 @@ namespace iTasks.Controlador
 {
     class TarefaControlador
     {
+        private int idGestor;
+
         public ITaskContext Context { get; set; }
         public TarefaControlador()
         {
@@ -273,8 +275,16 @@ namespace iTasks.Controlador
         public List<Programador> ListaProgramadores()
         {
             return Context.Programadores
+               .Where(p => p.IdGestor == idGestor) //retornar os programadores pertencentes a um gestor em especifico
                .OrderBy(p => p.Nome)
                .ToList();
+        }
+        public List<Programador> ListaProgramadoresPorGestor(int idGestor)
+        {
+            return Context.Programadores
+                .Where(p => p.IdGestor == idGestor)
+                .OrderBy(p => p.Nome)
+                .ToList();
         }
 
 

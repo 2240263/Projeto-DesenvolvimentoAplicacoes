@@ -31,7 +31,6 @@ namespace iTasks.Vistas
         public AdicionarProgramador(Programador Programador) : this() // contrutor quando edita - recebe a informação já preenchida
         {
             QueroEditar = true;
-            //EnumsDinamicos();
             this.Programador = Programador;
 
             // carregar os dados
@@ -39,8 +38,9 @@ namespace iTasks.Vistas
             txtUsernameProg.Text = this.Programador.Username;
             txtPasswordProg.Text = this.Programador.Password;
             cbNivelProg.SelectedItem = this.Programador.nivelExperiencia;
-            cbGestorProg.SelectedItem = this.Programador.IdGestor;
-          
+            cbGestorProg.SelectedValue = this.Programador.IdGestor;
+
+
             txtIdProg.Text = this.Programador.Id.ToString();
 
 
@@ -66,8 +66,10 @@ namespace iTasks.Vistas
             using (ITaskContext context = new ITaskContext())
             {
                 List<Gestor> gestores = context.Gestores.ToList();
-               // cbGestorProg.DataSource = null; // faz reset antes de preencher---------------------------------------
+              
                 cbGestorProg.DataSource = gestores;
+                cbGestorProg.DisplayMember = "Nome";  
+                cbGestorProg.ValueMember = "Id";
             }
 
         }

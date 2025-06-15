@@ -64,6 +64,8 @@ namespace iTasks
 
         }
 
+       
+
         private void preencherDados(Tarefa tarefaAtual) // metodo para preencher dados automaticos
         {
             if (tarefaAtual == null)
@@ -202,9 +204,17 @@ namespace iTasks
 
         private void frmDetalhesTarefa_Activated(object sender, EventArgs e)
         {
-            cbProgramador.DataSource = controladorT.ListaProgramadores();
-            cbProgramador.DisplayMember = "Nome"; // o que será mostrado na lista
-            cbProgramador.ValueMember = "Id";     // o valor interno enviado ao objeto
+            if (utilizadoratual is Gestor gestor)
+            {
+                cbProgramador.DataSource = controladorT.ListaProgramadoresPorGestor(gestor.Id);
+                cbProgramador.DisplayMember = "Nome";
+                cbProgramador.ValueMember = "Id";
+            }
+            else
+            {
+                // Caso não seja gestor, pode esconder ou limpar o combo
+                cbProgramador.DataSource = null;
+            }
 
             cbTipoTarefa.DataSource = controladorT.ListaTiposTarefa();
             cbTipoTarefa.DisplayMember = "Nome"; // o que será mostrado na lista
