@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -519,6 +520,62 @@ namespace iTasks
             }
 
 
+        }
+
+        private void exportarParaCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // não verificamos se é gestor, porque a funcionalidade só é acedivel a ele
+
+            try
+            {
+                // Obtem tarefas concluidas
+                var todasTarefas = controladorT.ListaDone();
+
+                if (!todasTarefas.Any())
+                {
+                    MessageBox.Show("Não existem tarefas para exportar.", "Exportar CSV", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Preparar os lookups para Programador e Tipo de Tarefa
+                var programadores = controladorT.ListaProgramadores().ToDictionary(p => p.Id, p => p.Nome);
+                var tiposTarefa = controladorT.ListaTiposTarefa().ToDictionary(tt => tt.Id, tt => tt.Nome);
+
+                //  Configurar o SaveFileDialog
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+                saveFileDialog.FileName = "Tarefas_Exportadas.csv";
+                saveFileDialog.Title = "Guardar Tarefas como CSV";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName, false, Encoding.UTF8))
+                    {
+                        // primeira linha conforme enunciado
+                        sw.WriteLine("Programador;Descricao;DataPrevistaInicio;DataPrevistaFim;TipoTarefa;DataRealInicio;DataRealFim");
+
+                        // Escrever os dados das tarefas
+                        foreach (var tarefa in todasTarefas)
+                        {
+                            string programadorNome = programadores.TryGetValue(tarefa.IdProgramador, out string pName) ? pName : "Programador eliminado ";
+                            string tipoTarefaNome = tiposTarefa.TryGetValue(tarefa.IdTipoTarefa, out string ttName) ? ttName : "Sem dados";
+
+                            string dataPrevistaInicio = tarefa.DataPrevistaInicio != DateTime.MinValue ? tarefa.DataPrevistaInicio.ToString("dd/MM/yyyy") : "";
+                            string dataPrevistaFim = tarefa.DataPrevistaFim != DateTime.MinValue ? tarefa.DataPrevistaFim.ToString("dd/MM/yyyy") : "";
+                            string dataRealInicio = tarefa.DataRealInicio != DateTime.MinValue ? tarefa.DataRealInicio.ToString("dd/MM/yyyy") : "";
+                            string dataRealFim = tarefa.DataRealFim != DateTime.MinValue ? tarefa.DataRealFim.ToString("dd/MM/yyyy") : "";
+
+                            string linha = $"{programadorNome};{tarefa.Descricao};{dataPrevistaInicio};{dataPrevistaFim};{tipoTarefaNome};{dataRealInicio};{dataRealFim}";
+                            sw.WriteLine(linha);
+                        }
+                    }
+                    MessageBox.Show("Tarefas exportadas com sucesso para CSV!", "Exportar CSV", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocorreu um erro ao exportar as tarefas: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
