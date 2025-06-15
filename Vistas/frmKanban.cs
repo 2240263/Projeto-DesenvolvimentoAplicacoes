@@ -454,10 +454,7 @@ namespace iTasks
             }
             else
             {
-                MessageBox.Show("Ups.",
-                                "Aviso",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                MessageBox.Show("Ups.","Aviso",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
 
 

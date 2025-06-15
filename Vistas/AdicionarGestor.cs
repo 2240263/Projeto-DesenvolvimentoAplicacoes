@@ -30,7 +30,7 @@ namespace iTasks.Vistas
         {
             QueroEditar = true;
 
-            EnumsDinamicosGestor();
+            //EnumsDinamicosGestor();
             this.Gestor = Gestor;
             // carregar os dados
             txtNomeGestor.Text = this.Gestor.Nome;

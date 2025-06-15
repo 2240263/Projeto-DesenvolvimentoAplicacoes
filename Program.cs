@@ -25,13 +25,14 @@ namespace iTasks
                 if (context.Utilizadores.Count() == 0)
                 {
                     Gestor utilizadorgestor = new Gestor(true,Departamentos.IT,"administrador", "admin", "123");
-                    Programador utilizadorprogramador = new Programador(NivelExperiencia.Junior, utilizadorgestor, "Programador1", "prog", "123");
                     context.Utilizadores.Add(utilizadorgestor); //adiciona o utilizador à base de dados
-                    context.Utilizadores.Add(utilizadorprogramador);
-
                     context.SaveChanges();
-                    
+                    //primeiro guarda o gestor com o id e depois cria o programador associado ao is do gestor já criado
 
+                    Programador utilizadorprogramador = new Programador(NivelExperiencia.Junior, utilizadorgestor.Id, "Programador1", "prog", "123");
+                    
+                    context.Utilizadores.Add(utilizadorprogramador);
+                    context.SaveChanges();
                 }
                
                 

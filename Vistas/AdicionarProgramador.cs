@@ -31,7 +31,7 @@ namespace iTasks.Vistas
         public AdicionarProgramador(Programador Programador) : this() // contrutor quando edita - recebe a informação já preenchida
         {
             QueroEditar = true;
-            EnumsDinamicos();
+            //EnumsDinamicos();
             this.Programador = Programador;
 
             // carregar os dados
@@ -66,6 +66,7 @@ namespace iTasks.Vistas
             using (ITaskContext context = new ITaskContext())
             {
                 List<Gestor> gestores = context.Gestores.ToList();
+               // cbGestorProg.DataSource = null; // faz reset antes de preencher---------------------------------------
                 cbGestorProg.DataSource = gestores;
             }
 
@@ -91,7 +92,8 @@ namespace iTasks.Vistas
                 this.Programador.Username = txtUsernameProg.Text;
                 this.Programador.Password = txtPasswordProg.Text;
                 this.Programador.nivelExperiencia = nivelExperiencia;
-                this.Programador.IdGestor = gestorSelecionado; 
+                this.Programador.IdGestor = gestorSelecionado.Id;
+
 
 
                 try
@@ -115,7 +117,16 @@ namespace iTasks.Vistas
             }
             else
             {
-                Programador novoProgramador = new Programador(nivelExperiencia, gestorSelecionado, txtNomeProg.Text, txtUsernameProg.Text, txtPasswordProg.Text);
+                //Programador novoProgramador = new Programador(nivelExperiencia, gestorSelecionado, txtNomeProg.Text, txtUsernameProg.Text, txtPasswordProg.Text);
+
+                Programador novoProgramador = new Programador
+                {
+                    Nome = txtNomeProg.Text,
+                    Username = txtUsernameProg.Text,
+                    Password = txtPasswordProg.Text,
+                    nivelExperiencia = nivelExperiencia,
+                    IdGestor = gestorSelecionado.Id  // associa apenas o ID     
+                };
                 try
                 {
                     //Os campos combox colocámos a propriedade dropdownstyle em dropdownlist 
