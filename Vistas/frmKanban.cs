@@ -31,7 +31,17 @@ namespace iTasks
             VerificarUtilizador();
 
         }
+        private bool TarefaPertenceAoUtilizador(Tarefa tarefa)
+        {
+            if (Utilizador is Gestor gestor)
+                return tarefa.IdGestor == gestor.Id;
 
+            if (Utilizador is Programador prog)
+                return tarefa.IdProgramador == prog.Id;
+
+            // Se for daquela equipa, pode mudar as tarefas de estado
+            return true;
+        }
         private void AtualizarNomeUtilizador()
         {
             label1.Text = "Bem-Vindo: " + Utilizador.Nome;
@@ -115,6 +125,7 @@ namespace iTasks
             // Abre o formulário de detalhes, passando a nova tarefa
             Form detalhesTarefaForm = new frmDetalhesTarefa(novaTarefa, Utilizador);
 
+
             var resultado = detalhesTarefaForm.ShowDialog();
 
             if (resultado == DialogResult.OK)
@@ -172,7 +183,7 @@ namespace iTasks
 
         }
 
-        // BUTÃO PARA APAGAR TAREFAS - a funcionar
+        // BoTÃO PARA APAGAR TAREFAS 
         //-----------------------------------------------------------------------------------------------------
 
         private void buttonApagarTarefa_Click(object sender, EventArgs e)
@@ -200,12 +211,37 @@ namespace iTasks
 
             if (tarefaId != -1)
             {
-                //Abre o formulário com o ID da tarefa selecionada
-                controladorT.ApagarTarefa(tarefaId);
+                 try
+                 {
+                    // Verifica se o utilizador atual é o gestor
+                    if (Utilizador is Gestor gestorAtual)
+                    {
+                        var tarefa = controladorT.CarregarTarefa(tarefaId);
+
+                        if (tarefa == null)
+                        {
+                            MessageBox.Show("A tarefa não foi encontrada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        if (!TarefaPertenceAoUtilizador(tarefa))
+                        {
+                            MessageBox.Show("Não pode apagar tarefas de outros gestores.",
+                                            "Sem Acesso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+                    controladorT.ApagarTarefa(tarefaId, Utilizador.Id);
+                    AtualizarListas();
+                  }
+                catch (InvalidOperationException ex)
+                {
+                    MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
-                MessageBox.Show("Por favor, selecione uma tarefa para editar.");
+                MessageBox.Show("Por favor, selecione uma tarefa para apagar.");
             }
             this.AtualizarListas();
 
@@ -224,6 +260,13 @@ namespace iTasks
             if (lstTodo.SelectedItem != null)
             {
                 Tarefa tarefaSelecionada = (Tarefa)lstTodo.SelectedItem;
+                // Se for gestor, só pode alterar tarefas dele
+                if (!TarefaPertenceAoUtilizador(tarefaSelecionada))
+                {
+                    MessageBox.Show("Não pode mover tarefas de outros gestores.",
+                                    "Acesso negado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 // Regra 15
                 int tarefasEmDoing = controladorT.TarefasEmDoing(Utilizador.Id);
@@ -237,8 +280,7 @@ namespace iTasks
                     {
                         if (tarefaSelecionada.Id != -1)
                         {
-                            controladorT.AtualizarEstadoTarefa(tarefaSelecionada.Id);
-
+                            controladorT.AtualizarEstadoTarefa(tarefaSelecionada.Id, Utilizador.Id);
                         }
                         else
                         {
@@ -274,6 +316,15 @@ namespace iTasks
             {
                 Tarefa tarefaSelecionada = (Tarefa)lstDoing.SelectedItem;
 
+
+                if (!TarefaPertenceAoUtilizador(tarefaSelecionada))
+                {
+                    MessageBox.Show("Não pode concluir tarefas de outros gestores.",
+                                    "Acesso negado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+
                 // Regra 16
                 bool ordemTarefasCerta = controladorT.VerificarTarefaPrioritariaDoing(tarefaSelecionada, Utilizador.Id);
 
@@ -281,7 +332,8 @@ namespace iTasks
                 {
                     if (tarefaSelecionada.Id != -1)
                     {
-                        controladorT.AtualizarEstadoTarefa(tarefaSelecionada.Id);
+                        controladorT.AtualizarEstadoTarefa(tarefaSelecionada.Id, Utilizador.Id);
+
                     }
                     else
                     {
@@ -313,6 +365,14 @@ namespace iTasks
             if (lstDoing.SelectedItem != null)
             {
                 Tarefa tarefaSelecionada = (Tarefa)lstDoing.SelectedItem;
+
+                if (!TarefaPertenceAoUtilizador(tarefaSelecionada))
+                {
+                    MessageBox.Show("Não pode alterar tarefas de outros gestores.",
+                                    "Acesso negado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 tarefaId = tarefaSelecionada.Id;
             }
             // Caso não tenha envia mensagem
@@ -320,6 +380,7 @@ namespace iTasks
             {
                 MessageBox.Show("Por favor, selecione uma tarefa da lista Doing.");
             }
+          
 
             if (tarefaId != -1)
             {

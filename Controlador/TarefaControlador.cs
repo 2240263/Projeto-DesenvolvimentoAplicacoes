@@ -25,18 +25,19 @@ namespace iTasks.Controlador
         // VAI BUSCAR TAREFA À BASE DE DADOS SENGUNDO O ID, RETORNA NULL SE NÃO ENCONTRAR
         public Tarefa CarregarTarefa(int Id)
         {
-            try
+            return Context.Tarefas.FirstOrDefault(t => t.Id == Id);
+            /*try
             {
                 Tarefa tarefaEncontrada = Context.Tarefas
                                                 .Where(t => t.Id == Id)
-                                                .First();
+                                                .FirstOrDefault(t => t.Id == Id);
 
                 return tarefaEncontrada;
             }
             catch (Exception ex)
             {
                 return null;
-            }
+            }*/
 
         }
 
@@ -108,56 +109,66 @@ namespace iTasks.Controlador
         }
 
         // APAGAR TAREFA KANBAN - a funcionar
-        public void ApagarTarefa(int id)
+        public void ApagarTarefa(int idTarefa, int idGestor)
         {
-            var tarefaApagar = Context.Tarefas.FirstOrDefault(p => p.Id == id);
+            var tarefaApagar = Context.Tarefas.FirstOrDefault(t => t.Id == idTarefa && t.IdGestor == idGestor);
+
             if (tarefaApagar != null)
             {
                 Context.Tarefas.Remove(tarefaApagar);
                 Context.SaveChanges();
             }
+         
         }
 
         // ATUALIZAR TAREFA KANBAN - a funcionar
-        public void AtualizarEstadoTarefa(int Id)
+        public void AtualizarEstadoTarefa(int idTarefa, int idUtilizadorAtual)
         {
             try
             {
                 // carregar tarefa pelo id
-                Tarefa tarefaEncontrada = Context.Tarefas
-                                                 .Where(t => t.Id == Id)
-                                                 .FirstOrDefault();
+                Tarefa tarefaEncontrada = Context.Tarefas.FirstOrDefault(t => t.Id == idTarefa);
 
                 if (tarefaEncontrada != null)
                 {
+                    // valida se o utilizador pode alterar (exemplo para gestor)
+                    if (UtilizadorumGestor(idUtilizadorAtual) && tarefaEncontrada.IdGestor != idUtilizadorAtual)
+                    {
+                        throw new UnauthorizedAccessException("Não pode alterar tarefas de outros gestores.");
+                    }
 
+                    // atualizar estado
                     if (tarefaEncontrada.estadoatual == EstadoAtual.ToDo)
                     {
                         tarefaEncontrada.estadoatual = EstadoAtual.Doing;
-
-                        // atulaizar a data  de inicio
                         tarefaEncontrada.DataRealInicio = DateTime.Now;
                     }
-
                     else if (tarefaEncontrada.estadoatual == EstadoAtual.Doing)
                     {
-
                         tarefaEncontrada.estadoatual = EstadoAtual.Done;
-
-                        // atulaizar a data de fim
                         tarefaEncontrada.DataRealFim = DateTime.Now;
                     }
 
-
-
                     Context.SaveChanges();
                 }
+            }
+            catch (UnauthorizedAccessException uaEx)
+            {
+                MessageBox.Show(uaEx.Message, "Tarefa pertence a outra equipa", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao carregar ou atualizar a tarefa: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private bool UtilizadorumGestor(int idUtilizador)
+        {
+            // lógica para verificar se o utilizador é gestor, por exemplo:
+            var utilizador = Context.Utilizadores.Find(idUtilizador);
+            return utilizador is Gestor;
+        }
+
 
         // REVERTER ESTADO TAREFA KANBAN - a funcionar
         public void ReverterEstadoTarefa(int Id)
@@ -212,6 +223,12 @@ namespace iTasks.Controlador
                 .OrderBy(t => t.OrdemExecucao)
                 .ToList();
 
+            // Se não houver tarefas a fazer, não há ordem a verificar
+            if (tarefasToDo.Count == 0)
+            {
+                return true;
+            }
+                
             var tarefaPrioritaria = tarefasToDo.First(); // firs retorna a primeira da lista que foi ordenada por ordem de execução
 
             return tarefaSelecionada.Id == tarefaPrioritaria.Id; // true ou false

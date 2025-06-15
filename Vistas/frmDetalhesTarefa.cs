@@ -35,33 +35,48 @@ namespace iTasks
                     tarefaAtual.IdGestor = gestorCriador.Id;
                 }
             }
+
             else
             {
-                // Carregar tarefa existente
                 tarefaAtual = controladorT.CarregarTarefa(tarefa.Id);
+
+                if (tarefaAtual == null)
+                {
+                    return;
+                }
             }
 
             preencherDados(tarefaAtual);
 
-            /*this.tarefaAtual = tarefa;      
-            tarefaAtual = controladorT.CarregarTarefa(tarefaAtual.Id);
-            preencherDados(tarefaAtual);*/
-
- 
 
             if (forcarModoReadyOnly) // utilizar o modo forcar modo realyonly quando se chama , caso contratrio verifica o utilizador para saber se coloca nesse estado ou não
             {
                 modoReadOnly = true;
-                AplicarModoReadOnly();
+            
+            }
+            else if (utilizadoratual is Gestor gestorAtual)
+            {
+                if (tarefa == null || tarefaAtual.Id == 0)
+                {
+                    // Nova tarefa – pode editar
+                    modoReadOnly = false;
+                }
+                else
+                {
+                    // Só pode editar se a tarefa for dele
+                    modoReadOnly = tarefaAtual.IdGestor != gestorAtual.Id;
+                }
+            }
+            else if (utilizadoratual is Programador)
+            {
+                modoReadOnly = true;
             }
             else
             {
-                modoReadOnly = (utilizador is Programador); 
-                AplicarModoReadOnly();
+                modoReadOnly = true; // por segurança
             }
-            
-           
 
+            AplicarModoReadOnly();
         }
 
        
