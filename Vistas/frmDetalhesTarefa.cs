@@ -25,10 +25,27 @@ namespace iTasks
         {
             InitializeComponent();
             this.utilizadoratual = utilizador;
-            this.tarefaAtual = tarefa;      
-            tarefaAtual = controladorT.CarregarTarefa(tarefaAtual.Id);
+            if (tarefa == null)
+            {
+                // Criar nova tarefa se parâmetro for null
+                tarefaAtual = new Tarefa();
+
+                if (utilizadoratual is Gestor gestorCriador)
+                {
+                    tarefaAtual.IdGestor = gestorCriador.Id;
+                }
+            }
+            else
+            {
+                // Carregar tarefa existente
+                tarefaAtual = controladorT.CarregarTarefa(tarefa.Id);
+            }
+
             preencherDados(tarefaAtual);
 
+            /*this.tarefaAtual = tarefa;      
+            tarefaAtual = controladorT.CarregarTarefa(tarefaAtual.Id);
+            preencherDados(tarefaAtual);*/
 
  
 
@@ -86,6 +103,10 @@ namespace iTasks
 
                 escondercampos(tarefaAtual,txtDataRealini, txtdataRealFim);  //metodo para esconder as datas que foram incializadas com a data atual - nomeadamente datarealinicio e datarealfim
 
+
+                // Após preencher dados, setar os ComboBoxes com os valores atuais
+                cbProgramador.SelectedValue = tarefaAtual.IdProgramador;
+                cbTipoTarefa.SelectedValue = tarefaAtual.IdTipoTarefa;
             }
 
         }
@@ -188,6 +209,13 @@ namespace iTasks
             cbTipoTarefa.DataSource = controladorT.ListaTiposTarefa();
             cbTipoTarefa.DisplayMember = "Nome"; // o que será mostrado na lista
             cbTipoTarefa.ValueMember = "Id";     // o valor interno enviado ao objeto
+
+            // Atualizar após atribuir DataSource
+            if (tarefaAtual != null)
+            {
+                cbProgramador.SelectedValue = tarefaAtual.IdProgramador;
+                cbTipoTarefa.SelectedValue = tarefaAtual.IdTipoTarefa;
+            }
         }
 
 
