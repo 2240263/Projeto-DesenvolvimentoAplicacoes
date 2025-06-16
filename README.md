@@ -15,9 +15,9 @@ Este projeto consiste no desenvolvimento de uma aplicação de gestão de tarefa
 
 
 ## Requisitos para Execução:
-Software Necessário: Visual Studio (versão recomendada: 2019 ou superior)
-.NET Framework (ou .NET Core, conforme versão usada no projeto)
-Clonar o repositório: Use Git ou baixe o projeto em ZIP e extraia.
+Software Necessário: Visual Studio (versão recomendada: 2019 ou superior);
+.NET Framework;
+Clonar o repositório: Use Git ou baixe o projeto em ZIP e extraia;
 Abra o Visual Studio: Vá em Arquivo > Abrir > Projeto/Solução. - Selecione o arquivo .sln localizado na raiz do projeto.
 
 
