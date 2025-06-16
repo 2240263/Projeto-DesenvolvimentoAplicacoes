@@ -28,6 +28,7 @@ namespace iTasks
         private void frmConsultaTarefasEmCurso_Load(object sender, EventArgs e)
         {
             carregarTarefasemCurso();
+            atualizaLabel();
         }
 
 
@@ -103,22 +104,51 @@ namespace iTasks
             gvTarefasEmCurso.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
 
 
-            var coluna = gvTarefasEmCurso.Columns[e.ColumnIndex].Name;
+            
             // Obter o DataBoundItem de forma segura
             object rowDataObj = gvTarefasEmCurso.Rows[e.RowIndex].DataBoundItem;
 
             if (rowDataObj == null)
                 return;
 
-
-            EstadoAtual estadoatual = EstadoAtual.ToDo; // Valor predefinido
-
             var estadoAtualProp = rowDataObj.GetType().GetProperty("estadoatual");
+
+            EstadoAtual estadoatual;
+
             if (estadoAtualProp != null && estadoAtualProp.PropertyType == typeof(EstadoAtual))
             {
                 estadoatual = (EstadoAtual)estadoAtualProp.GetValue(rowDataObj);
             }
+            else
+            {
+                estadoatual = EstadoAtual.ToDo;
+            }
 
+
+            // Lê a DataPrevistaFim
+            var dtPrevFimProp = rowDataObj.GetType().GetProperty("DataPrevistaFim");
+            DateTime? dataPrevistaFim;
+
+            if (dtPrevFimProp != null)
+            {
+                dataPrevistaFim = (DateTime?)dtPrevFimProp.GetValue(rowDataObj);
+            }
+            else
+            {
+                dataPrevistaFim = null;
+            }
+            if (estadoatual != EstadoAtual.Done && dataPrevistaFim.HasValue)
+            {
+
+                double diasRestantes = (dataPrevistaFim.Value.Date - DateTime.Now.Date).TotalDays;
+                if (diasRestantes == 1)
+                {
+                    // Amarelo muito claro
+                    gvTarefasEmCurso.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 204);
+                }
+             
+            }
+            string coluna = gvTarefasEmCurso.Columns[e.ColumnIndex].Name;
             //DataRealInicio em branco se o estado for ToDo
             if (coluna == "DataRealInicio" && estadoatual == EstadoAtual.ToDo)
             {
@@ -166,6 +196,9 @@ namespace iTasks
             this.Close();
         }
 
-        
+        public void atualizaLabel()
+        {
+            labelCorEmCurso.Text = "Amarelo: Falta apenas 1 dia para terminar esta tarefa.";
+        }
     }
 }

@@ -45,7 +45,23 @@ namespace iTasks
         }
         private void AtualizarNomeUtilizador()
         {
-            label1.Text = "Bem-Vindo: " + Utilizador.Nome;
+            string tipo;
+
+            if (Utilizador is Gestor)
+            {
+                tipo = "Gestor";
+            }
+            else if (Utilizador is Programador)
+            {
+                tipo = "Programador";
+            }
+            else
+            {
+                tipo = "Utilizador";
+            }
+
+            label1.Text = "Bem-Vindo: " + Utilizador.Nome + " (" + tipo + ")";
+         
 
         }
 

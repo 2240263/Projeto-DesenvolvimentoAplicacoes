@@ -28,6 +28,7 @@ namespace iTasks
         private void frmConsultarTarefasConcluidas_Load(object sender, EventArgs e)
         {
             CarregarTarefasConcluidas();
+            atualizaLabel();
 
         }
        
@@ -184,9 +185,42 @@ namespace iTasks
             this.Close();
         }
 
-       
-        
+        private void gvTarefasConcluidas_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // aplicar a formatção 1 vez só 1x por linha
+            if (e.RowIndex < 0 || gvTarefasConcluidas.Rows[e.RowIndex].DataBoundItem == null)
+                return;
+
+            var row = gvTarefasConcluidas.Rows[e.RowIndex];
+
+            // Verifica se as colunas existem ns GridView
+            if (!gvTarefasConcluidas.Columns.Contains("DataPrevistaFim") || !gvTarefasConcluidas.Columns.Contains("DataRealFim"))
+                return;
+
+            // Tenta converter os valores das células em datas
+            if (DateTime.TryParse(row.Cells["DataPrevistaFim"].Value?.ToString(), out DateTime dataPrevistaFim) &&
+                DateTime.TryParse(row.Cells["DataRealFim"].Value?.ToString(), out DateTime dataRealFim))
+            {
+                if (dataRealFim <= dataPrevistaFim)
+                {
+                    row.DefaultCellStyle.BackColor = Color.FromArgb(232, 255, 232); ; // Concluído a tempo
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.FromArgb(255, 230, 230); // Fora do prazo
+                }
+            }
+        }
+
+
+
+        public void atualizaLabel()
+        {
+            labelCorConcluida.Text = "Verde: Tarefas Concluídas dentro do prazo previsto. \nVermelho: Tarefas Concluídas fora do prazo previsto.";;
+        }
     }
+
+
 }
 
 
