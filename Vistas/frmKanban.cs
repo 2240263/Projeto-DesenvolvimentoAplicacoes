@@ -427,15 +427,12 @@ namespace iTasks
             }
           
 
-            /*if (tarefaId != -1)
+            if (tarefaId != -1)
             {
                 controladorT.ReverterEstadoTarefa(tarefaId);
             }
-            else
-            {
-                MessageBox.Show("Erro, não é possível reverter !", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            this.AtualizarListas();*/
+   
+            this.AtualizarListas();
         }
 
 
