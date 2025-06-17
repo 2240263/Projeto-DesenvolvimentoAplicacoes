@@ -169,7 +169,7 @@
             this.dtInicio.Name = "dtInicio";
             this.dtInicio.Size = new System.Drawing.Size(265, 22);
             this.dtInicio.TabIndex = 14;
-            this.dtInicio.ValueChanged += new System.EventHandler(this.dtInicio_ValueChanged);
+            
             // 
             // label6
             // 

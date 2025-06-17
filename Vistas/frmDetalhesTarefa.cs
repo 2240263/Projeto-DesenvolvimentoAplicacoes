@@ -252,12 +252,6 @@ namespace iTasks
         }
 
 
-
-        private void dtInicio_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void escondercampos(Tarefa tarefa, TextBox dataRi, TextBox dataRf)
         {
             if (tarefa.estadoatual == EstadoAtual.ToDo)
@@ -274,9 +268,7 @@ namespace iTasks
             {
                 dataRi.Visible = true;
                 dataRf.Visible = true;
-
             }
-
         }
 
         private void AplicarModoReadOnly()
