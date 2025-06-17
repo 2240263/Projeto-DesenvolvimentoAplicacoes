@@ -423,19 +423,19 @@ namespace iTasks
             // Caso não tenha envia mensagem
             else
             {
-                MessageBox.Show("Por favor, selecione uma tarefa da lista Doing.");
+                MessageBox.Show("Não é possível reverter tarefas em estado 'Done'");
             }
           
 
-            if (tarefaId != -1)
+            /*if (tarefaId != -1)
             {
                 controladorT.ReverterEstadoTarefa(tarefaId);
             }
             else
             {
-                MessageBox.Show("Erro ao atualizar Estado!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro, não é possível reverter !", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            this.AtualizarListas();
+            this.AtualizarListas();*/
         }
 
 
