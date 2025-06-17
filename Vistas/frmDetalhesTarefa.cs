@@ -215,8 +215,25 @@ namespace iTasks
             // Guarda
             controladorT.GuardaTarefa(tarefaAtual);
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+
+            //this.DialogResult = DialogResult.OK;
+            FecharJanelaAposDelay();
+
+            txtDesc.Enabled = false;
+            txtOrdem.Enabled = false;
+            txtStoryPoints.Enabled = false;
+            dtInicio.Enabled = false;
+            dtFim.Enabled = false;
+
+
+        }
+
+
+        async void FecharJanelaAposDelay() //fechar os form apos um determinado tempo
+        {
+            await Task.Delay(1500); // espera pouco mais de 1 segundo antes de fechar
+            this.DialogResult = DialogResult.OK;// retorna que o utilizador confirmou ok após o show.dialog e retorna esse resultado - quando devolver ok no geretipo tarefas vai atualizar a lista
+            this.Close();           // fecha o formulário
         }
 
         private void frmDetalhesTarefa_Activated(object sender, EventArgs e)
