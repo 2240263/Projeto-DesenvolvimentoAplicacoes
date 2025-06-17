@@ -188,7 +188,9 @@ namespace iTasks.Controlador
                         tarefaEncontrada.estadoatual = EstadoAtual.ToDo;
 
                         // atulaizar a data para o min, de maneira a dar 'reset' à mesma
-                        tarefaEncontrada.DataRealInicio = DateTime.MinValue;
+                        //tarefaEncontrada.DataRealInicio = DateTime.MinValue;
+                        tarefaEncontrada.DataRealInicio = DateTime.Now;
+                        
                     }
 
                     Context.SaveChanges();
