@@ -43,7 +43,7 @@ namespace iTasks
                     return;
                 }
                 else { 
-                    if (utilizador == null)
+                    if (utilizador == null || utilizador.Password != password)
                     {
                     MessageBox.Show("Username ou password inválidos.");
                     return;
