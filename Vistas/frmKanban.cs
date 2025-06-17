@@ -308,7 +308,7 @@ namespace iTasks
                 // Se for gestor, só pode alterar tarefas dele
                 if (!TarefaPertenceAoUtilizador(tarefaSelecionada))
                 {
-                    MessageBox.Show("Não pode mover tarefas de outros gestores.",
+                    MessageBox.Show("Não pode mover tarefas de outros programadores.",
                                     "Acesso negado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
@@ -563,7 +563,10 @@ namespace iTasks
 
         }
 
-     
+        private void exportarParaCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+        }
 
         private void exportarParaCSVToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
