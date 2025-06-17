@@ -71,7 +71,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1793, 779);
+            this.ClientSize = new System.Drawing.Size(1786, 779);
             this.Controls.Add(this.labelCorConcluida);
             this.Controls.Add(this.btFechar);
             this.Controls.Add(this.gvTarefasConcluidas);

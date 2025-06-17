@@ -119,6 +119,21 @@ namespace iTasks
             // Atribui a lista de objetos  ao DataSource do DataGridView
             gvTarefasConcluidas.DataSource = dadosParaExibir;
 
+            if(listaFiltradaPorUtilizador.Count== 0)
+            {
+                string tipo = "";
+                if(utilizadorAutenticado is Gestor)
+                {
+                    tipo = "Gestor";
+                }
+                else if(utilizadorAutenticado is Programador)
+                {
+                    tipo = "Programador";
+                }
+                MessageBox.Show("Não existem tarefas concluídas associadas a este " + tipo + "!",
+                    "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
            
             
 

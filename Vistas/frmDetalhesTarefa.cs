@@ -1,5 +1,6 @@
 ﻿using iTasks.Controlador;
 using iTasks.Modelos;
+using iTasks.Vistas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,7 @@ namespace iTasks
         private Utilizador utilizadoratual;
 
         TarefaControlador controladorT = new TarefaControlador();
+      
         private Tarefa tarefaAtual;
         private bool modoReadOnly;
 
@@ -221,27 +223,34 @@ namespace iTasks
         {
             if (utilizadoratual is Gestor gestor)
             {
-                cbProgramador.DataSource = controladorT.ListaProgramadoresPorGestor(gestor.Id);
+                var listaProgramadores = controladorT.ListaProgramadoresPorGestor(gestor.Id);
+
+                if (!listaProgramadores.Any())
+                {
+                    MessageBox.Show("Não existem programadores associados a este gestor. Será necessário criar um antes de continuar.",
+                                    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    this.DialogResult = DialogResult.Abort;
+                    this.Close();
+                    return;
+                }
+
+                cbProgramador.DataSource = listaProgramadores;
                 cbProgramador.DisplayMember = "Nome";
                 cbProgramador.ValueMember = "Id";
             }
-            else
-            {
-                // Caso não seja gestor, pode esconder ou limpar o combo
-                cbProgramador.DataSource = null;
-            }
 
             cbTipoTarefa.DataSource = controladorT.ListaTiposTarefa();
-            cbTipoTarefa.DisplayMember = "Nome"; // o que será mostrado na lista
-            cbTipoTarefa.ValueMember = "Id";     // o valor interno enviado ao objeto
+            cbTipoTarefa.DisplayMember = "Nome";
+            cbTipoTarefa.ValueMember = "Id";
 
-            // Atualizar após atribuir DataSource
             if (tarefaAtual != null)
             {
                 cbProgramador.SelectedValue = tarefaAtual.IdProgramador;
                 cbTipoTarefa.SelectedValue = tarefaAtual.IdTipoTarefa;
             }
         }
+
 
 
         private void dtInicio_ValueChanged(object sender, EventArgs e)

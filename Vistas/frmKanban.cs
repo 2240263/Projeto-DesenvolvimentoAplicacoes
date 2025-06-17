@@ -136,23 +136,50 @@ namespace iTasks
 
         private void btNova_Click(object sender, EventArgs e)
         {
-            // Cria um novo objeto Tarefa, mas ainda não salva no BD
-            Tarefa novaTarefa = new Tarefa();
+            Gestor gestorAtual = Utilizador as Gestor;
 
-            // Abre o formulário de detalhes, passando a nova tarefa
-            Form detalhesTarefaForm = new frmDetalhesTarefa(novaTarefa, Utilizador);
-
-
-            var resultado = detalhesTarefaForm.ShowDialog();
-
-            if (resultado == DialogResult.OK)
+            if (gestorAtual == null)
             {
-                // para atualizar as listas 
-                AtualizarListas();
-
+                MessageBox.Show("Apenas gestores podem criar tarefas.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
+            bool tarefaCriada = false;
+
+            while (!tarefaCriada)
+            {
+                Tarefa novaTarefa = new Tarefa();
+                frmDetalhesTarefa formTarefa = new frmDetalhesTarefa(novaTarefa, gestorAtual);
+
+                var resultado = formTarefa.ShowDialog();
+
+                if (resultado == DialogResult.OK)
+                {
+                    AtualizarListas();
+                    tarefaCriada = true;
+                }
+                else if (resultado == DialogResult.Abort)
+                {
+                    // Abre formulário para criar programador
+                    AdicionarProgramador formAdicionarProg = new AdicionarProgramador(gestorAtual);
+                    var resultadoCriarProg = formAdicionarProg.ShowDialog();
+
+                    if (resultadoCriarProg != DialogResult.OK)
+                    {
+                        // O utilizador cancelou, parar tudo
+                        break;
+                    }
+
+                    // Depois de criar programador, reabre o form de tarefa para criar a tarefa.
+                }
+                else
+                {
+                    // Sai do formulário de tarefa
+                    break;
+                }
+            }
         }
+
 
         //BUTÃO PARA EDITAR TAREFAS - a funcionar
         //-----------------------------------------------------------------------------------------------------
@@ -230,18 +257,19 @@ namespace iTasks
             {
                  try
                  {
+                    
+                    var tarefa = controladorT.CarregarTarefa(tarefaId);
+
+                    if (tarefa == null)
+                    {
+                        MessageBox.Show("A tarefa não foi encontrada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     // Verifica se o utilizador atual é o gestor
                     if (Utilizador is Gestor gestorAtual)
                     {
-                        var tarefa = controladorT.CarregarTarefa(tarefaId);
-
-                        if (tarefa == null)
-                        {
-                            MessageBox.Show("A tarefa não foi encontrada.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-
-                        if (!TarefaPertenceAoUtilizador(tarefa))
+                  
+                        if (tarefa.IdGestor != gestorAtual.Id)
                         {
                             MessageBox.Show("Não pode apagar tarefas de outros gestores.",
                                             "Sem Acesso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -249,7 +277,7 @@ namespace iTasks
                         }
                     }
                     controladorT.ApagarTarefa(tarefaId, Utilizador.Id);
-                    AtualizarListas();
+                    MessageBox.Show("Tarefa apagada com sucesso.","Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                   }
                 catch (InvalidOperationException ex)
                 {
@@ -386,7 +414,7 @@ namespace iTasks
                 if (!TarefaPertenceAoUtilizador(tarefaSelecionada))
                 {
                     MessageBox.Show("Não pode alterar tarefas de outros gestores.",
-                                    "Acesso negado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    "Sem Acesso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -539,6 +567,11 @@ namespace iTasks
         }
 
         private void exportarParaCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void exportarParaCSVToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             // não verificamos se é gestor, porque a funcionalidade só é acedivel a ele
 

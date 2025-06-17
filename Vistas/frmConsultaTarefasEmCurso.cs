@@ -48,6 +48,11 @@ namespace iTasks
                                            .Where(t => t.IdGestor == _idGestorAutenticado)
                                            .ToList();
 
+            if (listaFiltradaPorGestor.Count == 0)
+            {
+                MessageBox.Show("Não existem tarefas em curso associadas a este gestor.",
+                                "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             var dadosParaExibir = listaFiltradaPorGestor.Select(t =>
             {
        

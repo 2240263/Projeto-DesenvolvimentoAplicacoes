@@ -19,14 +19,18 @@ namespace iTasks.Vistas
         Programador Programador;
 
         UtilizadorControlador utilizadorControlador = new UtilizadorControlador();
-        private bool QueroEditar = false; 
+        private bool QueroEditar = false;
 
-
-        public AdicionarProgramador() // contrutor para criar programador vazio
+       
+        public AdicionarProgramador(Gestor gestorAtual) // contrutor para criar programador vazio
         {
             InitializeComponent();
 
             EnumsDinamicos();
+        } 
+        public AdicionarProgramador() // contrutor para criar programador vazio
+        {
+           
         }
         public AdicionarProgramador(Programador Programador) : this() // contrutor quando edita - recebe a informação já preenchida
         {

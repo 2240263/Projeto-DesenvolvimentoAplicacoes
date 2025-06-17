@@ -166,6 +166,7 @@
             this.exportarParaCSVToolStripMenuItem.Name = "exportarParaCSVToolStripMenuItem";
             this.exportarParaCSVToolStripMenuItem.Size = new System.Drawing.Size(407, 34);
             this.exportarParaCSVToolStripMenuItem.Text = "Exportar Tarefas Concluídas para CSV";
+            this.exportarParaCSVToolStripMenuItem.Click += new System.EventHandler(this.exportarParaCSVToolStripMenuItem_Click_1);
             // 
             // utilizadoresToolStripMenuItem
             // 
