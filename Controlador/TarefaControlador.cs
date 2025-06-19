@@ -310,6 +310,7 @@ namespace iTasks.Controlador
 
         //METODO PARA VER A PREVISÃO DO TEMPO DAS TAREFAS
         //TIMESPAN DEVOLVE O TEMPO ESTIMADO TOTAL COM O ID DO GESTOR EM QUESTAO
+        /*
         public TimeSpan CalcularTempoPrevistoTarefasToDo(int idGestor)
         {
             // Seleciona todas as tarefas concluídas por esse gestor
@@ -345,6 +346,57 @@ namespace iTasks.Controlador
                 else
                 {
                     // Procurar média mais próxima
+                    var storyPointsDisponiveis = mediasPorStoryPoints.Keys.ToList();
+                    if (storyPointsDisponiveis.Count > 0)
+                    {
+                        int spMaisProximo = storyPointsDisponiveis
+                            .OrderBy(sp => Math.Abs(sp - tarefa.StoryPoints))
+                            .First();
+
+                        tempoTotalEstimado += mediasPorStoryPoints[spMaisProximo];
+                    }
+                }
+            }
+
+            return tempoTotalEstimado;
+        }*/
+
+
+        public TimeSpan CalcularTempoPrevistoTarefasToDo(int idGestor)
+        {
+            // Seleciona todas as tarefas concluídas pelo gestor com datas válidas
+            var tarefasConcluidas = Context.Tarefas
+                .Where(t => t.estadoatual == EstadoAtual.Done && t.IdGestor == idGestor)
+                .Where(t => t.DataRealFim >= t.DataRealInicio) // Permite que as datas sejam iguais
+                .ToList();
+
+          
+
+            // Agrupa as tarefas concluídas por StoryPoints e calcula o tempo médio
+            var mediasPorStoryPoints = tarefasConcluidas
+                .GroupBy(t => t.StoryPoints)
+                .ToDictionary(
+                    g => g.Key,
+                    g => TimeSpan.FromMinutes(g.Average(t => (t.DataRealFim - t.DataRealInicio).TotalMinutes))
+                );
+
+            // Seleciona todas as tarefas pendentes (ToDo) do gestor
+            var tarefasToDo = Context.Tarefas
+                .Where(t => t.estadoatual == EstadoAtual.ToDo && t.IdGestor == idGestor)
+                .ToList();
+
+            TimeSpan tempoTotalEstimado = TimeSpan.Zero;
+
+            foreach (var tarefa in tarefasToDo)
+            {
+                // Se houver uma média exata para os StoryPoints da tarefa, usa essa média
+                if (mediasPorStoryPoints.TryGetValue(tarefa.StoryPoints, out var media))
+                {
+                    tempoTotalEstimado += media;
+                }
+                else
+                {
+                    // Caso contrário, busca a média mais próxima disponível
                     var storyPointsDisponiveis = mediasPorStoryPoints.Keys.ToList();
                     if (storyPointsDisponiveis.Count > 0)
                     {
