@@ -318,7 +318,11 @@ namespace iTasks.Controlador
                 .Where(t => t.DataRealFim >= t.DataRealInicio) // Permite que as datas sejam iguais
                 .ToList();
 
-          
+            if (!tarefasConcluidas.Any())
+            {
+                Console.WriteLine("Nenhuma tarefa concluída válida encontrada. Verifique se DataRealFim está maior ou igual a DataRealInicio.");
+                return TimeSpan.Zero;
+            }
 
             // Agrupa as tarefas concluídas por StoryPoints e calcula o tempo médio
             var mediasPorStoryPoints = tarefasConcluidas

@@ -549,12 +549,11 @@ namespace iTasks
             if (Utilizador is Gestor gestor)
             {
                 TimeSpan previsao = controladorT.CalcularTempoPrevistoTarefasToDo(gestor.Id);
-
-                string mensagem = $"Estimativa de tempo para concluir todas as tarefas 'ToDo': " +
-                         $"{(int)previsao.TotalHours} horas e {previsao.Minutes} minutos.";
-                MessageBox.Show(mensagem,"Previsão de Tempo",MessageBoxButtons.OK,MessageBoxIcon.Information);
-
+               string mensagem = $"Estimativa de tempo para concluir todas as tarefas 'ToDo': " +
+                           $"{previsao.Days} dias, {previsao.Hours} horas e {previsao.Minutes} minutos.";
+                MessageBox.Show(mensagem, "Previsão de Tempo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
             else
             {
                 MessageBox.Show("Ups.","Aviso",MessageBoxButtons.OK,MessageBoxIcon.Information);
