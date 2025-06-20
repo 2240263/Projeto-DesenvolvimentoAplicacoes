@@ -30,7 +30,8 @@ namespace iTasks.Vistas
         } 
         public AdicionarProgramador() // contrutor para criar programador vazio
         {
-           
+            InitializeComponent();
+            EnumsDinamicos();
         }
         public AdicionarProgramador(Programador Programador) : this() // contrutor quando edita - recebe a informação já preenchida
         {
@@ -185,8 +186,8 @@ namespace iTasks.Vistas
 
         public void ResetFormularioProgramador()
         {
-
             txtNomeProg.Text = "";
+            
             txtUsernameProg.Text = "";
             txtPasswordProg.Text = "";
             cbNivelProg.Text = "";

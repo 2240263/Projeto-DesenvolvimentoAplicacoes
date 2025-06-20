@@ -51,12 +51,13 @@ namespace iTasks
                 // Se for um Programador, mostra apenas as tarefas concluídas que lhe foram atribuídas
                 listaFiltradaPorUtilizador = listaDone
                                                 .Where(t => t.IdProgramador == programador.Id)
-                                                .ToList();
+                                                .ToList();                
             }
             else
             {
                
                 listaFiltradaPorUtilizador = new List<Tarefa>();
+                Console.WriteLine("Tipo de utilizador não reconhecido ou sem permissões.");
             }
 
 

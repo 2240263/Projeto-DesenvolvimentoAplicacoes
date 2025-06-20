@@ -147,7 +147,7 @@ namespace iTasks
         private void btCriarProg_Click(object sender, EventArgs e)
         {
           
-            var form = new AdicionarProgramador();// cria nova instancia de adicionar gestor (porque se limpa)
+            var form = new AdicionarProgramador();// cria nova instancia de adicionar prog (porque se limpa)
           
             form.ResetFormularioProgramador();// vai buscar ao formAdicionarGestor a funcao reseat 
             RecarregarGestores(); // atualizar a lista de gestores sempre 
