@@ -23,6 +23,7 @@ namespace iTasks
         {
             InitializeComponent();
 
+            // ativar o draw mode para podermos usar cores e associar as ListBoxs
             lstTodo.DrawMode = DrawMode.OwnerDrawFixed;
             lstDoing.DrawMode = DrawMode.OwnerDrawFixed;
             lstDone.DrawMode = DrawMode.OwnerDrawFixed;
@@ -32,83 +33,6 @@ namespace iTasks
             lstDone.DrawItem += LstDone_DrawItem;
         }
 
-        private void LstTodo_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index < 0) return;
-
-            var tarefa = (Tarefa)lstTodo.Items[e.Index];
-            Color corTexto = Color.Gray;
-
-            if (Utilizador is Gestor gestor)
-            {
-                if (tarefa.IdGestor == gestor.Id)
-                    corTexto = tarefa.DataPrevistaFim < DateTime.Now ? Color.Red : Color.Green;
-            }
-            else if (Utilizador is Programador prog)
-            {
-                if (tarefa.IdProgramador == prog.Id)
-                    corTexto = tarefa.DataPrevistaFim < DateTime.Now ? Color.Red : Color.Green;
-            }
-
-            e.DrawBackground();
-            using (Brush brush = new SolidBrush(corTexto))
-            {
-                e.Graphics.DrawString(tarefa.Descricao, e.Font, brush, e.Bounds);
-            }
-            e.DrawFocusRectangle();
-        }
-
-        private void LstDoing_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index < 0) return;
-
-            var tarefa = (Tarefa)lstDoing.Items[e.Index];
-            Color corTexto = Color.Gray;
-
-            if (Utilizador is Gestor gestor)
-            {
-                if (tarefa.IdGestor == gestor.Id)
-                    corTexto = tarefa.DataPrevistaFim < DateTime.Now ? Color.Red : Color.Green;
-            }
-            else if (Utilizador is Programador prog)
-            {
-                if (tarefa.IdProgramador == prog.Id)
-                    corTexto = tarefa.DataPrevistaFim < DateTime.Now ? Color.Red : Color.Green;
-            }
-
-            e.DrawBackground();
-            using (Brush brush = new SolidBrush(corTexto))
-            {
-                e.Graphics.DrawString(tarefa.Descricao, e.Font, brush, e.Bounds);
-            }
-            e.DrawFocusRectangle();
-        }
-
-        private void LstDone_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index < 0) return;
-
-            var tarefa = (Tarefa)lstDone.Items[e.Index];
-            Color corTexto = Color.Gray;
-
-            if (Utilizador is Gestor gestor)
-            {
-                if (tarefa.IdGestor == gestor.Id)
-                    corTexto = tarefa.DataPrevistaFim < tarefa.DataRealFim ? Color.Red : Color.Green;
-            }
-            else if (Utilizador is Programador prog)
-            {
-                if (tarefa.IdProgramador == prog.Id)
-                    corTexto = tarefa.DataPrevistaFim < tarefa.DataRealFim ? Color.Red : Color.Green;
-            }
-
-            e.DrawBackground();
-            using (Brush brush = new SolidBrush(corTexto))
-            {
-                e.Graphics.DrawString(tarefa.Descricao, e.Font, brush, e.Bounds);
-            }
-            e.DrawFocusRectangle();
-        }
 
 
         public frmKanban(Utilizador utilizador) : this()
@@ -522,6 +446,93 @@ namespace iTasks
             }
    
             this.AtualizarListas();
+        }
+
+        // CORES DAS TAREFAS CONSUANTE UTILIZADOR E PRAZO --------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------------------------
+
+        private void LstTodo_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            var tarefa = (Tarefa)lstTodo.Items[e.Index];
+            Color corTexto = Color.Gray;
+
+            //aqui definimos as cores(propriedades) para cada tarefa  
+            if (Utilizador is Gestor gestor)
+            {
+                if (tarefa.IdGestor == gestor.Id)
+                    corTexto = tarefa.DataPrevistaFim < DateTime.Now ? Color.Red : Color.Green;
+            }
+            else if (Utilizador is Programador prog)
+            {
+                if (tarefa.IdProgramador == prog.Id)
+                    corTexto = tarefa.DataPrevistaFim < DateTime.Now ? Color.Red : Color.Green;
+            }
+
+            // implementa/aplica as cores que defenimos antes
+            e.DrawBackground();
+            using (Brush brush = new SolidBrush(corTexto))
+            {
+                e.Graphics.DrawString(tarefa.Descricao, e.Font, brush, e.Bounds);
+            }
+            e.DrawFocusRectangle(); // este é para a tarefa continuar a aparecer a "selecionada" quando a selecionamos
+        }
+
+        private void LstDoing_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            var tarefa = (Tarefa)lstDoing.Items[e.Index];
+            Color corTexto = Color.Gray;
+
+            //aqui definimos as cores(propriedades) para cada tarefa  
+            if (Utilizador is Gestor gestor)
+            {
+                if (tarefa.IdGestor == gestor.Id)
+                    corTexto = tarefa.DataPrevistaFim < DateTime.Now ? Color.Red : Color.Green;
+            }
+            else if (Utilizador is Programador prog)
+            {
+                if (tarefa.IdProgramador == prog.Id)
+                    corTexto = tarefa.DataPrevistaFim < DateTime.Now ? Color.Red : Color.Green;
+            }
+
+            // implementa/aplica as cores que defenimos antes
+            e.DrawBackground();
+            using (Brush brush = new SolidBrush(corTexto))
+            {
+                e.Graphics.DrawString(tarefa.Descricao, e.Font, brush, e.Bounds);
+            }
+            e.DrawFocusRectangle(); // este é para a tarefa continuar a aparecer a "selecionada" quando a selecionamos
+        }
+
+        private void LstDone_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            //aqui definimos as cores(propriedades) para cada tarefa  
+            var tarefa = (Tarefa)lstDone.Items[e.Index];
+            Color corTexto = Color.Gray;
+
+            if (Utilizador is Gestor gestor)
+            {
+                if (tarefa.IdGestor == gestor.Id)
+                    corTexto = tarefa.DataPrevistaFim < tarefa.DataRealFim ? Color.Red : Color.Green;
+            }
+            else if (Utilizador is Programador prog)
+            {
+                if (tarefa.IdProgramador == prog.Id)
+                    corTexto = tarefa.DataPrevistaFim < tarefa.DataRealFim ? Color.Red : Color.Green;
+            }
+
+            // implementa/aplica as cores que defenimos antes
+            e.DrawBackground();
+            using (Brush brush = new SolidBrush(corTexto))
+            {
+                e.Graphics.DrawString(tarefa.Descricao, e.Font, brush, e.Bounds);
+            }
+            e.DrawFocusRectangle(); // este é para a tarefa continuar a aparecer a "selecionada" quando a selecionamos
         }
 
 
