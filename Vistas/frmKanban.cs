@@ -22,7 +22,94 @@ namespace iTasks
         public frmKanban()
         {
             InitializeComponent();
+
+            lstTodo.DrawMode = DrawMode.OwnerDrawFixed;
+            lstDoing.DrawMode = DrawMode.OwnerDrawFixed;
+            lstDone.DrawMode = DrawMode.OwnerDrawFixed;
+
+            lstTodo.DrawItem += LstTodo_DrawItem;
+            lstDoing.DrawItem += LstDoing_DrawItem;
+            lstDone.DrawItem += LstDone_DrawItem;
         }
+
+        private void LstTodo_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            var tarefa = (Tarefa)lstTodo.Items[e.Index];
+            Color corTexto = Color.Gray;
+
+            if (Utilizador is Gestor gestor)
+            {
+                if (tarefa.IdGestor == gestor.Id)
+                    corTexto = tarefa.DataPrevistaFim < DateTime.Now ? Color.Red : Color.Green;
+            }
+            else if (Utilizador is Programador prog)
+            {
+                if (tarefa.IdProgramador == prog.Id)
+                    corTexto = tarefa.DataPrevistaFim < DateTime.Now ? Color.Red : Color.Green;
+            }
+
+            e.DrawBackground();
+            using (Brush brush = new SolidBrush(corTexto))
+            {
+                e.Graphics.DrawString(tarefa.Descricao, e.Font, brush, e.Bounds);
+            }
+            e.DrawFocusRectangle();
+        }
+
+        private void LstDoing_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            var tarefa = (Tarefa)lstDoing.Items[e.Index];
+            Color corTexto = Color.Gray;
+
+            if (Utilizador is Gestor gestor)
+            {
+                if (tarefa.IdGestor == gestor.Id)
+                    corTexto = tarefa.DataPrevistaFim < DateTime.Now ? Color.Red : Color.Green;
+            }
+            else if (Utilizador is Programador prog)
+            {
+                if (tarefa.IdProgramador == prog.Id)
+                    corTexto = tarefa.DataPrevistaFim < DateTime.Now ? Color.Red : Color.Green;
+            }
+
+            e.DrawBackground();
+            using (Brush brush = new SolidBrush(corTexto))
+            {
+                e.Graphics.DrawString(tarefa.Descricao, e.Font, brush, e.Bounds);
+            }
+            e.DrawFocusRectangle();
+        }
+
+        private void LstDone_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            var tarefa = (Tarefa)lstDone.Items[e.Index];
+            Color corTexto = Color.Gray;
+
+            if (Utilizador is Gestor gestor)
+            {
+                if (tarefa.IdGestor == gestor.Id)
+                    corTexto = tarefa.DataPrevistaFim < tarefa.DataRealFim ? Color.Red : Color.Green;
+            }
+            else if (Utilizador is Programador prog)
+            {
+                if (tarefa.IdProgramador == prog.Id)
+                    corTexto = tarefa.DataPrevistaFim < tarefa.DataRealFim ? Color.Red : Color.Green;
+            }
+
+            e.DrawBackground();
+            using (Brush brush = new SolidBrush(corTexto))
+            {
+                e.Graphics.DrawString(tarefa.Descricao, e.Font, brush, e.Bounds);
+            }
+            e.DrawFocusRectangle();
+        }
+
 
         public frmKanban(Utilizador utilizador) : this()
         {
@@ -64,6 +151,7 @@ namespace iTasks
          
 
         }
+
 
         private void VerificarUtilizador()
         {
@@ -517,7 +605,7 @@ namespace iTasks
 
             if (lista.SelectedItem != null && lista.SelectedItem is Tarefa tarefaSelecionada)
             {
-                Form detalhesTarefaForm = new frmDetalhesTarefa(tarefaSelecionada, Utilizador);
+                Form detalhesTarefaForm = new frmDetalhesTarefa(tarefaSelecionada, Utilizador, forcarModoReadyOnly: true);
                 var resultado = detalhesTarefaForm.ShowDialog();
 
                 if (resultado == DialogResult.OK)
