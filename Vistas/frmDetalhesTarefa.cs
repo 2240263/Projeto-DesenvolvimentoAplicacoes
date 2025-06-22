@@ -208,8 +208,23 @@ namespace iTasks
             tarefaAtual.StoryPoints = storyPoints;
 
             // Datas
+
+            if (dtInicio.Value.Date < DateTime.Today)
+            {
+                MessageBox.Show("A data de início não pode ser anterior à data atual.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtInicio.Focus();
+                return;
+            }
             tarefaAtual.DataPrevistaInicio = dtInicio.Value;
+
+            if (dtFim.Value.Date < dtInicio.Value.Date)
+            {
+                MessageBox.Show("A data de fim não pode ser anterior à data de início.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtFim.Focus();
+                return;
+            }
             tarefaAtual.DataPrevistaFim = dtFim.Value;
+
             tarefaAtual.estadoatual = EstadoAtual.ToDo;
 
             // Guarda

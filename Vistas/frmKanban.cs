@@ -198,15 +198,16 @@ namespace iTasks
             // Caso não tenha, verifica na coluna "Doing"
             else if (lstDoing.SelectedItem != null)
             {
-                tarefaSelecionada = (Tarefa)lstDoing.SelectedItem;
-                tarefaId = tarefaSelecionada.Id;
+                MessageBox.Show("Não pode editar tarefas em execução.");
+                return;
             }
             // Caso não tenha, verifica na coluna "Done"
             else if (lstDone.SelectedItem != null)
             {
-                tarefaSelecionada = (Tarefa)lstDone.SelectedItem;
-                tarefaId = tarefaSelecionada.Id;
+                MessageBox.Show("Não pode editar tarefas concluidas.");
+                return;
             }
+            
 
             if (tarefaSelecionada != null)
             {
