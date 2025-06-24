@@ -62,7 +62,6 @@ namespace iTasks
 
             if( index == -1)
             {
-                MessageBox.Show("aAAAAAAAAAAAAA");
                 return;
             }
 
