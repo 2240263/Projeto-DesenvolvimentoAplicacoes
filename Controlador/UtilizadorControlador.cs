@@ -22,8 +22,9 @@ namespace iTasks.Controlador
 
         }
 
-      
-        //apagar um gestor 
+      //-------------------------METODOS QUE VAO SER ADCIONADOS AOS FORMS A QUE PERTENCEM -----------------------------
+
+        //METODO PARA APAGAR UM GESTOR
         public void ApagarUtilizador(Gestor gestor)
         {
 
@@ -34,7 +35,7 @@ namespace iTasks.Controlador
                 Context.SaveChanges();
             }
         }
-        //apagar um programador
+        //METODO PARA APAGAR UM PROG 
         public void ApagarUtilizador(Programador programador)
         {
             var programadorExistente = Context.Programadores.FirstOrDefault(p => p.Id == programador.Id);
@@ -45,7 +46,7 @@ namespace iTasks.Controlador
             }
         }
 
-        //metodo para editar um utilizador que é um programador
+        //METODO PARA EDITAR UM PROG
         public void EditarUtilizador(Programador programador)
         {
             var ProgramadorExiste = Context.Programadores.FirstOrDefault(u => u.Id == programador.Id);
@@ -63,7 +64,7 @@ namespace iTasks.Controlador
             Context.SaveChanges();
         }
 
-        //metodo para criar um utilizador que é especificamente um programador
+        //METODO PARA CRIAR UM PROGRAMADOR
         public void CriarUtilizador(Programador programador)
         {
             Programador progexistente = Context.Programadores.FirstOrDefault(prog => prog.Username == programador.Username);
@@ -76,7 +77,7 @@ namespace iTasks.Controlador
             Context.SaveChanges();
         }
 
-        //metodo para criar um utilizador que é especificamente um gestor
+        //METODO PARA CRIAR UM GESTOR 
         public void CriarUtilizador(Gestor gestor)
         {
             Gestor gestorexistente = Context.Gestores.FirstOrDefault(g => g.Username == gestor.Username);
@@ -90,7 +91,7 @@ namespace iTasks.Controlador
 
         }
 
-        //metodo para editar um utilizador que é um programador
+        //METODO PARA EDITAR UM GESTOR 
         public void EditarUtilizador(Gestor gestor)
         {
             var GestorExiste = Context.Gestores.FirstOrDefault(u => u.Id == gestor.Id);

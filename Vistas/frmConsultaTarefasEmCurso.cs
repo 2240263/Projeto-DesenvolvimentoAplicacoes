@@ -32,7 +32,7 @@ namespace iTasks
         }
 
 
-
+        //METODO PARA VISUALIZAR TODOS OS DADOS NA GRELHA
         private void carregarTarefasemCurso()
         {
 
@@ -103,7 +103,8 @@ namespace iTasks
             gvTarefasEmCurso.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        private void gvTarefasEmCurso_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)// formatar a datagridview, porque nao pode apresentar as datas reais e de fim .  
+        //EVENTO PARA FORMATAR A DATAGRIDVIEW
+        private void gvTarefasEmCurso_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)  
         {
             gvTarefasEmCurso.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
             gvTarefasEmCurso.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
@@ -169,8 +170,8 @@ namespace iTasks
             }
         }
 
-
-        private void gvTarefasEmCurso_CellDoubleClick(object sender, DataGridViewCellEventArgs e)//para abrir os detalhes de tarefa só em modo leitura
+        //EVENTO PARA ABRIR OS DETALHES SÓ EM MODO LEITURA
+        private void gvTarefasEmCurso_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) 
             {
@@ -201,6 +202,7 @@ namespace iTasks
             this.Close();
         }
 
+        //DESCRICAO CORES
         public void atualizaLabel()
         {
             labelCorEmCurso.Text = "Amarelo: Falta apenas 1 dia para terminar esta tarefa.";

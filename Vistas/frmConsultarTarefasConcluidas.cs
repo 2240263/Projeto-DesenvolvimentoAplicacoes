@@ -32,6 +32,7 @@ namespace iTasks
 
         }
        
+        //METODO PARA VER TODOS OS DADOS NA GRELHA
         private void CarregarTarefasConcluidas()
         {
             // Obter a lista de todas as tarefas concluídas (estado Done)
@@ -59,10 +60,6 @@ namespace iTasks
                 listaFiltradaPorUtilizador = new List<Tarefa>();
                 Console.WriteLine("Tipo de utilizador não reconhecido ou sem permissões.");
             }
-
-
-
-
 
 
             var dadosParaExibir = listaFiltradaPorUtilizador.Select(t =>
@@ -164,8 +161,8 @@ namespace iTasks
             gvTarefasConcluidas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-
-        private void gvTarefasConcluidas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)// para abrir os detalhes da tarefa
+        //BOTAO PARA ABRIR TAREFA CONCLUIDA
+        private void gvTarefasConcluidas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
             if (e.RowIndex >= 0)

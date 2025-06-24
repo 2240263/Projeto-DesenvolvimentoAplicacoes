@@ -42,8 +42,9 @@ namespace iTasks
             atualizaListaProgramador();
         }
 
-
-        //método para atualizar a lstListaGestores com os dados da base de dados
+        //-----------------------------------------------------GESTOR--------------------------------------------------
+     
+        //METODO ATUALIZA LISTA DOS GESTORES COM OS DADOS QUE ESTÃO NA BASE DE DADOS
         private void atualizaListaGestores()
         {
             using(ITaskContext context = new ITaskContext())
@@ -59,7 +60,8 @@ namespace iTasks
 
 
         }
-        //quando clico no botao criar gestor vai abrir o form do gestor 
+
+        //BOTAO CRIAR GESTOR 
         private void btGravarGestor_Click(object sender, EventArgs e)
         {
             
@@ -80,8 +82,8 @@ namespace iTasks
 
 
         }
-        //evento do formúlario, para que preencha as opçoes no combobox
-       
+
+       //EVENTO LISTBOX GESTORES
         private void lstListaGestores_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = lstListaGestores.SelectedIndex;
@@ -94,7 +96,7 @@ namespace iTasks
 
         }
 
-        //este botao é para atualizar/editar o gestor
+        //BOTAO EDITAR GESTOR
         private void BotaoEditarG(object sender, EventArgs e)
         {
             //se nao houver nenhum gestor selecionado apresenta uma mensagem
@@ -119,7 +121,7 @@ namespace iTasks
 
         }
 
-        //botão para apagar gestor
+        //BOTAO APAGAR GESTOR
         private void buttonApagarGestor_Click(object sender, EventArgs e)
         {
             if (SelecionaGestor == null)
@@ -141,9 +143,9 @@ namespace iTasks
 
 
 
-        //-------------------------------------PROGRAMADOR ---------------------------------------------
-
-        //botão para gravar programador
+        //-----------------------------------------------PROGRAMADOR ---------------------------------------------
+        
+        //BOTAO CRIAR PROGRAMADOR
         private void btCriarProg_Click(object sender, EventArgs e)
         {
           
@@ -163,7 +165,7 @@ namespace iTasks
 
         }
 
-
+        //ATUALIZAR LISTA PROGRAMADOR
         private void atualizaListaProgramador()
         {
             using (ITaskContext context = new ITaskContext())
@@ -194,6 +196,7 @@ namespace iTasks
             }
         }
 
+        //EVENTO ASSOCIADO A LISTBOX
         private void lstListaProgramadores_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = lstListaProgramadores.SelectedIndex;
@@ -217,6 +220,7 @@ namespace iTasks
 
         }
         
+        //BOTAO EDITAR PROGRAMADOR
         private void buttonAtualizarProgramador_Click(object sender, EventArgs e) //atualizar
         {
             if (SelecionaProgramador == null)
@@ -235,7 +239,7 @@ namespace iTasks
 
 
 
-        //botão apagar programador 
+        //BOTAO APAGAR PROGRAMADOR
         private void buttonApagarProg_Click(object sender, EventArgs e)
         {
             if (SelecionaProgramador == null)

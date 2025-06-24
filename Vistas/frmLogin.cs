@@ -20,7 +20,8 @@ namespace iTasks
         {
             InitializeComponent();
         }
-          
+
+        //-----------------------------------------BOTÃO LOGIN -----------------------------------------------------
         private void btLogin_Click(object sender, EventArgs e)
         {
             using(ITaskContext context = new ITaskContext())
@@ -70,8 +71,8 @@ namespace iTasks
         }
 
 
-        //botão registo do login
-        private void buttonRegisto_Click(object sender, EventArgs e) //verrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+        //-----------------------------------------BOTÃO REGISTO LOGIN -----------------------------------------------
+        private void buttonRegisto_Click(object sender, EventArgs e) 
         {
           
 

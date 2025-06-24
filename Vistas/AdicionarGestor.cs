@@ -30,7 +30,6 @@ namespace iTasks.Vistas
         {
             QueroEditar = true;
 
-            //EnumsDinamicosGestor();
             this.Gestor = Gestor;
             // carregar os dados
             txtNomeGestor.Text = this.Gestor.Nome;
@@ -46,10 +45,9 @@ namespace iTasks.Vistas
         }
 
 
-
         public Gestor GetGestor()
         {
-            return this.Gestor; // TODO
+            return this.Gestor; 
         }
 
         private void EnumsDinamicosGestor()
@@ -58,6 +56,7 @@ namespace iTasks.Vistas
 
         }
 
+        //BOTAO OK DO FORM
         private void btOkGestor_Click(object sender, EventArgs e)
         {
             Departamentos departamento = (Departamentos)cbDepartamento.SelectedItem;
@@ -70,9 +69,7 @@ namespace iTasks.Vistas
                 this.Gestor.Username = txtUsernameGestor.Text;
                 this.Gestor.Password = txtPasswordGestor.Text;
                 this.Gestor.Departamento = departamento;
-                
-
-             
+            
                 try
                 {
                    
@@ -126,11 +123,7 @@ namespace iTasks.Vistas
                 {
                     MessageBox.Show(ex.Message);
                 }
-
-              
-
-
-                
+       
             }  
         }   
        async void FecharJanelaAposDelay() //fechar os form apos um determinado tempo
@@ -164,6 +157,7 @@ namespace iTasks.Vistas
 
         }
 
+        //BOTAO CANCELAR DO FORM
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
             this.Close();

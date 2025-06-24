@@ -82,8 +82,8 @@ namespace iTasks
         }
 
        
-
-        private void preencherDados(Tarefa tarefaAtual) // metodo para preencher dados automaticos
+        //METODO PARA PREENCHER DADOS AUTOMATICOS
+        private void preencherDados(Tarefa tarefaAtual) 
         {
             if (tarefaAtual == null)
             {
@@ -120,7 +120,7 @@ namespace iTasks
                 dtInicio.Value = tarefaAtual.DataPrevistaInicio;
                 dtFim.Value = tarefaAtual.DataPrevistaFim;
 
-                escondercampos(tarefaAtual,txtDataRealini, txtdataRealFim);  //metodo para esconder as datas que foram incializadas com a data atual - nomeadamente datarealinicio e datarealfim
+                escondercampos(tarefaAtual,txtDataRealini, txtdataRealFim);  // VAI CHAMAR metodo para esconder as datas que foram incializadas com a data atual - nomeadamente datarealinicio e datarealfim
 
 
                 // Após preencher dados, setar os ComboBoxes com os valores atuais
@@ -130,7 +130,7 @@ namespace iTasks
 
         }
 
-        // Botão gravar, com verificações para que os campos a preencher não vão vazios
+        //BOTAO CRIAR DETALHES TAREFA
         private void btGravar_Click(object sender, EventArgs e)
         {
              if (tarefaAtual == null)
@@ -142,8 +142,6 @@ namespace iTasks
                     tarefaAtual.IdGestor = gestorCriador.Id;// associar tarefa ao id do gestor
                 }
             }
-
-
 
             // Verifica descrição
             if (string.IsNullOrWhiteSpace(txtDesc.Text))
@@ -243,13 +241,14 @@ namespace iTasks
 
         }
 
-
-        async void FecharJanelaAposDelay() //fechar os form apos um determinado tempo
+        //FECHAR FORM AO FIM DE ALGUM TEMPO
+        async void FecharJanelaAposDelay() 
         {
             await Task.Delay(1500); // espera pouco mais de 1 segundo antes de fechar
             this.DialogResult = DialogResult.OK;// retorna que o utilizador confirmou ok após o show.dialog e retorna esse resultado - quando devolver ok no geretipo tarefas vai atualizar a lista
             this.Close();           // fecha o formulário
         }
+
 
         private void frmDetalhesTarefa_Activated(object sender, EventArgs e)
         {

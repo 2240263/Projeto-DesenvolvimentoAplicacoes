@@ -54,6 +54,7 @@ namespace iTasks
             // Se for daquela equipa, pode mudar as tarefas de estado
             return true;
         }
+
         private void AtualizarNomeUtilizador()
         {
             string tipo;
@@ -76,7 +77,7 @@ namespace iTasks
 
         }
 
-
+        //Verificar campos visiveis para cada utilizador
         private void VerificarUtilizador()
         {
             //se for um programador
@@ -101,7 +102,7 @@ namespace iTasks
 
             }
         }
-
+        //------------------------------------ Menu -------------------------------------------------------
         private void gerirUtilizadoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form segundoForm = new frmGereUtilizadores();
@@ -143,9 +144,8 @@ namespace iTasks
             }
         }
 
-        // BUTÃO PARA CRIAR NOVAS TAREFAS - a funcionar
-        //-----------------------------------------------------------------------------------------------------
-
+     
+        //------------------------------------ BOTÃO PARA CRIAR NOVAS TAREFAS  -----------------------------------------
         private void btNova_Click(object sender, EventArgs e)
         {
             Gestor gestorAtual = Utilizador as Gestor;
@@ -192,10 +192,7 @@ namespace iTasks
             }
         }
 
-
-        //BUTÃO PARA EDITAR TAREFAS - a funcionar
-        //-----------------------------------------------------------------------------------------------------
-
+        //------------------------------------BOTÃO PARA EDITAR TAREFAS ---------------------------------------------
         private void btnEditar(object sender, EventArgs e)
         {
             Tarefa tarefaSelecionada = null;
@@ -240,9 +237,7 @@ namespace iTasks
 
         }
 
-        // BoTÃO PARA APAGAR TAREFAS 
-        //-----------------------------------------------------------------------------------------------------
-
+        //------------------------------------ BOTÃO PARA APAGAR TAREFAS ---------------------------------------------
         private void buttonApagarTarefa_Click(object sender, EventArgs e)
         {
             int tarefaId = -1;
@@ -306,10 +301,7 @@ namespace iTasks
 
         }
 
-
-        //  MÉTODOS PARA ATUALIZAR OS ESTADOS DAS TAREFAS - a funcionar 
-        //-----------------------------------------------------------------------------------------------------
-
+        //--------------------------MÉTODOS PARA ATUALIZAR OS ESTADOS DAS TAREFAS------------------------------
 
         // Passar para Doing, regras : 15 Duas tarefas em Doing, 16 Passar por Ordem de Execução
         private void btSetDoing_Click(object sender, EventArgs e)
@@ -448,9 +440,8 @@ namespace iTasks
             this.AtualizarListas();
         }
 
-        // CORES DAS TAREFAS CONSUANTE UTILIZADOR E PRAZO --------------------------------------------------------------------------------
-        //--------------------------------------------------------------------------------------------------------------------------------
-
+        //----------------------------- CORES DAS TAREFAS CONSUANTE UTILIZADOR E PRAZO--------------------------------- 
+   
         private void LstTodo_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
@@ -536,9 +527,7 @@ namespace iTasks
         }
 
 
-        // METODO PARA ATUALIZAR AS LISTAS NO KANBAN - a funcionar
-        //-----------------------------------------------------------------------------------------------------
-
+        // --------------------------------METODO PARA ATUALIZAR AS LISTAS NO KANBAN-----------------------------------
         public void AtualizarListas()
         {
             TarefaControlador controladorNovo = new TarefaControlador(); // resolve o problema da edição não atualizar
@@ -566,8 +555,7 @@ namespace iTasks
         }
 
 
-        // MÉTODO QUE CARREGA AS LISTAS QUANDO O FORM É ATIVADO - se retirar não atualiza no  início mes chamando a função
-        //-----------------------------------------------------------------------------------------------------
+        // ------------------------MÉTODO QUE CARREGA AS LISTAS QUANDO O FORM É ATIVADO---------------------------------
         private void frmKanban_Activated(object sender, EventArgs e)
         {
             lstTodo.DataSource = null;
@@ -663,7 +651,7 @@ namespace iTasks
         }
 
        
-
+        //----------------------------------------------MENU EXPORTAR---------------------------------------------------
         private void exportarParaCSVToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             // não verificamos se é gestor, porque a funcionalidade só é acedivel a ele

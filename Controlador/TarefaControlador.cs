@@ -26,19 +26,7 @@ namespace iTasks.Controlador
         public Tarefa CarregarTarefa(int Id)
         {
             return Context.Tarefas.FirstOrDefault(t => t.Id == Id);
-            /*try
-            {
-                Tarefa tarefaEncontrada = Context.Tarefas
-                                                .Where(t => t.Id == Id)
-                                                .FirstOrDefault(t => t.Id == Id);
-
-                return tarefaEncontrada;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }*/
-
+            
         }
 
         public void AtualizarTarefa(Tarefa tarefa)
@@ -67,7 +55,9 @@ namespace iTasks.Controlador
             }
         }
 
-        // GUARDAR TAREFAS NOVAS E EXISTENTES (BUTÃO GRAVAR DO FRMDETALHES)
+        //-----------------------METODOS QUE VAO SER CHAMADOS NO FORM DETALHES DE TAREFA--------------------------------
+
+        // METODO CRIAR/EDITAR TAREFA KANBAN
         public void GuardaTarefa(Tarefa tarefa)
         {
             try
@@ -108,7 +98,7 @@ namespace iTasks.Controlador
             }
         }
 
-        // APAGAR TAREFA KANBAN - a funcionar
+        // METODO APAGAR TAREFA KANBAN
         public void ApagarTarefa(int idTarefa, int idGestor)
         {
             var tarefaApagar = Context.Tarefas.FirstOrDefault(t => t.Id == idTarefa && t.IdGestor == idGestor);
@@ -121,7 +111,7 @@ namespace iTasks.Controlador
          
         }
 
-        // ATUALIZAR TAREFA KANBAN - a funcionar
+        // ATUALIZAR TAREFA KANBAN 
         public void AtualizarEstadoTarefa(int idTarefa, int idUtilizadorAtual)
         {
             try
@@ -170,7 +160,7 @@ namespace iTasks.Controlador
         }
 
 
-        // REVERTER ESTADO TAREFA KANBAN - a funcionar
+        // REVERTER ESTADO TAREFA KANBAN
         public void ReverterEstadoTarefa(int Id)
         {
             try
@@ -208,8 +198,6 @@ namespace iTasks.Controlador
 
 
         // MÉTODOS PARA IMPLEMEMTAÇÃO DE REGRAS
-        //----------------------------------------------------------------------------------------
-
         public int TarefasEmDoing(int idProg)
         {
             return Context.Tarefas
@@ -259,7 +247,6 @@ namespace iTasks.Controlador
 
 
         // LISTAS PARA APRESENTAÇÃO NA VIEW
-        //---------------------------------------------------------------------------------------
         public List<TipoTarefa> ListaTiposTarefa()
         {
             return Context.TipoTarefas

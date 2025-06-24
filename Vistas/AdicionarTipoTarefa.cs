@@ -25,9 +25,7 @@ namespace iTasks.Vistas
         public AdicionarTipoTarefa()
         {
             InitializeComponent();
-
-
-           
+          
         }
         public AdicionarTipoTarefa(TipoTarefa TipoTarefa):this()// contrutor quando edita - recebe a informação já preenchida
         {
@@ -35,15 +33,10 @@ namespace iTasks.Vistas
             this.TipoTarefa = TipoTarefa;
             txtDesc.Text = this.TipoTarefa.Nome;
             txtId.Text = this.TipoTarefa.Id.ToString();
-            
-
-
-
-
         }
 
      
-        public void SetIdTT(int id) // 
+        public void SetIdTT(int id) 
         {
             txtId.Text = id.ToString();
         }
@@ -51,12 +44,12 @@ namespace iTasks.Vistas
 
         public TipoTarefa GetTipoTarefa()
         {
-            return this.TipoTarefa; // TODO
+            return this.TipoTarefa;
         }
 
 
 
-
+        //BOTAO OK DO FORM
         private void butOkTT_Click(object sender, EventArgs e)
         {//se quiser editar a descrição da tarefa 
             if (QueroEditar)
@@ -125,6 +118,7 @@ namespace iTasks.Vistas
 
         }
 
+
         public void ResetFormulario()
         {
             txtDesc.Text = "";
@@ -132,6 +126,7 @@ namespace iTasks.Vistas
             txtId.Text = "";
         }
 
+        //BOTAO CANCELAR DO FORM
         private void buttCancelarTT_Click(object sender, EventArgs e) // botao cancelar no criar tipo tarefa
         {
             this.Close();

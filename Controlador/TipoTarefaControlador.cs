@@ -17,10 +17,13 @@ namespace iTasks.Controlador
             Context = new ITaskContext();
         }
 
+        //------------------------------METODOS QUE VAO SER CHAMADOS NO FORM DO TIPO DE TAREFA-------------------------
+
+        //METODO APAGAR TIPO TAREFA
         public void ApagarTipoTarefa(TipoTarefa tipoTarefa)
         {
             TipoTarefa tipo = Context.TipoTarefas.Find(tipoTarefa.Id); // Como o item vai ser apagado, necessitamos de fazer uma ligacao/referência à base de dados para saber o que vai apagar
-            //Context.Entry(tipoTarefa).State = System.Data.Entity.EntityState.Deleted; - Outra forma de fz referência à lista na base de dados que vai ser apagada
+           
             if (tipo == null) // para confirmar se o tipo de objeto existe, para nao gerar erro, caso nao exista.
             {
                 throw new Exception("Tipo tarefa não encontrada");
@@ -29,6 +32,7 @@ namespace iTasks.Controlador
             Context.SaveChanges();
         }
 
+        //METODO CRIAR TIPO TAREFA
         public void CriarTipoTarefa(TipoTarefa tipoTarefa)
         {
 
@@ -37,6 +41,7 @@ namespace iTasks.Controlador
 
         }
 
+        //METODO EDITAR TIPO TAREFA
         public void EditarTipoTarefa(TipoTarefa tipoTarefa)
         {
             var TipoTarefaExiste = Context.TipoTarefas.FirstOrDefault(tt => tt.Id == tipoTarefa.Id); //Retorna através da comparacao da lista (FirstOrDefault) o primeiro item que corresponde ao critério id, ou null se não encontrar

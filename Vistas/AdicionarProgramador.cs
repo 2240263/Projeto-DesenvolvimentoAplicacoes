@@ -44,24 +44,19 @@ namespace iTasks.Vistas
             txtPasswordProg.Text = this.Programador.Password;
             cbNivelProg.SelectedItem = this.Programador.nivelExperiencia;
             cbGestorProg.SelectedValue = this.Programador.IdGestor;
-
-
             txtIdProg.Text = this.Programador.Id.ToString();
-
-
 
         }
 
-        public void SetId(int id) // 
+        public void SetId(int id) 
         {
             txtIdProg.Text = id.ToString();
         }
 
 
-
         public Programador GetProgramador()
         {
-            return this.Programador; // TODO
+            return this.Programador; 
         }
 
 
@@ -79,7 +74,8 @@ namespace iTasks.Vistas
 
         }
 
-        private void btOKProg_Click(object sender, EventArgs e) // botão OK
+        //BOTAO OK DO FORM
+        private void btOKProg_Click(object sender, EventArgs e) 
         {
 
             NivelExperiencia nivelExperiencia = (NivelExperiencia)cbNivelProg.SelectedItem;
@@ -124,8 +120,7 @@ namespace iTasks.Vistas
             }
             else
             {
-                //Programador novoProgramador = new Programador(nivelExperiencia, gestorSelecionado, txtNomeProg.Text, txtUsernameProg.Text, txtPasswordProg.Text);
-
+                
                 Programador novoProgramador = new Programador
                 {
                     Nome = txtNomeProg.Text,
@@ -162,10 +157,10 @@ namespace iTasks.Vistas
                 }
 
             }
-
-
         }
-        async void FecharJanelaAposDelay() //fechar os form apos um determinado tempo
+
+        //fechar os form apos um determinado tempo
+        async void FecharJanelaAposDelay() 
         {
             await Task.Delay(1500); // espera pouco mais de 1 segundo antes de fechar
             this.DialogResult = DialogResult.OK;// retorna que o utilizador confirmou ok após o show.dialog e retorna esse resultado - quando devolver ok vai atualizar a lista
@@ -174,8 +169,8 @@ namespace iTasks.Vistas
         }
 
 
-
-        public void enbaleformProgramador()// torna a txt impossivel de alterar
+        // torna a txt impossivel de alterar
+        public void enbaleformProgramador()
         {
             txtNomeProg.Enabled = false;
             txtUsernameProg.Enabled = false;
@@ -201,7 +196,7 @@ namespace iTasks.Vistas
             cbGestorProg.Enabled = true;
 
         }
-
+        //BOTAO CANCELAR DO FORM
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
             this.Close();

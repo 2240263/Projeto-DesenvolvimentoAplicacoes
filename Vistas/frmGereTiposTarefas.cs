@@ -29,9 +29,9 @@ namespace iTasks
             atualizarListaTiposTarefas();
         }
 
+        //BOTAO CRIAR TIPO TAREFA
         private void btCriarTT_Click(object sender, EventArgs e)
         {
-           // FormadicionarTipoTarefa.Show();
             var form = new AdicionarTipoTarefa();
             FormadicionarTipoTarefa.ResetFormulario(); // chama a funcao para colocar o formulario limpo e assim podermos criar novo tipo de tarefa sem fechar formulario
             var result = FormadicionarTipoTarefa.ShowDialog();
@@ -41,9 +41,8 @@ namespace iTasks
             }    
         }
 
-
-
-    private void atualizarListaTiposTarefas()
+        //ATUALIZAR LISTA TIPO TAREFA COM DADOS DA BASE DE DADOS
+        private void atualizarListaTiposTarefas()
         {
             using (ITaskContext context = new ITaskContext())
             {
@@ -55,8 +54,8 @@ namespace iTasks
             }   
         }
 
-
-    private void lstLista_SelectedIndexChanged(object sender, EventArgs e)
+        //EVENTO ASSOCIADO A LISTBOX
+        private void lstLista_SelectedIndexChanged(object sender, EventArgs e)
         {
            
             int index = lstLista.SelectedIndex;
@@ -72,6 +71,7 @@ namespace iTasks
 
         }
 
+        //BOTAO APAGAR TIPO TAREFA
         private void ButApagar_Click(object sender, EventArgs e)
         {
            
@@ -94,6 +94,8 @@ namespace iTasks
 
         }
 
+
+        //BOTAO EDITAR TIPO TAREFA
         private void ButEditar_Click(object sender, EventArgs e)
         {
             if (SelecionaTipoTarefa == null)
@@ -113,13 +115,6 @@ namespace iTasks
                 MessageBox.Show("Tipo de Tarefa atualizado com sucesso!");
                 atualizarListaTiposTarefas();
             }
-
-          
-
-          
-                
-            
-
         }
     }
 }
