@@ -177,8 +177,7 @@ namespace iTasks.Controlador
                     {
                         tarefaEncontrada.estadoatual = EstadoAtual.ToDo;
 
-                        // atulaizar a data para o min, de maneira a dar 'reset' à mesma
-                        //tarefaEncontrada.DataRealInicio = DateTime.MinValue;
+                        // atualizar a data para o min, de maneira a dar 'reset' à mesma
                         tarefaEncontrada.DataRealInicio = DateTime.Now;
                         
                     }
@@ -219,7 +218,7 @@ namespace iTasks.Controlador
                 return true;
             }
                 
-            var tarefaPrioritaria = tarefasToDo.First(); // firs retorna a primeira da lista que foi ordenada por ordem de execução
+            var tarefaPrioritaria = tarefasToDo.First(); //retorna a primeira da lista que foi ordenada por ordem de execução
 
             return tarefaSelecionada.Id == tarefaPrioritaria.Id; // true ou false
         }

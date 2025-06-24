@@ -440,7 +440,7 @@ namespace iTasks
             this.AtualizarListas();
         }
 
-        //----------------------------- CORES DAS TAREFAS CONSUANTE UTILIZADOR E PRAZO--------------------------------- 
+        //----------------------------- CORES DAS TAREFAS CONSOANTE UTILIZADOR E PRAZO--------------------------------- 
    
         private void LstTodo_DrawItem(object sender, DrawItemEventArgs e)
         {

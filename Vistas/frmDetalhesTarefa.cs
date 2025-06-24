@@ -228,8 +228,6 @@ namespace iTasks
             // Guarda
             controladorT.GuardaTarefa(tarefaAtual);
 
-
-            //this.DialogResult = DialogResult.OK;
             FecharJanelaAposDelay();
 
             txtDesc.Enabled = false;
