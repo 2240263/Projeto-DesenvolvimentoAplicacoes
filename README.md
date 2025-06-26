@@ -9,6 +9,16 @@ Inês Sousa `2241537`
 -------------------
 Desenvolvimento de Aplicações @ 2025
 
+## Dados de Acesso Gestor
+
+Username: admin
+Password: 123
+
+## Dados de Acesso Programador
+
+Username: prog
+Password: 123
+
 ## Descrição do Projeto
 
 Este projeto consiste no desenvolvimento de uma aplicação de gestão de tarefas atribuídas aos seus programadores, baseada no conceito de Kanban, com as listas clássicas: "ToDo", "Doing" e "Done".
